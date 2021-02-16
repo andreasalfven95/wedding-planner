@@ -29,8 +29,6 @@ function Products({ products, heading }) {
 export default Products
 
 const ProductsContainer = styled.div`
-  min-height: 100vh;
-  padding: 2rem calc((100vw - 1300px) / 2);
   color: #fff;
 `
 

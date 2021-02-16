@@ -59,12 +59,12 @@ export default function Register() {
           style={{ maxWidth: '500px' }}
           onSubmit={handleSubmit}
         >
-          <div className='form-group'>
+          <div className='block text-grey-darker text-sm font-bold mb-2'>
             <label htmlFor='name'>Company</label>
             <input
               required
               type='text'
-              className='form-control'
+              className='shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker'
               id='name'
               name='name'
               value={name}
@@ -72,14 +72,14 @@ export default function Register() {
             />
           </div>
 
-          <div className='form-group'>
+          <div className='block text-grey-darker text-sm font-bold mb-2'>
             <label htmlFor='exampleInputEmail1'>Email address</label>
             <input
               required
               type='email'
               pattern='[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$'
               title='Write a valid email: characters@characters.domain'
-              className='form-control'
+              className='shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker'
               id='exampleInputEmail1'
               aria-describedby='emailHelp'
               name='email'
@@ -91,7 +91,7 @@ export default function Register() {
             </small>
           </div>
 
-          <div className='form-group'>
+          <div className='block text-grey-darker text-sm font-bold mb-2'>
             <label htmlFor='exampleInputPassword1'>Password</label>
             <input
               required
@@ -99,7 +99,7 @@ export default function Register() {
               required
               title='6 characters minimum'
               type='password'
-              className='form-control'
+              className='shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker'
               id='exampleInputPassword1'
               name='password'
               value={password}
@@ -107,7 +107,7 @@ export default function Register() {
             />
           </div>
 
-          <div className='form-group'>
+          <div className='block text-grey-darker text-sm font-bold mb-2'>
             <label htmlFor='exampleInputPassword2'>Confirm password</label>
             <input
               required
@@ -115,17 +115,21 @@ export default function Register() {
               required
               title='6 characters minimum'
               type='password'
-              className='form-control'
+              className='shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker'
               id='exampleInputPassword2'
               name='cf_password'
               value={cf_password}
               onChange={handleChangeInput}
             />
           </div>
-
-          <button type='submit' className='btn btn-dark w-100'>
-            Register
-          </button>
+          <div className='flex items-center justify-between mb-3'>
+            <button
+              type='submit'
+              className='bg-red-300 hover:bg-red-400 text-white font-bold py-2 px-4 rounded'
+            >
+              Register
+            </button>
+          </div>
 
           <p>
             Already have an account?

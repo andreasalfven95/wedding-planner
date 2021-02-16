@@ -6,8 +6,47 @@ import styled from 'styled-components'
 import React from 'react'
 
 const Card = ({ product }) => {
+  const userLink = () => {
+    return (
+      <>
+        <Link href={`/product/${product._id}`} passHref>
+          <Button primary='true' round='true'>
+            View
+          </Button>
+        </Link>
+        <Link href={`/product/${product._id}`} passHref>
+          <Button primary='true' round='true'>
+            Add to favourites
+          </Button>
+        </Link>
+      </>
+    )
+  }
+
   return (
-    <ProductCard>
+    <div className='card'>
+      <img
+        src={product.images[0].url}
+        alt={product.images[0].url}
+        layout='fill'
+        className='card-img'
+      />
+      <div className='card-body bg-black'>
+        <h5 className='card-title capitalize' title={product.title}>
+          {product.title}
+        </h5>
+        <div className=''>
+          <h6>${product.price}</h6>
+          <h6>{product.inStock} in stock</h6>
+        </div>
+        <p className='card-text' title={product.description}>
+          {product.description}
+        </p>
+        <div className='flex justify-between'>{userLink()}</div>
+      </div>
+    </div>
+
+    /* <ProductCard>
       <ProductImg
         src={product.images[0].url}
         alt={product.images[0].url}
@@ -38,7 +77,7 @@ const Card = ({ product }) => {
           </Button>
         </Link>
       </ProductInfo>
-    </ProductCard>
+    </ProductCard> */
   )
 }
 

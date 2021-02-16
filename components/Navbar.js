@@ -69,7 +69,7 @@ const Navbar = ({ toggle }) => {
             }
           `}
         >
-          WedPlan
+          Wed2Be
         </NavLink>
       </Link>
       <Bars onClick={toggle} />
@@ -84,13 +84,7 @@ const Navbar = ({ toggle }) => {
       {Object.keys(auth).length === 0 ? (
         <NavBtn>
           <Link href='/signin' passHref>
-            <Button
-              primary='true'
-              round='true'
-              style={{
-                marginRight: '1rem',
-              }}
-            >
+            <Button primary='true' round='true'>
               Sign In
             </Button>
           </Link>
@@ -99,7 +93,7 @@ const Navbar = ({ toggle }) => {
               primary='true'
               round='true'
               style={{
-                marginRight: '1rem',
+                marginLeft: '1rem',
               }}
             >
               Register
@@ -120,7 +114,6 @@ const Nav = styled.nav`
   height: 80px;
   display: flex;
   justify-content: space-between;
-  padding: 0.5rem calc((100vw - 1300px) / 2);
   z-index: 100;
   position: relative;
 `
@@ -130,7 +123,6 @@ const NavLink = styled.a`
   display: flex;
   align-items: center;
   text-decoration: none;
-  padding: 0 1rem;
   height: 100%;
   cursor: pointer;
   transition: 0.2s ease-in-out;
@@ -147,8 +139,8 @@ const Bars = styled(FaBars)`
   @media screen and (max-width: 768px) {
     display: block;
     position: absolute;
-    top: 0;
-    right: 0;
+    top: 3px;
+    right: -28.8px;
     transform: translate(-100%, 75%);
     font-size: 1.8rem;
     cursor: pointer;
@@ -157,8 +149,10 @@ const Bars = styled(FaBars)`
 
 const NavMenu = styled.div`
   display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   align-items: center;
-  /* margin-right: -48px; */
+  width: 30%;
 
   @media screen and (max-width: 768px) {
     display: none;

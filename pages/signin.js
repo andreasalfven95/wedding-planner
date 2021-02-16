@@ -71,14 +71,14 @@ export default function SignIn() {
           style={{ maxWidth: '500px' }}
           onSubmit={handleSubmit}
         >
-          <div className='form-group'>
+          <div className='block text-grey-darker text-sm font-bold mb-2'>
             <label htmlFor='exampleInputEmail1'>Email address</label>
             <input
               required
               type='email'
               pattern='[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$'
               title='Write a valid email: characters@characters.domain'
-              className='form-control'
+              className='shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker'
               id='exampleInputEmail1'
               aria-describedby='emailHelp'
               name='email'
@@ -89,14 +89,14 @@ export default function SignIn() {
               We'll never share your email with anyone else.
             </small>
           </div>
-          <div className='form-group'>
+          <div className='block text-grey-darker text-sm font-bold mb-2'>
             <label htmlFor='exampleInputPassword1'>Password</label>
             <input
               required
               pattern='.{6,}'
               title='6 characters minimum'
               type='password'
-              className='form-control'
+              className='shadow appearance-none border border-red rounded w-full py-2 px-3 text-grey-darker mb-3'
               id='exampleInputPassword1'
               name='password'
               value={password}
@@ -104,11 +104,22 @@ export default function SignIn() {
             />
           </div>
 
-          <button type='submit' className='btn btn-dark w-100'>
-            Sign in
-          </button>
+          <div className='flex items-center justify-between mb-3'>
+            <button
+              type='submit'
+              className='bg-red-300 hover:bg-red-400 text-white font-bold py-2 px-4 rounded'
+            >
+              Sign in
+            </button>
+            {/* <a
+              class='inline-block align-baseline font-bold text-sm text-blue hover:text-blue-darker'
+              href='#'
+            >
+              Forgot Password?
+            </a> */}
+          </div>
 
-          <p>
+          <p className=''>
             You don't have an account?
             {/* <NavBtn>
               <Button primary='true' round='true' href='/trips'>

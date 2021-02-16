@@ -15,9 +15,10 @@ export const Button = styled.div`
   transition: 0.3s !important;
   border-radius: ${({ round }) => (round ? '50px' : 'none')};
   /* margin: 0 1rem; */
-  height: 50px;
+  height: 40px;
   display: flex;
   align-items: center;
+  width: min-content;
 
   &:hover {
     /* background: ${({ primary }) => (primary ? '#077BF1' : '#F26A2E')};

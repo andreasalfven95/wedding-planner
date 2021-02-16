@@ -4,6 +4,11 @@ body {
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 
+body {
+  padding-left: max(calc((100vw - 1300px) / 2), 1rem);
+  padding-right: max(calc((100vw - 1300px) / 2), 1rem);
+}
+
 a {
   color: inherit;
   text-decoration: none;
@@ -18,7 +23,11 @@ a {
 
 img {
   object-fit: cover;
+  object-position: 0 25%;
 }
 
 /* ------------- LOADING ------------ */
 @import url('./loading.css');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
