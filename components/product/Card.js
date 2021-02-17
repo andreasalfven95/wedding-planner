@@ -4,8 +4,15 @@ import { Button } from '../Button'
 import Link from 'next/link'
 import styled from 'styled-components'
 import React from 'react'
+import { useContext } from 'react'
+import { DataContext } from '../../store/GlobalState'
+import { addToCart } from '../../store/Actions'
+import { AiOutlineStar, AiFillStar } from 'react-icons/ai'
 
 const Card = ({ product }) => {
+  const { state, dispatch } = useContext(DataContext)
+  const { cart } = state
+
   const userLink = () => {
     return (
       <>
@@ -14,11 +21,16 @@ const Card = ({ product }) => {
             View
           </Button>
         </Link>
-        <Link href={`/product/${product._id}`} passHref>
-          <Button primary='true' round='true'>
-            Add to favourites
-          </Button>
-        </Link>
+        <Button
+          primary='true'
+          round='true'
+          /* disabled={product.inStock === 0 ? true : false} */
+          onClick={() => dispatch(addToCart(product, cart))}
+        >
+          Add to favourites
+          <AiOutlineStar />
+          <AiFillStar />
+        </Button>
       </>
     )
   }

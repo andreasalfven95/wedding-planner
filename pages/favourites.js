@@ -1,0 +1,35 @@
+import Head from 'next/head'
+import { useContext } from 'react'
+import { DataContext } from '../store/GlobalState'
+import CartItem from '../components/CartItem'
+
+export default function Cart() {
+  const { state, dispatch } = useContext(DataContext)
+  const { cart } = state
+
+  if (cart.length === 0)
+    return <h2 className='text-5xl text-center my-60'>No favourites.</h2>
+
+  return (
+    <div className='flex flex-row mx-auto'>
+      <Head>
+        <title>Favourites page</title>
+      </Head>
+
+      <div className='grid-cols-8 table'>
+        <h2 className='uppercase text-center'>Favourites:</h2>
+
+        {cart.map((item) => (
+          <CartItem
+            key={item._id}
+            item={item}
+            dispatch={dispatch}
+            cart={cart}
+          />
+        ))}
+      </div>
+
+      <div className='grid-cols-4'></div>
+    </div>
+  )
+}

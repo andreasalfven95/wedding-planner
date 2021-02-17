@@ -1,16 +1,19 @@
 import Head from 'next/head'
 import React from 'react'
-import { useState, useEffect, useRef } from 'react'
+import { useState, useContext, useEffect, useRef } from 'react'
 import { getData } from '../../utils/fetchData'
 import { Button } from '../../components/Button'
 import Link from 'next/link'
+import { DataContext } from '../../store/GlobalState'
+import { addToCart } from '../../store/Actions'
 
 const DetailProduct = (props) => {
   const [product] = useState(props.product)
-
   const [tab, setTab] = useState(0)
-
   const imgRef = useRef()
+
+  const { state, dispatch } = useContext(DataContext)
+  const { cart } = state
 
   useEffect(() => {
     const images = imgRef.current.children
@@ -27,7 +30,7 @@ const DetailProduct = (props) => {
   return (
     <div className='detail-page'>
       <Head>
-        <title>Detail Product</title>
+        <title>{product.title}</title>
       </Head>
       <div className='col-md-6'>
         <img
@@ -64,11 +67,14 @@ const DetailProduct = (props) => {
         </div>
         <div className='my-2'>{product.description}</div>
         <div className='my-2'>{product.content}</div>
-        <Link href='/signin' passHref>
-          <Button className='w-min' primary='true'>
-            Add to favourites
-          </Button>
-        </Link>
+
+        <Button
+          className='w-min'
+          primary='true'
+          onClick={() => dispatch(addToCart(product, cart))}
+        >
+          Add to favourites
+        </Button>
       </div>
     </div>
   )

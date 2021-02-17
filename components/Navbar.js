@@ -10,7 +10,8 @@ import Cookie from 'js-cookie'
 const Navbar = ({ toggle }) => {
   /* const router = useRouter() */
   const { state, dispatch } = useContext(DataContext)
-  const { auth } = state
+  /* Import state, cart is if we want to show how many products we have in cart/favourites on the navbar. */
+  const { auth, cart } = state
 
   const handleLogout = () => {
     Cookie.remove('refreshtoken', { path: 'api/auth/accessToken' })
