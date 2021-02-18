@@ -11,12 +11,12 @@ export default function Cart() {
     return <h2 className='text-5xl text-center my-60'>No favourites.</h2>
 
   return (
-    <div className='flex flex-row mx-auto'>
+    <div className='flex flex-row mx-auto w-full'>
       <Head>
         <title>Favourites page</title>
       </Head>
 
-      <div className='grid-cols-8 table'>
+      <div className='cols-8 table mx-auto'>
         <h2 className='uppercase text-center'>Favourites:</h2>
 
         {cart.map((item) => (

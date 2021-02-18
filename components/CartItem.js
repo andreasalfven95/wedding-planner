@@ -10,14 +10,14 @@ const CartItem = ({ item, dispatch, cart }) => {
   }
 
   return (
-    <div className='card text-white'>
+    <div className='card text-white mx-auto'>
       <img
         src={item.images[0].url}
         alt={item.images[0].url}
         layout='fill'
-        className='card-img'
+        className='card-img mx-auto'
       />
-      <div className='card-body bg-black'>
+      <div className='card-body bg-black p-2'>
         <h5 className='card-title capitalize' title={item.title}>
           {item.title}
         </h5>
@@ -28,7 +28,7 @@ const CartItem = ({ item, dispatch, cart }) => {
         <p className='card-text' title={item.description}>
           {item.description}
         </p>
-        <div className='flex flex-row justify-between items-center mb-2 p-2'>
+        <div className='flex flex-row justify-between items-center'>
           <Link href={`/product/${item._id}`} passHref>
             <Button primary='true' round='true'>
               View
