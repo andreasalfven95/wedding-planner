@@ -2,9 +2,12 @@ import Head from 'next/head'
 import { useState, useContext, useEffect } from 'react'
 import { DataContext } from '../store/GlobalState'
 import { FaCamera } from 'react-icons/fa'
+import Link from 'next/link'
 
 import valid from '../utils/valid'
 import { patchData } from '../utils/fetchData'
+
+import { imageUpload } from '../utils/imageUpload'
 
 const Profile = () => {
   const initialState = {
@@ -39,6 +42,8 @@ const Profile = () => {
         return dispatch({ type: 'NOTIFY', payload: { error: errMsg } })
       updatePassword()
     }
+
+    if (name !== auth.user.name || avatar) updateInfor()
   }
 
   const updatePassword = () => {
@@ -47,6 +52,57 @@ const Profile = () => {
       if (res.err)
         return dispatch({ type: 'NOTIFY', payload: { error: res.err } })
       return dispatch({ type: 'NOTIFY', payload: { error: res.msg } })
+    })
+  }
+
+  const changeAvatar = (e) => {
+    const file = e.target.files[0]
+    if (!file)
+      return dispatch({
+        type: 'NOTIFY',
+        payload: { error: 'File does not exist.' },
+      })
+    if (file.size > 1024 * 1024 * 2)
+      //2mb
+      return dispatch({
+        type: 'NOTIFY',
+        payload: { error: 'Image must be less than 2MB.' },
+      })
+    if (file.type !== 'image/jpeg' && file.type !== 'image/png')
+      //2mb
+      return dispatch({
+        type: 'NOTIFY',
+        payload: { error: 'Image must be either JPEG or PNG.' },
+      })
+
+    setData({ ...data, avatar: file })
+  }
+
+  const updateInfor = async () => {
+    let media
+    dispatch({ type: 'NOTIFY', payload: { loading: true } })
+
+    if (avatar) media = await imageUpload([avatar])
+
+    patchData(
+      'user',
+      {
+        name,
+        avatar: avatar ? media[0].url : auth.user.avatar,
+      },
+      auth.token
+    ).then((res) => {
+      if (res.err)
+        return dispatch({ type: 'NOTIFY', payload: { error: res.err } })
+
+      dispatch({
+        type: 'AUTH',
+        payload: {
+          token: auth.token,
+          user: res.user,
+        },
+      })
+      return dispatch({ type: 'NOTIFY', payload: { success: res.msg } })
     })
   }
 
@@ -67,8 +123,8 @@ const Profile = () => {
           <div className='w-40 h-40 overflow-hidden relative my-4 mx-auto border border-solid border-gray-300 rounded-full'>
             <img
               className='w-full h-full block object-cover'
-              src={auth.user.avatar}
-              alt={auth.user.avatar}
+              src={avatar ? URL.createObjectURL(avatar) : auth.user.avatar}
+              alt='avatar'
             />
             <span className='absolute bottom-0 left-0 w-full h-2/5 bg-gray-500 bg-opacity-70 text-center font-normal cursor-pointer'>
               <FaCamera className='cursor-pointer mx-auto' />
@@ -78,6 +134,8 @@ const Profile = () => {
                 type='file'
                 name='file'
                 id='file_up'
+                accept='image/*'
+                onChange={changeAvatar}
               />
             </span>
           </div>
