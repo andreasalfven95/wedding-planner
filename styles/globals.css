@@ -26,6 +26,14 @@ img {
   object-position: 0 25%;
 }
 
+.dropdown {
+  display: none;
+}
+
+.dropdown_btn:hover .dropdown {
+  display: block;
+}
+
 /* ------------- LOADING ------------ */
 @import url('./loading.css');
 @tailwind base;
