@@ -34,6 +34,10 @@ img {
   display: block;
 }
 
+#menu-toggle:checked + #menu {
+  display: block;
+}
+
 /* ------------- LOADING ------------ */
 @import url('./loading.css');
 @tailwind base;

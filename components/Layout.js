@@ -15,8 +15,8 @@ const Layout = ({ children }) => {
   return (
     <>
       <GlobalStyle />
-      <Sidebar isOpen={isOpen} toggle={toggle} />
       <Navbar toggle={toggle} />
+      <Sidebar isOpen={isOpen} toggle={toggle} />
       <Notify />
       <main>{children}</main>
       {/* <Footer /> */}

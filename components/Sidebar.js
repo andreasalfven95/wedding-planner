@@ -7,7 +7,25 @@ import { Button } from './Button'
 
 function Sidebar({ isOpen, toggle }) {
   return (
-    <SidebarContainer isOpen={isOpen} onClick={toggle}>
+    <div
+      isOpen={isOpen}
+      onClick={toggle}
+      className={
+        isOpen
+          ? 'md:hidden grid grid-rows-3 text-center items-center border-b border-t mb-4'
+          : 'hidden'
+      }
+    >
+      {menuData.map((item, index) => (
+        <Link href={item.link} passHref key={index}>
+          <a className='p-3 text-gray-500 text-center items-center -no-underline h-full cursor-pointer transition duration-200 ease-in-out hover:text-black'>
+            {item.title}
+          </a>
+        </Link>
+      ))}
+    </div>
+
+    /* <SidebarContainer isOpen={isOpen} onClick={toggle}>
       <Icon onClick={toggle}>
         <CloseIcon />
       </Icon>
@@ -30,7 +48,7 @@ function Sidebar({ isOpen, toggle }) {
           </Button>
         </Link>
       </NavBtn>
-    </SidebarContainer>
+    </SidebarContainer> */
   )
 }
 
