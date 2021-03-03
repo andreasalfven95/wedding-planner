@@ -5,9 +5,14 @@ import { getData } from '../utils/fetchData'
 export const DataContext = createContext()
 
 export const DataProvider = ({ children }) => {
-  const initialState = { notify: {}, auth: {}, cart: [] }
+  const initialState = {
+    notify: {},
+    auth: {},
+    cart: [],
+    users: [],
+  }
   const [state, dispatch] = useReducer(reducers, initialState)
-  const { cart } = state
+  const { cart, auth } = state
 
   useEffect(() => {
     const firstLogin = localStorage.getItem('firstLogin')
@@ -25,6 +30,16 @@ export const DataProvider = ({ children }) => {
         })
       })
     }
+
+    /* getData('categories').then((res) => {
+      if (res.err)
+        return dispatch({ type: 'NOTIFY', payload: { error: res.err } })
+
+      dispatch({
+        type: 'ADD_CATEGORIES',
+        payload: res.categories,
+      })
+    }) */
   }, [])
 
   useEffect(() => {
@@ -39,6 +54,23 @@ export const DataProvider = ({ children }) => {
   useEffect(() => {
     localStorage.setItem('__next__cart01__devat', JSON.stringify(cart))
   }, [cart])
+
+  useEffect(() => {
+    if (auth.token) {
+      if (auth.user.role === 'admin') {
+        console.log(auth.user.role)
+        console.log('hejsan')
+        getData('user', auth.token).then((res) => {
+          if (res.err)
+            return dispatch({ type: 'NOTIFY', payload: { error: res.err } })
+
+          dispatch({ type: 'ADD_USERS', payload: res.users })
+        })
+      }
+    } else {
+      dispatch({ type: 'ADD_USERS', payload: [] })
+    }
+  }, [auth.token])
 
   return (
     <DataContext.Provider value={{ state, dispatch }}>

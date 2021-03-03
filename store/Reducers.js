@@ -17,10 +17,10 @@ const reducer = (state, action) => {
         ...state,
         cart: action.payload,
       }
-    case ACTIONS.ADD_MODAL:
+    case ACTIONS.ADD_USERS:
       return {
         ...state,
-        modal: action.payload,
+        users: action.payload,
       }
     default:
       return state

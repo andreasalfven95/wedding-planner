@@ -1,16 +1,16 @@
 import React, { useContext } from 'react'
 import Link from 'next/link'
-import styled from 'styled-components'
 import { FaBars } from 'react-icons/fa'
 import { GrLogout } from 'react-icons/gr'
 import { VscSignIn } from 'react-icons/vsc'
 import { menuData } from '../data/MenuData'
 import { Button } from './Button'
+import { useRouter } from 'next/router'
 import { DataContext } from '../store/GlobalState'
 import Cookie from 'js-cookie'
 
 const Navbar = ({ toggle }) => {
-  /* const router = useRouter() */
+  const router = useRouter()
   const { state, dispatch } = useContext(DataContext)
   /* Import state, cart is if we want to show how many products we have in cart/favourites on the navbar. */
   const { auth, cart } = state
@@ -20,6 +20,7 @@ const Navbar = ({ toggle }) => {
     localStorage.removeItem('firstLogin')
     dispatch({ type: 'AUTH', payload: {} })
     dispatch({ type: 'NOTIFY', payload: { success: 'Logged out!' } })
+    return router.push('/')
   }
 
   const loggedRouter = () => {
@@ -40,7 +41,7 @@ const Navbar = ({ toggle }) => {
                   {auth.user.name}
                   {auth.user.role === 'admin' && (
                     <svg
-                      className='-mr-1 ml-2 h-5 w-5'
+                      className='-mr-1 ml-2 h-5 w-5 self-center'
                       xmlns='http://www.w3.org/2000/svg'
                       viewBox='0 0 20 20'
                       fill='currentColor'
@@ -66,27 +67,30 @@ const Navbar = ({ toggle }) => {
                 aria-orientation='vertical'
                 aria-labelledby='options-menu'
               >
-                <a
-                  href='#'
-                  className='block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900'
-                  role='menuitem'
-                >
-                  Users
-                </a>
-                <a
-                  href='#'
-                  className='block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900'
-                  role='menuitem'
-                >
-                  Products
-                </a>
-                <a
-                  href='#'
-                  className='block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900'
-                  role='menuitem'
-                >
-                  Categories
-                </a>
+                <Link href='/users'>
+                  <a
+                    className='block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900'
+                    role='menuitem'
+                  >
+                    Users
+                  </a>
+                </Link>
+                <Link href='/create'>
+                  <a
+                    className='block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900'
+                    role='menuitem'
+                  >
+                    Products
+                  </a>
+                </Link>
+                <Link href='/categories'>
+                  <a
+                    className='block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900'
+                    role='menuitem'
+                  >
+                    Categories
+                  </a>
+                </Link>
               </div>
             </div>
           )}

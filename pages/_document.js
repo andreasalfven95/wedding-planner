@@ -27,22 +27,17 @@ export default class MyDocument extends Document {
             name='description'
             content='A website for all of those who are planning their big day. Here you can find venues, locations, services etc.'
           ></meta>
-          <meta
+          {/*  <meta
             name='viewport'
             content='width=device-width, initial-scale=1.0'
-          ></meta>
-          <meta charset='UTF-8'></meta>
-          {/* <link
-            rel='stylesheet'
-            href='https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css'
-          ></link> */}
+          ></meta> */}
+          <meta charSet='UTF-8'></meta>
           <link rel='preconnect' href='https://fonts.gstatic.com' />
           <link
             href='https://fonts.googleapis.com/css2?family=Roboto&display=swap'
             rel='stylesheet'
           ></link>
           <script src='https://code.jquery.com/jquery-3.5.1.slim.min.js'></script>
-          {/* <script src='https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js'></script> */}
           {/* Step 5: Output the styles in the head  */}
           {this.props.styleTags}
         </Head>

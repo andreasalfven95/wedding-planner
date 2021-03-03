@@ -6,14 +6,11 @@ const auth = async (req, res) => {
   if (!token) return res.status(400).json({ err: 'Invalid Authentication.' })
 
   const decoded = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET)
-
   if (!decoded) return res.status(400).json({ err: 'Invalid Authentication.' })
 
   const user = await Users.findOne({ _id: decoded.id })
 
-  /* USE THIS IF THE ACTIVE RETURN BELOW FAILS PROJECT */
-  /* return user */
-  return { id: user._id }
+  return { id: user._id, role: user.role, root: user.root }
 }
 
 export default auth
