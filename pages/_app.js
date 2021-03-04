@@ -2,7 +2,6 @@ import Layout from '../components/Layout'
 import '../styles/globals.css'
 import { DataProvider } from '../store/GlobalState'
 /* import { GlobalStyle } from './styles/GlobalStyles' */
-import '../styles/globals.css'
 
 function MyApp({ Component, pageProps }) {
   return (

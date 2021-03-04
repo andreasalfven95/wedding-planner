@@ -9,6 +9,7 @@ export const DataProvider = ({ children }) => {
     notify: {},
     auth: {},
     cart: [],
+    modal: [],
     users: [],
   }
   const [state, dispatch] = useReducer(reducers, initialState)
@@ -58,8 +59,6 @@ export const DataProvider = ({ children }) => {
   useEffect(() => {
     if (auth.token) {
       if (auth.user.role === 'admin') {
-        console.log(auth.user.role)
-        console.log('hejsan')
         getData('user', auth.token).then((res) => {
           if (res.err)
             return dispatch({ type: 'NOTIFY', payload: { error: res.err } })

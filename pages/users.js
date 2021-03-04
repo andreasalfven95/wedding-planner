@@ -81,10 +81,8 @@ const Users = () => {
 
                   {auth.user.root && auth.user.email !== user.email ? (
                     <FaTrash
-                      className='ml-4'
+                      className='ml-4 cursor-pointer'
                       title='Remove'
-                      data-toggle='modal'
-                      data-target='#exampleModal'
                       onClick={() =>
                         dispatch({
                           type: 'ADD_MODAL',
@@ -101,23 +99,8 @@ const Users = () => {
                     ></FaTrash>
                   ) : (
                     <FaTrash
-                      className='ml-4'
+                      className='ml-4 text-gray-400'
                       title='Remove'
-                      data-toggle='modal'
-                      data-target='#exampleModal'
-                      onClick={() =>
-                        dispatch({
-                          type: 'ADD_MODAL',
-                          payload: [
-                            {
-                              data: users,
-                              id: user._id,
-                              title: user.name,
-                              type: 'ADD_USERS',
-                            },
-                          ],
-                        })
-                      }
                     ></FaTrash>
                   )}
                 </div>

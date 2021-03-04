@@ -40,6 +40,8 @@ export default function Register() {
       return dispatch({ type: 'NOTIFY', payload: { error: res.err } })
     }
 
+    /* router.push('/signin') */
+
     return dispatch({ type: 'NOTIFY', payload: { success: res.msg } })
   }
 

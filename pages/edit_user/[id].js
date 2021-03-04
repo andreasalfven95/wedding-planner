@@ -52,6 +52,15 @@ const EditUser = () => {
         return dispatch({ type: 'NOTIFY', payload: { success: res.msg } })
       })
     }
+    /* THIS REMOVES NOTICE/TOAST AFTER 3 SECONDS.
+    IS IT POSSIBLE TO ADD THIS TO REDUX SO THAT IT ALWAYS REMOVES NOTICE AFTER x seconds, NOT JUST AFTER THIS LINE??? */
+    {
+      setTimeout(() => {
+        {
+          dispatch({ type: 'NOTIFY', payload: {} })
+        }
+      }, 3000)
+    }
   }
 
   return (

@@ -1,7 +1,7 @@
 const Loading = () => {
   return (
     <div
-      className='position-fixed w-100 h-100 text-center loading'
+      className='fixed w-full h-full text-center loading'
       style={{
         background: '#0008',
         color: 'white',

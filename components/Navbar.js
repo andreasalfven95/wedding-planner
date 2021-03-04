@@ -105,7 +105,7 @@ const Navbar = ({ toggle }) => {
   }
 
   return (
-    <nav className='bg-transparent h-20 flex flex-row z-50 relative justify-between'>
+    <nav className='bg-transparent h-20 flex flex-row z-30 relative justify-between'>
       <div className='flex flex-row justify-start'>
         <Link href='/' passHref>
           <a className='text-black flex items-center no-underline h-full cursor-pointer transition duration-200 ease-in-out text-2xl sm:text-3xl'>
