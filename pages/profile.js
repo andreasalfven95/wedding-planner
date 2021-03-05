@@ -59,7 +59,7 @@ const Profile = () => {
     patchData('user/resetPassword', { password }, auth.token).then((res) => {
       if (res.err)
         return dispatch({ type: 'NOTIFY', payload: { error: res.err } })
-      return dispatch({ type: 'NOTIFY', payload: { error: res.msg } })
+      return dispatch({ type: 'NOTIFY', payload: { success: res.msg } })
     })
     /* THIS REMOVES NOTICE/TOAST AFTER 3 SECONDS.*/
     {

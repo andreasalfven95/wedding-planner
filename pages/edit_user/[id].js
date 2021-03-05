@@ -52,7 +52,7 @@ const EditUser = () => {
         return dispatch({ type: 'NOTIFY', payload: { success: res.msg } })
       })
     }
-    /* THIS REMOVES NOTICE/TOAST AFTER 3 SECONDS.*/
+    /* THIS REMOVES NOTICE/TOAST AFTER 5 SECONDS.*/
     {
       setTimeout(() => {
         {

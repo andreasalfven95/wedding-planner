@@ -54,7 +54,7 @@ export default function SignIn() {
 
     localStorage.setItem('firstLogin', true)
 
-    /* THIS REMOVES NOTICE/TOAST AFTER 3 SECONDS.*/
+    /* THIS REMOVES NOTICE/TOAST AFTER 5 SECONDS.*/
     {
       setTimeout(() => {
         {
