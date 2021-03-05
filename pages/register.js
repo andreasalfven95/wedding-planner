@@ -42,6 +42,15 @@ export default function Register() {
 
     /* router.push('/signin') */
 
+    /* THIS REMOVES NOTICE/TOAST AFTER 3 SECONDS.*/
+    {
+      setTimeout(() => {
+        {
+          dispatch({ type: 'NOTIFY', payload: {} })
+        }
+      }, 5000)
+    }
+
     return dispatch({ type: 'NOTIFY', payload: { success: res.msg } })
   }
 

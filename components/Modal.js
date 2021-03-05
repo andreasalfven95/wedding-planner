@@ -18,6 +18,14 @@ const Modal = (props) => {
         return dispatch({ type: 'NOTIFY', payload: { error: res.err } })
       return dispatch({ type: 'NOTIFY', payload: { success: res.msg } })
     })
+    /* THIS REMOVES NOTICE/TOAST AFTER 3 SECONDS.*/
+    {
+      setTimeout(() => {
+        {
+          dispatch({ type: 'NOTIFY', payload: {} })
+        }
+      }, 5000)
+    }
   }
 
   /* const deleteCategories = (item) => {
@@ -38,6 +46,14 @@ const Modal = (props) => {
       dispatch({ type: 'NOTIFY', payload: { success: res.msg } })
       return router.push('/')
     })
+    /* THIS REMOVES NOTICE/TOAST AFTER 3 SECONDS.*/
+    {
+      setTimeout(() => {
+        {
+          dispatch({ type: 'NOTIFY', payload: {} })
+        }
+      }, 5000)
+    }
   }
 
   const handleSubmit = () => {

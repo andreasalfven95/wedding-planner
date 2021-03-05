@@ -1,18 +1,5 @@
-import React, { useState, useEffect } from 'react'
-
-/* Toasts are hidden by default. Use the data-autohide="false" attribute to show it by default. To close it, use a <button> element and add data-dismiss="toast": */
-
-const Toast = ({ msg, handleShow /* , props */ }) => {
-  /* const { toastList, position } = props
-  const [list, setList] = useState(toastList) */
-
-  /* useEffect(() => {
-    setList(toastList)
-  }, [toastList, list]) */
-
+const Toast = ({ msg, handleShow }) => {
   return (
-    /*     <!-- Toast Container -->
-    <!-- put taost notification in here , to cope when the toast more than one --> */
     <div className='absolute right-0 bottom-0 m-5 z-40' onClick={handleShow}>
       {msg.title === 'success' && (
         <div className='flex items-center bg-green-500 border-l-4 border-green-700 py-2 px-3 shadow-md mb-2'>

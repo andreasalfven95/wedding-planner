@@ -27,12 +27,12 @@ const EditUser = () => {
 
   const handleCheck = () => {
     setCheckAdmin(!checkAdmin)
-    setNum(num + 1)
+    /* setNum(num + 1) */
   }
 
   const handleSubmit = () => {
     let role = checkAdmin ? 'admin' : 'user'
-    if (num % 2 !== 0) {
+    /* if (num % 2 !== 0)  */ {
       dispatch({ type: 'NOTIFY', payload: { loading: true } })
       patchData(`user/${editUser._id}`, { role }, auth.token).then((res) => {
         if (res.err) {
@@ -52,14 +52,13 @@ const EditUser = () => {
         return dispatch({ type: 'NOTIFY', payload: { success: res.msg } })
       })
     }
-    /* THIS REMOVES NOTICE/TOAST AFTER 3 SECONDS.
-    IS IT POSSIBLE TO ADD THIS TO REDUX SO THAT IT ALWAYS REMOVES NOTICE AFTER x seconds, NOT JUST AFTER THIS LINE??? */
+    /* THIS REMOVES NOTICE/TOAST AFTER 3 SECONDS.*/
     {
       setTimeout(() => {
         {
           dispatch({ type: 'NOTIFY', payload: {} })
         }
-      }, 3000)
+      }, 5000)
     }
   }
 

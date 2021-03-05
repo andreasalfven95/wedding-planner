@@ -12,6 +12,14 @@ export const addToCart = (product, cart) => {
       type: 'NOTIFY',
       payload: { error: 'This product is out of stock.' },
     }
+  /* THIS REMOVES NOTICE/TOAST AFTER 5 SECONDS.*/
+  {
+    setTimeout(() => {
+      {
+        dispatch({ type: 'NOTIFY', payload: {} })
+      }
+    }, 5000)
+  }
   const check = cart.every((item) => {
     return item._id !== product._id
   })
@@ -21,6 +29,14 @@ export const addToCart = (product, cart) => {
       type: 'NOTIFY',
       payload: { error: 'The product has already been added to cart.' },
     }
+  /* THIS REMOVES NOTICE/TOAST AFTER 5 SECONDS.*/
+  {
+    setTimeout(() => {
+      {
+        dispatch({ type: 'NOTIFY', payload: {} })
+      }
+    }, 5000)
+  }
 
   return {
     type: 'ADD_CART',

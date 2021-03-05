@@ -18,6 +18,14 @@ export default function Navbar({ toggle }) {
     localStorage.removeItem('firstLogin')
     dispatch({ type: 'AUTH', payload: {} })
     dispatch({ type: 'NOTIFY', payload: { success: 'Logged out!' } })
+    /* THIS REMOVES NOTICE/TOAST AFTER 3 SECONDS.*/
+    {
+      setTimeout(() => {
+        {
+          dispatch({ type: 'NOTIFY', payload: {} })
+        }
+      }, 5000)
+    }
   }
 
   return (
