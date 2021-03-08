@@ -1,6 +1,6 @@
 const Toast = ({ msg, handleShow }) => {
   return (
-    <div className='absolute right-0 bottom-0 m-5 z-40' onClick={handleShow}>
+    <div className='fixed right-0 bottom-0 m-2 z-40' onClick={handleShow}>
       {msg.title === 'success' && (
         <div className='flex items-center bg-green-500 border-l-4 border-green-700 py-2 px-3 shadow-md mb-2'>
           <div className='text-green-500 rounded-full bg-white mr-3'>

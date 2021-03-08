@@ -4,7 +4,7 @@ import { deleteItem } from '../store/Actions'
 import { deleteData } from '../utils/fetchData'
 import { useRouter } from 'next/router'
 
-const Modal = (props) => {
+const Modal = () => {
   const { state, dispatch } = useContext(DataContext)
   const { modal, auth } = state
 
