@@ -20,7 +20,7 @@ const Navbar = ({ toggle }) => {
     localStorage.removeItem('firstLogin')
     dispatch({ type: 'AUTH', payload: {} })
     dispatch({ type: 'NOTIFY', payload: { success: 'Logged out!' } })
-    /* THIS REMOVES NOTICE/TOAST AFTER 3 SECONDS.*/
+    /* THIS REMOVES NOTICE/TOAST AFTER 5 SECONDS.*/
     {
       setTimeout(() => {
         {
@@ -56,9 +56,9 @@ const Navbar = ({ toggle }) => {
                       aria-hidden='true'
                     >
                       <path
-                        fill-rule='evenodd'
+                        fillRule='evenodd'
                         d='M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z'
-                        clip-rule='evenodd'
+                        clipRule='evenodd'
                       />
                     </svg>
                   )}
@@ -149,7 +149,6 @@ const Navbar = ({ toggle }) => {
           loggedRouter()
         )}
 
-        {/*FaBars: transform: translate(-100%, 75%); */}
         <FaBars
           className='ml-4 self-center justify-end text-2xl cursor-pointer text-black md:hidden'
           onClick={toggle}
