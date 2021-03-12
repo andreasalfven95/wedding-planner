@@ -23,7 +23,6 @@ const Card = ({ product }) => {
         <Button
           primary='true'
           round='true'
-          /* disabled={product.inStock === 0 ? true : false} */
           onClick={() => dispatch(addToCart(product, cart))}
         >
           Add to favourites
@@ -42,7 +41,23 @@ const Card = ({ product }) => {
             Edit
           </Button>
         </Link>
-        <Button primary='true' round='true'>
+        <Button
+          primary='true'
+          round='true'
+          onClick={() =>
+            dispatch({
+              type: 'ADD_MODAL',
+              payload: [
+                {
+                  data: '',
+                  id: product._id,
+                  title: product.title,
+                  type: 'DELETE_PRODUCT',
+                },
+              ],
+            })
+          }
+        >
           Delete
           <AiOutlineStar />
           <AiFillStar />
@@ -52,26 +67,37 @@ const Card = ({ product }) => {
   }
 
   return (
-    <div className='card'>
-      <img
-        src={product.images[0].url}
-        alt={product.images[0].url}
-        layout='fill'
-        className='card-img'
-      />
-      <div className='card-body bg-black'>
-        <h5 className='card-title capitalize' title={product.title}>
-          {product.title}
-        </h5>
-        <div className=''>
+    <div className='my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3'>
+      <div className='overflow-hidden rounded-lg shadow-lg'>
+        <img
+          src={product.images[0].url}
+          alt={product.images[0].url}
+          layout='fill'
+          className='block h-auto w-full'
+        />
+        <header className='flex items-center justify-between leading-tight p-2 md:p-4'>
+          <div className='text-lg'>{product.title}</div>
+          <p className='flex text-grey-darker text-sm'>
+            <ImLocation> </ImLocation> 14/4/19
+          </p>
+        </header>
+        {/* <div classNameName=''>
           <h6>${product.price}</h6>
           <h6>{product.inStock} in stock</h6>
-        </div>
-        <p className='card-text' title={product.description}>
-          {product.description}
-        </p>
-        <div className='flex justify-between'>
-          {!auth.user || auth.user.role !== 'admin' ? userLink() : adminLink()}
+        </div> */}
+        <footer className='flex items-center justify-between leading-none p-2 md:p-4'>
+          <div className='flex items-center'>
+            <p class='text-gray-700 text-base' title={product.description}>
+              {product.description}
+            </p>
+          </div>
+        </footer>
+        <div class='px-3 pb-2'>
+          <div class='flex justify-between'>
+            {!auth.user || auth.user.role !== 'admin'
+              ? userLink()
+              : adminLink()}
+          </div>
         </div>
       </div>
     </div>

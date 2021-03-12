@@ -1,13 +1,12 @@
 import React from 'react'
 import Link from 'next/link'
-import styled from 'styled-components'
 import Card from './Card'
 
 function Products({ products, heading }) {
   return (
-    <ProductsContainer>
-      <ProductsHeading>{heading}</ProductsHeading>
-      <ProductWrapper>
+    <div className='container mx-auto'>
+      <div className='text-center mb-8 text-5xl text-black'>{heading}</div>
+      <div className='flex flex-wrap -mx-1 lg:-mx-4'>
         {products.length === 0 ? (
           <h2
             style={{
@@ -21,36 +20,9 @@ function Products({ products, heading }) {
             <Card key={product._id} product={product} />
           ))
         )}
-      </ProductWrapper>
-    </ProductsContainer>
+      </div>
+    </div>
   )
 }
 
 export default Products
-
-const ProductsContainer = styled.div`
-  color: #fff;
-`
-
-const ProductsHeading = styled.div`
-  font-size: clamp(1.2rem, 5vw, 3rem);
-  text-align: center;
-  margin-bottom: 2rem;
-  color: #000;
-`
-
-const ProductWrapper = styled.div`
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-gap: 10px;
-  justify-items: center;
-  padding: 0 2rem;
-
-  @media screen and (max-width: 1200px) {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  @media screen and (max-width: 768px) {
-    grid-template-columns: 1fr;
-  }
-`

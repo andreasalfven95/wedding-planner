@@ -75,7 +75,7 @@ const Modal = () => {
 
         if (item.type === 'ADD_CATEGORIES') deleteCategories(item)
 
-        /* if (item.type === 'DELETE_PRODUCT') deleteProduct(item) */
+        if (item.type === 'DELETE_PRODUCT') deleteProduct(item)
 
         dispatch({ type: 'ADD_MODAL', payload: [] })
       }
