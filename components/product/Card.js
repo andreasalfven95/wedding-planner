@@ -87,13 +87,13 @@ const Card = ({ product }) => {
         </div> */}
         <footer className='flex items-center justify-between leading-none p-2 md:p-4'>
           <div className='flex items-center'>
-            <p class='text-gray-700 text-base' title={product.description}>
+            <p className='text-gray-700 text-base' title={product.description}>
               {product.description}
             </p>
           </div>
         </footer>
-        <div class='px-3 pb-2'>
-          <div class='flex justify-between'>
+        <div className='px-3 pb-2'>
+          <div className='flex justify-between'>
             {!auth.user || auth.user.role !== 'admin'
               ? userLink()
               : adminLink()}

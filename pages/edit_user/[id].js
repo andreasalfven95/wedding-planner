@@ -52,14 +52,6 @@ const EditUser = () => {
         return dispatch({ type: 'NOTIFY', payload: { success: res.msg } })
       })
     }
-    /* THIS REMOVES NOTICE/TOAST AFTER 5 SECONDS.*/
-    {
-      setTimeout(() => {
-        {
-          dispatch({ type: 'NOTIFY', payload: {} })
-        }
-      }, 5000)
-    }
   }
 
   return (

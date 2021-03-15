@@ -53,15 +53,6 @@ export default function SignIn() {
     })
 
     localStorage.setItem('firstLogin', true)
-
-    /* THIS REMOVES NOTICE/TOAST AFTER 5 SECONDS.*/
-    {
-      setTimeout(() => {
-        {
-          dispatch({ type: 'NOTIFY', payload: {} })
-        }
-      }, 5000)
-    }
   }
 
   useEffect(() => {

@@ -35,14 +35,7 @@ export const DataProvider = ({ children }) => {
         if (res.err) {
           return dispatch({ type: 'NOTIFY', payload: { error: res.err } })
         }
-        /* THIS REMOVES NOTICE/TOAST AFTER 5 SECONDS.*/
-        {
-          setTimeout(() => {
-            {
-              dispatch({ type: 'NOTIFY', payload: {} })
-            }
-          }, 5000)
-        }
+
         dispatch({
           type: 'ADD_CATEGORIES',
           payload: res.categories,
@@ -70,15 +63,6 @@ export const DataProvider = ({ children }) => {
         getData('user', auth.token).then((res) => {
           if (res.err)
             return dispatch({ type: 'NOTIFY', payload: { error: res.err } })
-
-          /* THIS REMOVES NOTICE/TOAST AFTER 5 SECONDS.*/
-          {
-            setTimeout(() => {
-              {
-                dispatch({ type: 'NOTIFY', payload: {} })
-              }
-            }, 5000)
-          }
 
           dispatch({ type: 'ADD_USERS', payload: res.users })
         })

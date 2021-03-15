@@ -74,12 +74,6 @@ const ProductsManager = () => {
 
     const imgCount = images.length
     if (imgCount + newImages.length > 5) {
-      /* THIS REMOVES NOTICE/TOAST AFTER 5 SECONDS.*/
-      setTimeout(() => {
-        {
-          dispatch({ type: 'NOTIFY', payload: {} })
-        }
-      }, 5000)
       return dispatch({
         type: 'NOTIFY',
         payload: { error: 'Select up to 5 images.' },

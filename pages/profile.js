@@ -44,14 +44,6 @@ const Profile = () => {
     }
 
     if (name !== auth.user.name || avatar) updateInfor()
-    /* THIS REMOVES NOTICE/TOAST AFTER 3 SECONDS.*/
-    {
-      setTimeout(() => {
-        {
-          dispatch({ type: 'NOTIFY', payload: {} })
-        }
-      }, 5000)
-    }
   }
 
   const updatePassword = () => {
@@ -61,14 +53,6 @@ const Profile = () => {
         return dispatch({ type: 'NOTIFY', payload: { error: res.err } })
       return dispatch({ type: 'NOTIFY', payload: { success: res.msg } })
     })
-    /* THIS REMOVES NOTICE/TOAST AFTER 3 SECONDS.*/
-    {
-      setTimeout(() => {
-        {
-          dispatch({ type: 'NOTIFY', payload: {} })
-        }
-      }, 5000)
-    }
   }
 
   const changeAvatar = (e) => {
@@ -92,14 +76,6 @@ const Profile = () => {
       })
 
     setData({ ...data, avatar: file })
-    /* THIS REMOVES NOTICE/TOAST AFTER 3 SECONDS.*/
-    {
-      setTimeout(() => {
-        {
-          dispatch({ type: 'NOTIFY', payload: {} })
-        }
-      }, 5000)
-    }
   }
 
   const updateInfor = async () => {
@@ -128,14 +104,6 @@ const Profile = () => {
       })
       return dispatch({ type: 'NOTIFY', payload: { success: res.msg } })
     })
-    /* THIS REMOVES NOTICE/TOAST AFTER 3 SECONDS.*/
-    {
-      setTimeout(() => {
-        {
-          dispatch({ type: 'NOTIFY', payload: {} })
-        }
-      }, 5000)
-    }
   }
 
   if (!auth.user) {

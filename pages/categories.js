@@ -22,29 +22,12 @@ const Categories = () => {
         type: 'NOTIFY',
         payload: { error: 'Authentication is not vaild.' },
       })
-    /* THIS REMOVES NOTICE/TOAST AFTER 5 SECONDS.*/
-    {
-      setTimeout(() => {
-        {
-          dispatch({ type: 'NOTIFY', payload: {} })
-        }
-      }, 5000)
-    }
 
     if (!name)
       return dispatch({
         type: 'NOTIFY',
         payload: { error: 'Name can not be left blank.' },
       })
-
-    /* THIS REMOVES NOTICE/TOAST AFTER 5 SECONDS.*/
-    {
-      setTimeout(() => {
-        {
-          dispatch({ type: 'NOTIFY', payload: {} })
-        }
-      }, 5000)
-    }
 
     dispatch({ type: 'NOTIFY', payload: { loading: true } })
 
@@ -65,14 +48,7 @@ const Categories = () => {
     }
     setName('')
     setId('')
-    /* THIS REMOVES NOTICE/TOAST AFTER 5 SECONDS.*/
-    {
-      setTimeout(() => {
-        {
-          dispatch({ type: 'NOTIFY', payload: {} })
-        }
-      }, 5000)
-    }
+
     return dispatch({ type: 'NOTIFY', payload: { success: res.msg } })
   }
 
