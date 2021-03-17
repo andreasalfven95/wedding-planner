@@ -63,7 +63,8 @@ const updateProduct = async (req, res) => {
     await Products.findOneAndUpdate(
       { _id: id },
       {
-        title,
+        /* Set updated title to lowercase */
+        title: title.toLowerCase(),
         price,
         inStock,
         description,

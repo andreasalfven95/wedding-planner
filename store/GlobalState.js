@@ -20,9 +20,7 @@ export const DataProvider = ({ children }) => {
     const firstLogin = localStorage.getItem('firstLogin')
     if (firstLogin) {
       getData('auth/accessToken').then((res) => {
-        if (res.err) {
-          return localStorage.removeItem('firstLogin')
-        }
+        if (res.err) return localStorage.removeItem('firstLogin')
         dispatch({
           type: 'AUTH',
           payload: {
@@ -31,17 +29,17 @@ export const DataProvider = ({ children }) => {
           },
         })
       })
-      getData('categories').then((res) => {
-        if (res.err) {
-          return dispatch({ type: 'NOTIFY', payload: { error: res.err } })
-        }
-
-        dispatch({
-          type: 'ADD_CATEGORIES',
-          payload: res.categories,
-        })
-      })
     }
+
+    getData('categories').then((res) => {
+      if (res.err)
+        return dispatch({ type: 'NOTIFY', payload: { error: res.err } })
+
+      dispatch({
+        type: 'ADD_CATEGORIES',
+        payload: res.categories,
+      })
+    })
   }, [])
 
   useEffect(() => {

@@ -49,7 +49,8 @@ const deleteCategory = async (req, res) => {
     const products = await Products.findOne({ category: id })
     if (products)
       return res.status(400).json({
-        err: 'Please delete all products with a relationship.',
+        err:
+          'Please delete all products with a relationship to the category first.',
       })
 
     await Categories.findByIdAndDelete(id)

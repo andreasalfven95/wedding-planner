@@ -47,9 +47,9 @@ const Filter = ({ state }) => {
       <form autoComplete='off' className='mt-2 col-md-8 px-0'>
         <input
           type='text'
-          className='form-control'
+          className='shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker'
           list='title_product'
-          value={search.toLowerCase()}
+          value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
       </form>
@@ -62,7 +62,7 @@ const Filter = ({ state }) => {
         >
           <option value='-createdAt'>Newest</option>
           <option value='oldest'>Oldest</option>
-          <option value='-sold'>Best sales</option>
+          <option value='-sold'>Most sold</option>
           <option value='-price'>Price: Hight-Low</option>
           <option value='price'>Price: Low-Hight</option>
         </select>
