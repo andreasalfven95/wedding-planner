@@ -1,11 +1,13 @@
 import Head from 'next/head'
 import React from 'react'
+import { ImLocation } from 'react-icons/im'
 import { useState, useContext, useEffect, useRef } from 'react'
 import { getData } from '../../utils/fetchData'
 import { Button } from '../../components/Button'
 import Link from 'next/link'
 import { DataContext } from '../../store/GlobalState'
 import { addToCart } from '../../store/Actions'
+import { AiOutlineStar, AiFillStar } from 'react-icons/ai'
 
 const DetailProduct = (props) => {
   const [product] = useState(props.product)
@@ -28,15 +30,18 @@ const DetailProduct = (props) => {
   }, [tab])
 
   return (
-    <div className='detail-page'>
+    <div className='detail-page pb-4'>
       <Head>
         <title>{product.title}</title>
       </Head>
+      <header className=' border-b border-t border-black mb-2 py-2'>
+        <h2 className='text-3xl capitalize'>{product.title}</h2>
+      </header>
       <div className='col-md-6'>
         <img
           src={product.images[tab].url}
           alt={product.images[tab].url}
-          className='block mt-4 w-max'
+          className='block mt-2 w-max'
           style={{ height: '350px' }}
         />
 
@@ -58,15 +63,11 @@ const DetailProduct = (props) => {
         </div>
       </div>
       {/* BIG SCREEN: Picture to left, information to right */}
-      <div className='col-md-6 mt-3'>
-        <h2 className='uppercase'>{product.title}</h2>
-        <h5 className='uppercase'>${product.price}</h5>
-        <div className='flex flex-row mx-0 justify-between'>
-          {product.inStock}
-          <h6>Sold: {product.sold}</h6>
+      <div className='col-md-6'>
+        <div className='information py-4 border-b border-black mb-4'>
+          <h3 className='text-lg pb-2'>{product.description}</h3>
+          <p className='text-sm leading-6'>{product.content}</p>
         </div>
-        <div className='my-2'>{product.description}</div>
-        <div className='my-2'>{product.content}</div>
 
         <Button
           className='w-min'
@@ -74,7 +75,22 @@ const DetailProduct = (props) => {
           onClick={() => dispatch(addToCart(product, cart))}
         >
           Add to favourites
+          <AiOutlineStar />
+          <AiFillStar />
         </Button>
+      </div>
+      <div className='company-info justify-end'>
+        <ul className=''>
+          <li>0761857993</li>
+          <li>
+            <a href='https://andreasalfven95.github.io/portfolio/'>
+              https://andreasalfven95.github.io/portfolio/
+            </a>
+          </li>
+          <li>
+            <ImLocation> </ImLocation> Fyrislundsgatan 26 <br /> 754 46 Uppsala
+          </li>
+        </ul>
       </div>
     </div>
   )

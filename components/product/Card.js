@@ -16,19 +16,21 @@ const Card = ({ product }) => {
     return (
       <>
         <Link href={`/product/${product._id}`} passHref>
-          <Button primary='true' round='true'>
-            View
-          </Button>
+          <Button primary='true'>Läs mer...</Button>
         </Link>
         <Button
+          className='w-min p-1'
           primary='true'
-          round='true'
           onClick={() => dispatch(addToCart(product, cart))}
         >
-          Add to favourites
-          <AiOutlineStar />
-          <AiFillStar />
+          <AiOutlineStar className='text-3xl p-0 min' />
         </Button>
+
+        {/* (item.id === product.id) {
+              return (<AiFillStar className='text-3xl p-0 min' />)
+            } else {
+              <AiOutlineStar className='text-3xl p-0 min' />
+            } */}
       </>
     )
   }
@@ -37,13 +39,10 @@ const Card = ({ product }) => {
     return (
       <>
         <Link href={`/create/${product._id}`} passHref>
-          <Button primary='true' round='true'>
-            Edit
-          </Button>
+          <Button primary='true'>Edit</Button>
         </Link>
         <Button
           primary='true'
-          round='true'
           onClick={() =>
             dispatch({
               type: 'ADD_MODAL',
@@ -59,40 +58,43 @@ const Card = ({ product }) => {
           }
         >
           Delete
-          <AiOutlineStar />
-          <AiFillStar />
         </Button>
       </>
     )
   }
 
   return (
-    <div className='my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3'>
-      <div className='overflow-hidden rounded-lg shadow-lg'>
-        <img
-          src={product.images[0].url}
-          alt={product.images[0].url}
-          layout='fill'
-          className='block h-auto w-full'
-        />
-        <header className='flex items-center justify-between leading-tight p-2 md:p-4'>
-          <div className='text-lg'>{product.title}</div>
-          <p className='flex text-grey-darker text-sm'>
-            <ImLocation> </ImLocation> 14/4/19
-          </p>
+    <div className='bg-gray-100 pb-2 mt-6 my-2 card-container border-black shadow-xl transition-shadow flex-col w-full md:flex-row md:text-left'>
+      <div className='w-full'>
+        <header className=' border-b border-t border-black mb-2 py-2'>
+          <h2 className='text-3xl capitalize'>{product.title}</h2>
         </header>
-        {/* <div classNameName=''>
-          <h6>${product.price}</h6>
-          <h6>{product.inStock} in stock</h6>
-        </div> */}
-        <footer className='flex items-center justify-between leading-none p-2 md:p-4'>
-          <div className='flex items-center'>
-            <p className='text-gray-700 text-base' title={product.description}>
-              {product.description}
-            </p>
+        <div className='flex-col'>
+          <img
+            src={product.images[0].url}
+            alt={product.images[0].url}
+            layout='fill'
+            className='block sm:max-h-56 mx-auto md:m-0'
+          />
+          <div className='information py-2 border-b border-black mb-2'>
+            <h3 className='text-lg pb-1'>{product.description}</h3>
+            <p className='text-sm leading-6'>{product.content}</p>
           </div>
-        </footer>
-        <div className='px-3 pb-2'>
+        </div>
+      </div>
+      <div className='company-info justify-end'>
+        <ul className=''>
+          <li>0761857993</li>
+          <li>
+            <a href='https://andreasalfven95.github.io/portfolio/'>
+              https://andreasalfven95.github.io/portfolio/
+            </a>
+          </li>
+          <li>
+            <ImLocation> </ImLocation> Fyrislundsgatan 26 <br /> 754 46 Uppsala
+          </li>
+        </ul>
+        <div className='mt-2'>
           <div className='flex justify-between'>
             {!auth.user || auth.user.role !== 'admin'
               ? userLink()

@@ -128,14 +128,16 @@ const Navbar = ({ toggle }) => {
           <div className='flex items-center'>
             <Link href='/signin' passHref>
               {/* <Button className='mr-4'>Sign In</Button> */}
-              <Button className='mr-4 px-3 md:px-4'>
+              <Button primary='true' className='mr-4 px-3 md:px-4'>
                 <div className='hidden md:block md:mr-3'>Sign In</div>
                 <VscSignIn className=''></VscSignIn>
               </Button>
             </Link>
 
             <Link href='/register' passHref>
-              <Button className='mr-4'>Register</Button>
+              <Button primary='true' className='mr-4'>
+                Register
+              </Button>
             </Link>
           </div>
         ) : (
