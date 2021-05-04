@@ -6,18 +6,28 @@ import React from 'react'
 import { useContext } from 'react'
 import { DataContext } from '../../store/GlobalState'
 import { addToCart } from '../../store/Actions'
-import { AiOutlineStar, AiFillStar } from 'react-icons/ai'
+import { AiOutlineStar, AiFillStar, AiOutlineMail, AiOutlinePhone } from 'react-icons/ai'
+import { VscGlobe } from 'react-icons/vsc';
 
 const Card = ({ product }) => {
   const { state, dispatch } = useContext(DataContext)
   const { cart, auth } = state
 
-  const userLink = () => {
-    return (
-      <>
-        <Link href={`/product/${product._id}`} passHref>
-          <Button primary='true'>Läs mer...</Button>
-        </Link>
+  let isAdded = false;
+
+
+  const checkCart = () => {
+    const check = cart.every((item) => {
+      return item._id !== product._id
+    })
+  
+    if (!check){
+      console.log('The product has already been added to cart.')
+      isAdded = true
+    }
+
+    if (isAdded === false) {
+      return(
         <Button
           className='w-min p-1'
           primary='true'
@@ -25,12 +35,27 @@ const Card = ({ product }) => {
         >
           <AiOutlineStar className='text-3xl p-0 min' />
         </Button>
+      )
+    } if(isAdded === true) {
+      return(
+        <Button
+          className='w-min p-1'
+          primary='true'
+          onClick={() => dispatch(addToCart(product, cart))}
+        >
+          <AiFillStar className='text-3xl p-0 min' />
+        </Button>
+      )
+    }
+  }
 
-        {/* (item.id === product.id) {
-              return (<AiFillStar className='text-3xl p-0 min' />)
-            } else {
-              <AiOutlineStar className='text-3xl p-0 min' />
-            } */}
+  const userLink = () => {
+    return (
+      <>
+        <Link href={`/product/${product._id}`} passHref>
+          <Button primary='true'>Läs mer...</Button>
+        </Link>
+        {checkCart()}
       </>
     )
   }
@@ -84,14 +109,19 @@ const Card = ({ product }) => {
       </div>
       <div className='company-info justify-end'>
         <ul className=''>
-          <li>0761857993</li>
+          <li>
+            <AiOutlineMail className="inline-block"> </AiOutlineMail> test@gmail.com
+          </li>
+          <li>
+            <AiOutlinePhone className="inline-block"> </AiOutlinePhone> 0761857993
+          </li>
           <li>
             <a href='https://andreasalfven95.github.io/portfolio/'>
-              https://andreasalfven95.github.io/portfolio/
+              <VscGlobe className="inline-block"></VscGlobe> https://andreasalfven95.github.io/portfolio/
             </a>
           </li>
           <li>
-            <ImLocation> </ImLocation> Fyrislundsgatan 26 <br /> 754 46 Uppsala
+            <ImLocation className="inline-block"> </ImLocation> Fyrislundsgatan 26 <br /> 754 46 Uppsala
           </li>
         </ul>
         <div className='mt-2'>
