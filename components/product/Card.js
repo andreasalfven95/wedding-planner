@@ -5,9 +5,9 @@ import Link from 'next/link'
 import React from 'react'
 import { useContext } from 'react'
 import { DataContext } from '../../store/GlobalState'
-import { addToCart } from '../../store/Actions'
+import { addToCart, deleteItem } from '../../store/Actions'
 import { AiOutlineStar, AiFillStar, AiOutlineMail, AiOutlinePhone } from 'react-icons/ai'
-import { VscGlobe } from 'react-icons/vsc';
+import { VscGlobe } from 'react-icons/vsc'
 
 const Card = ({ product }) => {
   const { state, dispatch } = useContext(DataContext)
@@ -22,7 +22,6 @@ const Card = ({ product }) => {
     })
   
     if (!check){
-      console.log('The product has already been added to cart.')
       isAdded = true
     }
 
@@ -41,7 +40,10 @@ const Card = ({ product }) => {
         <Button
           className='w-min p-1'
           primary='true'
-          onClick={() => dispatch(addToCart(product, cart))}
+          onClick={
+            () => /* dispatch(addToCart(product, cart)) */
+            dispatch(deleteItem(cart, product._id, 'ADD_CART'))
+          }
         >
           <AiFillStar className='text-3xl p-0 min' />
         </Button>
