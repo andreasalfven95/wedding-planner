@@ -135,7 +135,7 @@ const Navbar = ({ toggle }) => {
             </Link>
 
             <Link href='/register' passHref>
-              <Button primary='true' className='mr-4'>
+              <Button primary='true' className=''>
                 Register
               </Button>
             </Link>

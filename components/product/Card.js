@@ -40,10 +40,7 @@ const Card = ({ product }) => {
         <Button
           className='w-min p-1'
           primary='true'
-          onClick={
-            () => /* dispatch(addToCart(product, cart)) */
-            dispatch(deleteItem(cart, product._id, 'ADD_CART'))
-          }
+          onClick={() =>dispatch(deleteItem(cart, product._id, 'ADD_CART'))}
         >
           <AiFillStar className='text-3xl p-0 min' />
         </Button>
@@ -91,9 +88,9 @@ const Card = ({ product }) => {
   }
 
   return (
-    <div className='bg-gray-100 pb-2 mt-6 my-2 card-container border-black shadow-xl transition-shadow flex-col w-full md:flex-row md:text-left'>
+    <div className='pb-3 border-t border-b mt-8 mb-2 card-container border-black shadow-xl transition-shadow flex-col w-full md:flex-row md:text-left'>
       <div className='w-full'>
-        <header className=' border-b border-t border-black mb-2 py-2'>
+        <header className=' border-b border-black mb-2 py-2'>
           <h2 className='text-3xl capitalize'>{product.title}</h2>
         </header>
         <div className='flex-col'>
@@ -101,7 +98,7 @@ const Card = ({ product }) => {
             src={product.images[0].url}
             alt={product.images[0].url}
             layout='fill'
-            className='block sm:max-h-56 mx-auto md:m-0'
+            className='block max-h-80 md:max-w-sm mx-auto md:m-0'
           />
           <div className='information py-2 border-b border-black mb-2'>
             <h3 className='text-lg pb-1'>{product.description}</h3>
@@ -109,7 +106,7 @@ const Card = ({ product }) => {
           </div>
         </div>
       </div>
-      <div className='company-info justify-end'>
+      <div className='company-info justify-end break-words'>
         <ul className=''>
           <li>
             <AiOutlineMail className="inline-block"> </AiOutlineMail> test@gmail.com
