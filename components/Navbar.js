@@ -98,7 +98,7 @@ const Navbar = ({ toggle }) => {
         </div>
 
         <Button className='px-3 md:px-4' onClick={handleLogout}>
-          <div className='hidden md:block md:mr-3'>Logout</div>
+          <div className='hidden md:block md:mr-3'>Logga ut</div>
           <GrLogout className=''></GrLogout>
         </Button>
       </div>
@@ -129,14 +129,14 @@ const Navbar = ({ toggle }) => {
             <Link href='/signin' passHref>
               {/* <Button className='mr-4'>Sign In</Button> */}
               <Button primary='true' className='mr-4 px-3 md:px-4'>
-                <div className='hidden md:block md:mr-3'>Sign In</div>
+                <div className='hidden md:block md:mr-3'>Logga in</div>
                 <VscSignIn className=''></VscSignIn>
               </Button>
             </Link>
 
             <Link href='/register' passHref>
               <Button primary='true' className=''>
-                Register
+                Registrera
               </Button>
             </Link>
           </div>

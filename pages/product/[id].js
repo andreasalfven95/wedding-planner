@@ -104,6 +104,8 @@ const DetailProduct = (props) => {
             {product.content}
           </p>
           <p className='leading-6'>
+            {' '}
+            {/* {product.about} */}
             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quos
             possimus quasi officiis iste iusto! Quae nostrum perferendis sequi
             expedita neque, incidunt consequuntur maiores architecto dolorum

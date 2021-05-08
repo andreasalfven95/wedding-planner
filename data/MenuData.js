@@ -1,5 +1,5 @@
 export const menuData = [
-  { title: 'Favourites', link: '/favourites' },
-  { title: 'About us', link: '/about' },
-  { title: 'Contact', link: '/contact' },
+  { title: 'Dina favoriter', link: '/favourites' },
+  { title: 'Om Wed2Be', link: '/about' },
+  { title: 'Kontakta oss', link: '/contact' },
 ]
