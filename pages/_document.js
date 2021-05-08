@@ -32,14 +32,14 @@ export default class MyDocument extends Document {
             content='width=device-width, initial-scale=1.0'
           ></meta> */}
           <meta charSet='UTF-8'></meta>
-          <link rel='preconnect' href='https://fonts.gstatic.com' />
+          <link rel='preconnect' href='https://fonts.gstatic.com'></link>
           <link
-            href='https://fonts.googleapis.com/css2?family=Roboto&display=swap'
+            href='https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400;500;600&family=Raleway:wght@200;400;600&display=swap'
             rel='stylesheet'
           ></link>
           <script src='https://code.jquery.com/jquery-3.5.1.slim.min.js'></script>
 
-          <script src='https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js'></script>
+          {/* <script src='https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js'></script> */}
 
           {/* Step 5: Output the styles in the head  */}
           {this.props.styleTags}

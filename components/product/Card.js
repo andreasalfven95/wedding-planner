@@ -6,28 +6,27 @@ import React from 'react'
 import { useContext } from 'react'
 import { DataContext } from '../../store/GlobalState'
 import { addToCart, deleteItem } from '../../store/Actions'
-import { AiOutlineStar, AiFillStar, AiOutlineHeart, AiFillHeart, AiOutlineMail, AiOutlinePhone } from 'react-icons/ai'
+import { AiOutlineMail, AiOutlinePhone } from 'react-icons/ai'
 import { VscGlobe } from 'react-icons/vsc'
-import { HiHeart,HiOutlineHeart } from "react-icons/hi"
+import { HiHeart, HiOutlineHeart } from 'react-icons/hi'
 
 const Card = ({ product }) => {
   const { state, dispatch } = useContext(DataContext)
   const { cart, auth } = state
 
-  let isAdded = false;
-
+  let isAdded = false
 
   const checkCart = () => {
     const check = cart.every((item) => {
       return item._id !== product._id
     })
-  
-    if (!check){
+
+    if (!check) {
       isAdded = true
     }
 
     if (isAdded === false) {
-      return(
+      return (
         <Button
           className='w-min p-1'
           primary='true'
@@ -36,12 +35,13 @@ const Card = ({ product }) => {
           <HiOutlineHeart className='text-3xl p-0 min' />
         </Button>
       )
-    } if(isAdded === true) {
-      return(
+    }
+    if (isAdded === true) {
+      return (
         <Button
           className='w-min p-1'
           primary='true'
-          onClick={() =>dispatch(deleteItem(cart, product._id, 'ADD_CART'))}
+          onClick={() => dispatch(deleteItem(cart, product._id, 'ADD_CART'))}
         >
           <HiHeart className='text-3xl p-0 min' />
         </Button>
@@ -53,7 +53,9 @@ const Card = ({ product }) => {
     return (
       <>
         <Link href={`/product/${product._id}`} passHref>
-          <Button primary='true' className="mr-2">Läs mer...</Button>
+          <Button primary='true' className='mr-2'>
+            Läs mer...
+          </Button>
         </Link>
         {checkCart()}
       </>
@@ -110,38 +112,42 @@ const Card = ({ product }) => {
       <div className='company-info justify-end break-words'>
         <ul className=''>
           <li>
-            <div className="flex items-center mb-1">
-              <AiOutlineMail className="inline-block mr-2"> </AiOutlineMail>test@gmail.com
+            <div className='flex items-center mb-1'>
+              <AiOutlineMail className='inline-block mr-2'> </AiOutlineMail>
+              test@gmail.com
             </div>
           </li>
           <li>
-            <div className="flex items-center mb-1">
-              <AiOutlinePhone className="inline-block mr-2"> </AiOutlinePhone>0761857993
+            <div className='flex items-center mb-1'>
+              <AiOutlinePhone className='inline-block mr-2'> </AiOutlinePhone>
+              0761857993
             </div>
           </li>
           <li>
-            <div className="flex items-center mb-1">
-              <VscGlobe className="inline-block mr-2"></VscGlobe>
-              <a href='https://andreasalfven95.github.io/portfolio/' className="hover:underline">
-              https://andreasalfven95.github.io/portfolio/</a>
+            <div className='flex items-center mb-1'>
+              <VscGlobe className='inline-block mr-2'></VscGlobe>
+              <a
+                href='https://andreasalfven95.github.io/portfolio/'
+                className='hover:underline'
+              >
+                https://andreasalfven95.github.io/portfolio/
+              </a>
             </div>
           </li>
           <li>
-            <div className="flex items-center mb-1">
-              <ImLocation className="inline-block mr-2 self-start mt-1"/>
-              <div className="inline-block">
+            <div className='flex items-center mb-1'>
+              <ImLocation className='inline-block mr-2 self-start mt-1' />
+              <div className='inline-block'>
                 <p>Fyrislundsgatan 26</p>
                 <p>754 46 Uppsala</p>
               </div>
             </div>
           </li>
         </ul>
-        </div>
-        <div className='mt-2'>
-          <div className='flex justify-end'>
-            {!auth.user || auth.user.role !== 'admin'
-              ? userLink()
-              : adminLink()}
+      </div>
+      <div className='mt-2'>
+        <div className='flex justify-end'>
+          {!auth.user || auth.user.role !== 'admin' ? userLink() : adminLink()}
         </div>
       </div>
     </div>

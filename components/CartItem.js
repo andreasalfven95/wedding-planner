@@ -34,37 +34,45 @@ const CartItem = ({ item, dispatch, cart }) => {
       <div className='company-info justify-end break-words'>
         <ul className=''>
           <li>
-            <div className="flex items-center mb-1">
-              <AiOutlineMail className="inline-block mr-2"> </AiOutlineMail>test@gmail.com
+            <div className='flex items-center mb-1'>
+              <AiOutlineMail className='inline-block mr-2'> </AiOutlineMail>
+              test@gmail.com
             </div>
           </li>
           <li>
-            <div className="flex items-center mb-1">
-              <AiOutlinePhone className="inline-block mr-2"> </AiOutlinePhone>0761857993
+            <div className='flex items-center mb-1'>
+              <AiOutlinePhone className='inline-block mr-2'> </AiOutlinePhone>
+              0761857993
             </div>
           </li>
           <li>
-            <div className="flex items-center mb-1">
-              <VscGlobe className="inline-block mr-2"></VscGlobe>
-              <a href='https://andreasalfven95.github.io/portfolio/' className="hover:underline">
-              https://andreasalfven95.github.io/portfolio/</a>
+            <div className='flex items-center mb-1'>
+              <VscGlobe className='inline-block mr-2'></VscGlobe>
+              <a
+                href='https://andreasalfven95.github.io/portfolio/'
+                className='hover:underline'
+              >
+                https://andreasalfven95.github.io/portfolio/
+              </a>
             </div>
           </li>
           <li>
-            <div className="flex items-center mb-1">
-              <ImLocation className="inline-block mr-2 self-start mt-1"/>
-              <div className="inline-block">
+            <div className='flex items-center mb-1'>
+              <ImLocation className='inline-block mr-2 self-start mt-1' />
+              <div className='inline-block'>
                 <p>Fyrislundsgatan 26</p>
                 <p>754 46 Uppsala</p>
               </div>
             </div>
           </li>
         </ul>
-        </div>
-        <div className='mt-2'>
-          <div className='flex justify-end'>
+      </div>
+      <div className='mt-2'>
+        <div className='flex justify-end'>
           <Link href={`/product/${item._id}`} passHref>
-            <Button primary='true' className="mr-2">Läs mer...</Button>
+            <Button primary='true' className='mr-2'>
+              Läs mer...
+            </Button>
           </Link>
           <Button
             className='w-min p-0 px-2'
@@ -73,11 +81,9 @@ const CartItem = ({ item, dispatch, cart }) => {
           >
             <FiTrash className='text-xl' />
           </Button>
-          </div>
+        </div>
       </div>
     </div>
-
-
 
     /* 
         <div className='flex flex-row justify-between items-center'>
