@@ -18,11 +18,11 @@ export default function Cart() {
   return (
     <div className='flex flex-row mx-auto w-full'>
       <Head>
-        <title>Favoriter</title>
+        <title>Sparade:</title>
       </Head>
 
       <div className='mx-auto'>
-        <h2 className='uppercase text-xl text-center'>Favoriter:</h2>
+        <h2 className='uppercase text-xl text-center'>Sparade:</h2>
 
         {cart.map((item) => (
           <CartItem

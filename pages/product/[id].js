@@ -34,20 +34,21 @@ const DetailProduct = (props) => {
       <Head>
         <title>{product.title}</title>
       </Head>
-      <header className=' border-b border-t border-black mb-2 py-2'>
-        <h2 className='text-3xl capitalize'>{product.title}</h2>
-      </header>
-      <div className='col-md-6'>
-        <img
-          src={product.images[tab].url}
-          alt={product.images[tab].url}
-          className='block mt-2 w-max'
-          style={{ height: '350px' }}
-        />
+      <header className=' border-b border-black pb-2'>
+          <h2 className='text-3xl capitalize'>{product.title}</h2>
+        </header>
+      <div className=''>
+        <div className="h-80 flex items-center justify-center mb-2">
+          <img
+            src={product.images[tab].url}
+            alt={product.images[tab].url}
+            className='block mt-2 max-h-full'
+            /* style={{ height: '350px' }} */
+          />
+        </div>
 
         <div
-          className='flex flex-row mt-1'
-          style={{ cursor: 'pointer' }}
+          className='flex flex-row cursor-pointer'
           ref={imgRef}
         >
           {product.images.map((img, index) => (

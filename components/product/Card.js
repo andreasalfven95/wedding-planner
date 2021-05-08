@@ -6,8 +6,9 @@ import React from 'react'
 import { useContext } from 'react'
 import { DataContext } from '../../store/GlobalState'
 import { addToCart, deleteItem } from '../../store/Actions'
-import { AiOutlineStar, AiFillStar, AiOutlineMail, AiOutlinePhone } from 'react-icons/ai'
+import { AiOutlineStar, AiFillStar, AiOutlineHeart, AiFillHeart, AiOutlineMail, AiOutlinePhone } from 'react-icons/ai'
 import { VscGlobe } from 'react-icons/vsc'
+import { HiHeart,HiOutlineHeart } from "react-icons/hi"
 
 const Card = ({ product }) => {
   const { state, dispatch } = useContext(DataContext)
@@ -32,7 +33,7 @@ const Card = ({ product }) => {
           primary='true'
           onClick={() => dispatch(addToCart(product, cart))}
         >
-          <AiOutlineStar className='text-3xl p-0 min' />
+          <HiOutlineHeart className='text-3xl p-0 min' />
         </Button>
       )
     } if(isAdded === true) {
@@ -42,7 +43,7 @@ const Card = ({ product }) => {
           primary='true'
           onClick={() =>dispatch(deleteItem(cart, product._id, 'ADD_CART'))}
         >
-          <AiFillStar className='text-3xl p-0 min' />
+          <HiHeart className='text-3xl p-0 min' />
         </Button>
       )
     }
@@ -52,7 +53,7 @@ const Card = ({ product }) => {
     return (
       <>
         <Link href={`/product/${product._id}`} passHref>
-          <Button primary='true'>Läs mer...</Button>
+          <Button primary='true' className="mr-2">Läs mer...</Button>
         </Link>
         {checkCart()}
       </>
@@ -88,9 +89,9 @@ const Card = ({ product }) => {
   }
 
   return (
-    <div className='pb-3 border-t border-b mt-8 mb-2 card-container border-black shadow-xl transition-shadow flex-col w-full md:flex-row md:text-left'>
+    <div className='p-2 border-t border-b mt-8 card-container border-black shadow-xl transition-shadow flex-col w-full md:flex-row md:text-left'>
       <div className='w-full'>
-        <header className=' border-b border-black mb-2 py-2'>
+        <header className=' border-b border-black mb-2 pb-2'>
           <h2 className='text-3xl capitalize'>{product.title}</h2>
         </header>
         <div className='flex-col'>
@@ -109,26 +110,38 @@ const Card = ({ product }) => {
       <div className='company-info justify-end break-words'>
         <ul className=''>
           <li>
-            <AiOutlineMail className="inline-block"> </AiOutlineMail> test@gmail.com
+            <div className="flex items-center mb-1">
+              <AiOutlineMail className="inline-block mr-2"> </AiOutlineMail>test@gmail.com
+            </div>
           </li>
           <li>
-            <AiOutlinePhone className="inline-block"> </AiOutlinePhone> 0761857993
+            <div className="flex items-center mb-1">
+              <AiOutlinePhone className="inline-block mr-2"> </AiOutlinePhone>0761857993
+            </div>
           </li>
           <li>
-            <a href='https://andreasalfven95.github.io/portfolio/'>
-              <VscGlobe className="inline-block"></VscGlobe> https://andreasalfven95.github.io/portfolio/
-            </a>
+            <div className="flex items-center mb-1">
+              <VscGlobe className="inline-block mr-2"></VscGlobe>
+              <a href='https://andreasalfven95.github.io/portfolio/' className="hover:underline">
+              https://andreasalfven95.github.io/portfolio/</a>
+            </div>
           </li>
           <li>
-            <ImLocation className="inline-block"> </ImLocation> Fyrislundsgatan 26 <br /> 754 46 Uppsala
+            <div className="flex items-center mb-1">
+              <ImLocation className="inline-block mr-2 self-start mt-1"/>
+              <div className="inline-block">
+                <p>Fyrislundsgatan 26</p>
+                <p>754 46 Uppsala</p>
+              </div>
+            </div>
           </li>
         </ul>
+        </div>
         <div className='mt-2'>
-          <div className='flex justify-between'>
+          <div className='flex justify-end'>
             {!auth.user || auth.user.role !== 'admin'
               ? userLink()
               : adminLink()}
-          </div>
         </div>
       </div>
     </div>
