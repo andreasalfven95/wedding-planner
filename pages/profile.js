@@ -9,6 +9,7 @@ import Link from 'next/link'
 
 import valid from '../utils/valid'
 import { patchData } from '../utils/fetchData'
+import CountySelector from '../components/CountySelector'
 
 const Profile = () => {
   const initialStateUser = {
@@ -24,17 +25,40 @@ const Profile = () => {
     content: '',
     about: '',
     category: '',
+    guests: '',
     email: '',
     phone: '',
+    instagram: '',
+    facebook: '',
+    website: '',
+    street: '',
+    city: '',
+    county: [],
   }
 
   const [product, setProduct] = useState(initialStateProduct)
-  const { title, description, content, about, category, email, phone } = product
+  const {
+    title,
+    description,
+    content,
+    about,
+    category,
+    guests,
+    email,
+    phone,
+    instagram,
+    facebook,
+    website,
+    street,
+    city,
+    county,
+  } = product
 
   const [data, setData] = useState(initialStateUser)
   const { avatar, name, password, cf_password } = data
 
   const [images, setImages] = useState([])
+  /* const [county, setCounty] = useState([]) */
 
   const { state, dispatch } = useContext(DataContext)
   const { auth, notify, categories } = state
@@ -58,6 +82,7 @@ const Profile = () => {
       setOnEdit(false)
       setProduct(initialStateProduct)
       setImages([])
+      /* setCounty([]) */
     }
   }, [id])
 
@@ -123,7 +148,8 @@ const Profile = () => {
       !email ||
       !phone ||
       category === 'all' ||
-      images.length === 0
+      images.length === 0 ||
+      county.length === 0
     )
       return dispatch({
         type: 'NOTIFY',
@@ -290,13 +316,13 @@ const Profile = () => {
           </div>
 
           <div className='block text-grey-darker text-sm font-bold mb-2'>
-            <label htmlFor='name'>Name</label>
+            <label htmlFor='name'>Namn</label>
             <input
               type='text'
               name='name'
               value={name}
               className='shadow appearance-none border border-red rounded w-full py-2 px-3 text-grey-darker mb-3'
-              placeholder='Your name'
+              placeholder='Ditt namn eller företag'
               onChange={handleChange}
             />
           </div>
@@ -313,7 +339,7 @@ const Profile = () => {
           </div>
 
           <div className='block text-grey-darker text-sm font-bold mb-2'>
-            <label htmlFor='password'>New Password</label>
+            <label htmlFor='password'>Nytt lösenord</label>
             <input
               pattern='.{6,}'
               title='6 characters minimum'
@@ -321,13 +347,13 @@ const Profile = () => {
               name='password'
               value={password}
               className='shadow appearance-none border border-red rounded w-full py-2 px-3 text-grey-darker mb-3'
-              placeholder='Your new password'
+              placeholder='Nytt lösenord'
               onChange={handleChange}
             />
           </div>
 
           <div className='block text-grey-darker text-sm font-bold mb-2'>
-            <label htmlFor='cf_password'>Confirm new password</label>
+            <label htmlFor='cf_password'>Bekräfta nytt lösenord</label>
             <input
               pattern='.{6,}'
               title='6 characters minimum'
@@ -335,7 +361,7 @@ const Profile = () => {
               name='cf_password'
               value={cf_password}
               className='shadow appearance-none border border-red rounded w-full py-2 px-3 text-grey-darker mb-3'
-              placeholder='Confirm new password'
+              placeholder='Bekräfta nytt lösenord'
               onChange={handleChange}
             />
           </div>
@@ -346,7 +372,7 @@ const Profile = () => {
             disabled={notify.loading}
             onClick={handleUpdateProfile}
           >
-            Update
+            Uppdatera
           </button>
         </div>
         <div className='mt-8'>
@@ -376,9 +402,27 @@ const Profile = () => {
                 ))}
               </select>
             </div>
-            <div className=''>
-              {/* if kategori === "festlokal", add input on "max antal gäster" */}
-            </div>
+            {category === '6097c79b9a472e0a50e1550b' ? (
+              <div className=''>
+                <label
+                  className='block text-grey-darker text-sm font-bold my-2'
+                  htmlFor='guests'
+                >
+                  Max antal gäster ni kan ta emot*
+                </label>
+                <input
+                  required
+                  type='text'
+                  placeholder='Max antal gäster'
+                  name='guests'
+                  value={guests}
+                  onChange={handleChangeInput}
+                  className='shadow appearance-none border border-red rounded w-full py-2 px-3 text-grey-darker'
+                />
+              </div>
+            ) : (
+              <div className=''></div>
+            )}
             <div className=''>
               <label
                 className='block text-grey-darker text-sm font-bold my-2'
@@ -487,16 +531,45 @@ const Profile = () => {
               <small>Format: 070-123 45 67</small>
             </div>
 
+            <CountySelector></CountySelector>
+
+            {/* <div className=''>
+              <label
+                className='block text-grey-darker text-sm font-bold my-2'
+                htmlFor='county'
+              >
+                Vilka län arbetar du i?*
+              </label>
+              <select
+                required
+                multiple
+                onChange={handleChangeInput}
+                name='county'
+                id='county'
+                value={county}
+                className='shadow border border-red rounded w-full py-2 px-3 text-grey-darker'
+              >
+                <option value='all' className=''>
+                  Välj ett eller flera
+                </option>
+                {categories.map((item) => (
+                  <option key={item._id} value={item.name}>
+                    {item.name}
+                  </option>
+                ))}
+              </select>
+            </div> */}
+
             <div className=''>
               <div className='my-4'>
                 <label
                   htmlFor='upload'
                   className='block text-grey-darker text-sm font-bold'
                 >
-                  Upload images (max 5)
+                  Ladda upp bilder (max 5 st, max 1Mb/bild)*
                 </label>
                 <input
-                  /* required */
+                  required
                   type='file'
                   name='upload'
                   id='upload'
@@ -528,11 +601,58 @@ const Profile = () => {
                 ))}
               </div>
             </div>
+            <div className='socials mb-4'>
+              <label
+                className='block text-grey-darker text-sm font-bold my-2'
+                htmlFor='instagram'
+              >
+                Instagram
+              </label>
+              <input
+                required
+                type='text'
+                placeholder='Länk till eran Instagram'
+                name='instagram'
+                value={instagram}
+                onChange={handleChangeInput}
+                className='shadow appearance-none border border-red rounded w-full py-2 px-3 text-grey-darker'
+              />
+              <label
+                className='block text-grey-darker text-sm font-bold my-2'
+                htmlFor='facebook'
+              >
+                Facebook
+              </label>
+              <input
+                required
+                type='text'
+                placeholder='Länk till eran Facebook'
+                name='facebook'
+                value={facebook}
+                onChange={handleChangeInput}
+                className='shadow appearance-none border border-red rounded w-full py-2 px-3 text-grey-darker'
+              />
+              <label
+                className='block text-grey-darker text-sm font-bold my-2'
+                htmlFor='website'
+              >
+                Hemsida
+              </label>
+              <input
+                required
+                type='text'
+                placeholder='Länk till eran hemsida'
+                name='website'
+                value={website}
+                onChange={handleChangeInput}
+                className='shadow appearance-none border border-red rounded w-full py-2 px-3 text-grey-darker'
+              />
+            </div>
             <button
               type='submit'
               className='bg-red-300 hover:bg-red-400 text-white font-bold py-2 px-4 rounded'
             >
-              {onEdit ? 'Update' : 'Create'}
+              {onEdit ? 'Uppdatera' : 'Skapa'}
             </button>
           </form>
         </div>

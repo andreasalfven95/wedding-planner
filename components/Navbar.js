@@ -30,7 +30,7 @@ const Navbar = ({ toggle }) => {
         <div className='dropdown_btn relative inline-block text-left mr-4'>
           <div className=''>
             <Link href='/profile' passHref>
-              <Button className='px-2 sm:px-4'>
+              <Button primary='true' className='px-2 sm:px-4'>
                 <div className='h-8 w-8'>
                   <img
                     src={auth.user.avatar}
@@ -97,7 +97,7 @@ const Navbar = ({ toggle }) => {
           )}
         </div>
 
-        <Button className='px-3 md:px-4' onClick={handleLogout}>
+        <Button primary='true' className='px-3 md:px-4' onClick={handleLogout}>
           <div className='hidden md:block md:mr-3'>Logga ut</div>
           <GrLogout className=''></GrLogout>
         </Button>

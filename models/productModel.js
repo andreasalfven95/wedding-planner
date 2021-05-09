@@ -32,6 +32,13 @@ const productSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    county: {
+      type: Array,
+      required: true,
+    },
+    guests: {
+      type: String,
+    },
     checked: {
       type: Boolean,
       default: false,
@@ -53,30 +60,31 @@ const productSchema = new mongoose.Schema(
     contact: {
       email: {
         type: String,
+        required: true,
         trim: true,
       },
       phone: {
         type: String,
+        required: true,
         trim: true,
       },
-      website: {
-        type: String,
-        trim: true,
-      },
-      socialmedia: {
-        type: Array,
-      },
-    },
-    location: {
       street: {
         type: String,
       },
       city: {
         type: String,
       },
-      county: {
-        type: Array,
-        required: true,
+      instagram: {
+        type: String,
+        trim: true,
+      },
+      facebook: {
+        type: String,
+        trim: true,
+      },
+      website: {
+        type: String,
+        trim: true,
       },
     },
   },

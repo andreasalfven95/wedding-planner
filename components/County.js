@@ -1,0 +1,26 @@
+const County = [
+  { value: 'Hela Sverige', label: 'Hela Sverige' },
+  { value: 'Blekinge', label: 'Blekinge' },
+  { value: 'Dalarna', label: 'Dalarna' },
+  { value: 'Gotland', label: 'Gotland' },
+  { value: 'Gävleborg', label: 'Gävleborg' },
+  { value: 'Halland', label: 'Halland' },
+  { value: 'Jämtland', label: 'Jämtland' },
+  { value: 'Jönköping', label: 'Jönköping' },
+  { value: 'Kalmar', label: 'Kalmar' },
+  { value: 'Kronoberg', label: 'Kronoberg' },
+  { value: 'Norrbotten', label: 'Norrbotten' },
+  { value: 'Skåne', label: 'Skåne' },
+  { value: 'Stockholm', label: 'Stockholm' },
+  { value: 'Södermanland', label: 'Södermanland' },
+  { value: 'Uppsala', label: 'Uppsala' },
+  { value: 'Värmland', label: 'Värmland' },
+  { value: 'Västerbotten', label: 'Västerbotten' },
+  { value: 'Västernorrland', label: 'Västernorrland' },
+  { value: 'Västmanland', label: 'Västmanland' },
+  { value: 'Västra Götaland', label: 'Västra Götaland' },
+  { value: 'Örebro', label: 'Örebro' },
+  { value: 'Östergötland', label: 'Östergötland' },
+]
+
+export default County
