@@ -9,7 +9,16 @@ import Link from 'next/link'
 
 import valid from '../utils/valid'
 import { patchData } from '../utils/fetchData'
-import CountySelector from '../components/CountySelector'
+import County from '../data/County'
+import Select from 'react-select'
+
+import AddressForm from '../components/AddressForm'
+import PlacesAutocomplete from 'react-places-autocomplete'
+import {
+  geocodeByAddress,
+  geocodeByPlaceId,
+  getLatLng,
+} from 'react-places-autocomplete'
 
 const Profile = () => {
   const initialStateUser = {
@@ -31,9 +40,6 @@ const Profile = () => {
     instagram: '',
     facebook: '',
     website: '',
-    street: '',
-    city: '',
-    county: [],
   }
 
   const [product, setProduct] = useState(initialStateProduct)
@@ -49,16 +55,16 @@ const Profile = () => {
     instagram,
     facebook,
     website,
-    street,
-    city,
-    county,
   } = product
 
   const [data, setData] = useState(initialStateUser)
   const { avatar, name, password, cf_password } = data
 
   const [images, setImages] = useState([])
-  /* const [county, setCounty] = useState([]) */
+  const [county, setCounty] = useState([])
+  const [address, setAddress] = useState('')
+  const [primAddress, setPrimAddress] = useState('')
+  const [coordinates, setCoordinates] = useState({ lat: null, lng: null })
 
   const { state, dispatch } = useContext(DataContext)
   const { auth, notify, categories } = state
@@ -82,9 +88,24 @@ const Profile = () => {
       setOnEdit(false)
       setProduct(initialStateProduct)
       setImages([])
-      /* setCounty([]) */
+      setCounty([])
+      setAddress([])
+      setCoordinates([])
     }
   }, [id])
+
+  const searchOptions = {
+    /* types: ['address'], */
+    componentRestrictions: { country: 'se' },
+  }
+
+  const handleSelect = async (value) => {
+    const results = await geocodeByAddress(value)
+    const latLng = await getLatLng(results[0])
+    setPrimAddress(value)
+    setAddress(value)
+    setCoordinates(latLng)
+  }
 
   const handleChangeInput = (e) => {
     const { name, value } = e.target
@@ -134,11 +155,6 @@ const Profile = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    if (auth.user.role !== 'admin')
-      return dispatch({
-        type: 'NOTIFY',
-        payload: { error: 'Authentication is not valid.' },
-      })
 
     if (
       !title ||
@@ -147,13 +163,37 @@ const Profile = () => {
       !about ||
       !email ||
       !phone ||
-      category === 'all' ||
+      !category ||
       images.length === 0 ||
-      county.length === 0
+      county.length === 0 ||
+      (category === '6097c79b9a472e0a50e1550b' && !guests)
     )
       return dispatch({
         type: 'NOTIFY',
         payload: { error: 'Please add all the fields.' },
+      })
+
+    /* if ((coordinates.lat || coordinates.lng === null) || ) {
+      return dispatch({
+        type: 'NOTIFY',
+        payload: {
+          error: 'Skriv in adressen igen och markera ett av valen i listan.',
+        },
+      })
+    } */
+
+    if (county.length > 1 && category === '6097c79b9a472e0a50e1550b') {
+      return dispatch({
+        type: 'NOTIFY',
+        payload: {
+          error: 'Du kan bara välja ett län inom inom denna kategori.',
+        },
+      })
+    }
+    if (auth.user.role !== 'admin')
+      return dispatch({
+        type: 'NOTIFY',
+        payload: { error: 'Authentication is not valid.' },
       })
 
     dispatch({
@@ -173,6 +213,7 @@ const Profile = () => {
         {
           ...product,
           images: [...imgOldURL, ...media],
+          county: [county],
         },
         auth.token
       )
@@ -187,6 +228,7 @@ const Profile = () => {
         {
           ...product,
           images: [...imgOldURL, ...media],
+          county: [county],
         },
         auth.token
       )
@@ -279,6 +321,15 @@ const Profile = () => {
       })
       return dispatch({ type: 'NOTIFY', payload: { success: res.msg } })
     })
+  }
+
+  const checkCounty = () => {
+    /* Festlokal */
+    if (category === '6097c79b9a472e0a50e1550b') {
+      if (county.count > 1) {
+        return console.log('Mer än ett län')
+      }
+    }
   }
 
   if (!auth.user) {
@@ -531,34 +582,83 @@ const Profile = () => {
               <small>Format: 070-123 45 67</small>
             </div>
 
-            <CountySelector></CountySelector>
+            <div className=''>
+              {/* <AddressForm setAddress={setAddress}></AddressForm> */}
+              <PlacesAutocomplete
+                name='address'
+                value={primAddress}
+                onChange={setPrimAddress}
+                onSelect={handleSelect}
+                searchOptions={searchOptions}
+              >
+                {({
+                  getInputProps,
+                  suggestions,
+                  getSuggestionItemProps,
+                  loading,
+                }) => (
+                  <div>
+                    <label
+                      className='block text-grey-darker text-sm font-bold my-2'
+                      htmlFor='website'
+                    >
+                      Adress*
+                    </label>
+                    <input
+                      {...getInputProps({
+                        placeholder: 'Sök adress och välj sedan i listan ...',
+                        className:
+                          'location-search-input shadow appearance-none border border-red rounded w-full py-2 px-3 text-grey-darker',
+                      })}
+                    />
+                    <div className='autocomplete-dropdown-container shadow border rounded text-grey-darker'>
+                      {loading && <div>Loading...</div>}
+                      {suggestions.map((suggestion) => {
+                        const className = suggestion.active
+                          ? 'suggestion-item--active py-2 px-3 shadow border'
+                          : 'suggestion-item py-2 px-3 shadow border'
+                        // inline style for demonstration purpose
+                        const style = suggestion.active
+                          ? { backgroundColor: '#fafafa', cursor: 'pointer' }
+                          : { backgroundColor: '#ffffff', cursor: 'pointer' }
+                        return (
+                          <div
+                            {...getSuggestionItemProps(suggestion, {
+                              className,
+                              style,
+                            })}
+                          >
+                            <span>{suggestion.description}</span>
+                          </div>
+                        )
+                      })}
+                    </div>
+                  </div>
+                )}
+              </PlacesAutocomplete>
+            </div>
 
-            {/* <div className=''>
+            <div className=''>
               <label
                 className='block text-grey-darker text-sm font-bold my-2'
-                htmlFor='county'
+                htmlFor='Email'
               >
-                Vilka län arbetar du i?*
+                Län*
               </label>
-              <select
-                required
-                multiple
-                onChange={handleChangeInput}
+              <Select
+                /* styles={styles} */
+                defaultValue={county}
+                value={county}
                 name='county'
                 id='county'
-                value={county}
-                className='shadow border border-red rounded w-full py-2 px-3 text-grey-darker'
-              >
-                <option value='all' className=''>
-                  Välj ett eller flera
-                </option>
-                {categories.map((item) => (
-                  <option key={item._id} value={item.name}>
-                    {item.name}
-                  </option>
-                ))}
-              </select>
-            </div> */}
+                onChange={setCounty}
+                closeMenuOnSelect={true}
+                isMulti
+                options={County}
+              />
+            </div>
+            {console.log(county.length)}
+            {console.log(county)}
 
             <div className=''>
               <div className='my-4'>
@@ -609,7 +709,6 @@ const Profile = () => {
                 Instagram
               </label>
               <input
-                required
                 type='text'
                 placeholder='Länk till eran Instagram'
                 name='instagram'
@@ -624,7 +723,6 @@ const Profile = () => {
                 Facebook
               </label>
               <input
-                required
                 type='text'
                 placeholder='Länk till eran Facebook'
                 name='facebook'
@@ -639,7 +737,6 @@ const Profile = () => {
                 Hemsida
               </label>
               <input
-                required
                 type='text'
                 placeholder='Länk till eran hemsida'
                 name='website'
@@ -648,6 +745,7 @@ const Profile = () => {
                 className='shadow appearance-none border border-red rounded w-full py-2 px-3 text-grey-darker'
               />
             </div>
+
             <button
               type='submit'
               className='bg-red-300 hover:bg-red-400 text-white font-bold py-2 px-4 rounded'

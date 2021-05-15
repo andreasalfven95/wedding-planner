@@ -1,5 +1,5 @@
 const County = [
-  { value: 'Hela Sverige', label: 'Hela Sverige' },
+  /* { value: 'Hela Sverige', label: 'Hela Sverige' }, */
   { value: 'Blekinge', label: 'Blekinge' },
   { value: 'Dalarna', label: 'Dalarna' },
   { value: 'Gotland', label: 'Gotland' },

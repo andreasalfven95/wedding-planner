@@ -39,6 +39,9 @@ export default class MyDocument extends Document {
           ></link>
           <script src='https://code.jquery.com/jquery-3.5.1.slim.min.js'></script>
 
+          <script src={process.env.PLACES_API_URL}></script>
+          {/* <script src='https://maps.googleapis.com/maps/api/js?key=AIzaSyDP_RH7igmMV9aDg3qdGafju2UByCafNnA&libraries=places'></script> */}
+
           {/* <script src='https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js'></script> */}
 
           {/* Step 5: Output the styles in the head  */}

@@ -13,5 +13,7 @@ module.exports = {
     CLOUD_UPDATE_PRESET: 'wedding_plan',
     CLOUD_NAME: 'andreas-alfven',
     CLOUD_API: 'https://api.cloudinary.com/v1_1/andreas-alfven/image/upload',
+    PLACES_API_URL:
+      'https://maps.googleapis.com/maps/api/js?key=AIzaSyDP_RH7igmMV9aDg3qdGafju2UByCafNnA&libraries=places',
   },
 }
