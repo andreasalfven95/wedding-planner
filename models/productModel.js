@@ -4,7 +4,7 @@ const productSchema = new mongoose.Schema(
   {
     userid: {
       type: String,
-      required: true,
+      /* required: true, */
       trim: true,
     },
     title: {
@@ -24,20 +24,50 @@ const productSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    images: {
-      type: Array,
-      required: true,
-    },
     category: {
       type: String,
+      required: true,
+    },
+    guests: {
+      type: String,
+    },
+    email: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    phone: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    instagram: {
+      type: String,
+      trim: true,
+    },
+    facebook: {
+      type: String,
+      trim: true,
+    },
+    website: {
+      type: String,
+      trim: true,
+    },
+    images: {
+      type: Array,
       required: true,
     },
     county: {
       type: Array,
       required: true,
     },
-    guests: {
+    address: {
       type: String,
+      required: true,
+    },
+    coordinates: {
+      type: Object,
+      required: true,
     },
     checked: {
       type: Boolean,
@@ -56,36 +86,6 @@ const productSchema = new mongoose.Schema(
     show: {
       type: Boolean,
       default: false,
-    },
-    contact: {
-      email: {
-        type: String,
-        required: true,
-        trim: true,
-      },
-      phone: {
-        type: String,
-        required: true,
-        trim: true,
-      },
-      street: {
-        type: String,
-      },
-      city: {
-        type: String,
-      },
-      instagram: {
-        type: String,
-        trim: true,
-      },
-      facebook: {
-        type: String,
-        trim: true,
-      },
-      website: {
-        type: String,
-        trim: true,
-      },
     },
   },
   {

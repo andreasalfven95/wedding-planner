@@ -48,9 +48,13 @@ export default function Home(props) {
           {products.length === 0 ? (
             <h2>No products.</h2>
           ) : (
-            products.map((product) => (
-              <Card key={product._id} product={product} />
-            ))
+            products.map((product) =>
+              product.show ? (
+                <Card key={product._id} product={product} />
+              ) : (
+                <div></div>
+              )
+            )
           )}
         </div>
       </div>

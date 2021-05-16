@@ -12,7 +12,6 @@ import { patchData } from '../utils/fetchData'
 import County from '../data/County'
 import Select from 'react-select'
 
-import AddressForm from '../components/AddressForm'
 import PlacesAutocomplete from 'react-places-autocomplete'
 import {
   geocodeByAddress,
@@ -82,15 +81,18 @@ const Profile = () => {
       setOnEdit(true)
       getData(`product/${id}`).then((res) => {
         setProduct(res.product)
-        setImages(res.product.images)
+        setImages(res.images)
+        setCounty(res.county)
+        setAddress(res.address)
+        setCoordinates(res.coordinates)
       })
     } else {
       setOnEdit(false)
       setProduct(initialStateProduct)
       setImages([])
       setCounty([])
-      setAddress([])
-      setCoordinates([])
+      setAddress('')
+      setCoordinates({})
     }
   }, [id])
 
@@ -173,14 +175,14 @@ const Profile = () => {
         payload: { error: 'Please add all the fields.' },
       })
 
-    /* if ((coordinates.lat || coordinates.lng === null) || ) {
+    if (!address || coordinates.lat === null || coordinates.lng === null) {
       return dispatch({
         type: 'NOTIFY',
         payload: {
           error: 'Skriv in adressen igen och markera ett av valen i listan.',
         },
       })
-    } */
+    }
 
     if (county.length > 1 && category === '6097c79b9a472e0a50e1550b') {
       return dispatch({
@@ -190,11 +192,11 @@ const Profile = () => {
         },
       })
     }
-    if (auth.user.role !== 'admin')
+    /* if (auth.user.role !== 'admin')
       return dispatch({
         type: 'NOTIFY',
         payload: { error: 'Authentication is not valid.' },
-      })
+      }) */
 
     dispatch({
       type: 'NOTIFY',
@@ -214,6 +216,8 @@ const Profile = () => {
           ...product,
           images: [...imgOldURL, ...media],
           county: [county],
+          address: address,
+          coordinates: { coordinates },
         },
         auth.token
       )
@@ -229,6 +233,8 @@ const Profile = () => {
           ...product,
           images: [...imgOldURL, ...media],
           county: [county],
+          address: address,
+          coordinates: { coordinates },
         },
         auth.token
       )
@@ -657,8 +663,6 @@ const Profile = () => {
                 options={County}
               />
             </div>
-            {console.log(county.length)}
-            {console.log(county)}
 
             <div className=''>
               <div className='my-4'>
@@ -669,7 +673,6 @@ const Profile = () => {
                   Ladda upp bilder (max 5 st, max 1Mb/bild)*
                 </label>
                 <input
-                  required
                   type='file'
                   name='upload'
                   id='upload'

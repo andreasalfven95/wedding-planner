@@ -7,9 +7,16 @@ import { Button } from '../../components/Button'
 import Link from 'next/link'
 import { DataContext } from '../../store/GlobalState'
 import { addToCart, deleteItem } from '../../store/Actions'
-import { AiOutlineMail, AiOutlinePhone } from 'react-icons/ai'
-import { VscGlobe } from 'react-icons/vsc'
+import {
+  AiOutlineMail,
+  AiOutlinePhone,
+  AiFillStar,
+  AiOutlineInstagram,
+  AiFillFacebook,
+} from 'react-icons/ai'
 import { HiHeart, HiOutlineHeart } from 'react-icons/hi'
+import { BsPersonFill } from 'react-icons/bs'
+import { FaGlobeAmericas } from 'react-icons/fa'
 
 const DetailProduct = (props) => {
   const [product] = useState(props.product)
@@ -103,67 +110,116 @@ const DetailProduct = (props) => {
           <p className='leading-6 italic pb-3 font-extralight'>
             {product.content}
           </p>
-          <p className='leading-6'>
-            {' '}
-            {/* {product.about} */}
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quos
-            possimus quasi officiis iste iusto! Quae nostrum perferendis sequi
-            expedita neque, incidunt consequuntur maiores architecto dolorum
-            quos aliquam repudiandae commodi sapiente! Eligendi delectus
-            accusantium illo praesentium molestiae cum exercitationem est
-            officia maiores laboriosam? Nihil praesentium esse aspernatur
-            impedit sit eius nemo illum repellat eaque obcaecati neque odio
-            consequatur, veritatis laudantium inventore? Corrupti minus laborum
-            eveniet cum, quae at a consequuntur distinctio harum quidem vero est
-            recusandae necessitatibus. Vero rem nulla hic voluptates neque
-            voluptas nemo nihil, omnis ipsa ab impedit aliquid. Sapiente ratione
-            facilis nemo dolores non, facere neque quam voluptate deserunt
-            maiores velit maxime unde magnam dicta libero officia quae eum
-            perferendis, adipisci odit? Explicabo id nobis cum error temporibus!
-            Itaque, numquam natus consequatur accusantium exercitationem nobis
-            quaerat laboriosam ipsum esse porro unde sit quae quasi sint.
-            Aperiam veniam ut, esse earum minima expedita perspiciatis pariatur
-            est exercitationem praesentium eos? Illum impedit quos voluptatibus
-            ipsum accusantium quas autem? Molestias temporibus esse ipsam odit
-            error hic reprehenderit expedita iusto. Vel at provident laborum
-            cumque deleniti fuga sunt, cupiditate asperiores dolor quis?
-          </p>
+          <p className='leading-6'>{product.about}</p>
         </div>
       </div>
-      <div className='company-info justify-end break-words'>
+      <div className='company-info justify-end break-all text-base'>
         <ul className=''>
-          <li>
-            <div className='flex items-center mb-1'>
-              <AiOutlineMail className='inline-block mr-2'> </AiOutlineMail>
-              test@gmail.com
-            </div>
-          </li>
-          <li>
-            <div className='flex items-center mb-1'>
-              <AiOutlinePhone className='inline-block mr-2'> </AiOutlinePhone>
-              0761857993
-            </div>
-          </li>
-          <li>
-            <div className='flex items-center mb-1'>
-              <VscGlobe className='inline-block mr-2'></VscGlobe>
-              <a
-                href='https://andreasalfven95.github.io/portfolio/'
-                className='hover:underline'
-              >
-                https://andreasalfven95.github.io/portfolio/
-              </a>
-            </div>
-          </li>
-          <li>
-            <div className='flex items-center mb-1'>
-              <ImLocation className='inline-block mr-2 self-start mt-1' />
-              <div className='inline-block'>
-                <p>Fyrislundsgatan 26</p>
-                <p>754 46 Uppsala</p>
-              </div>
-            </div>
-          </li>
+          <div className='information mb-4 pb-2 border-b'>
+            {product.email && (
+              <li>
+                <div className='flex items-center mb-1'>
+                  <AiOutlineMail className='inline-block mr-2 self-start mt-1 min-w-max'></AiOutlineMail>
+                  <a
+                    className='hover:underline'
+                    href={`mailto:${product.email}`}
+                  >
+                    {product.email}
+                  </a>
+                </div>
+              </li>
+            )}
+
+            {product.phone && (
+              <li>
+                <div className='flex items-center mb-1'>
+                  <AiOutlinePhone className='inline-block mr-2 self-start mt-1 min-w-max'></AiOutlinePhone>
+                  <a className='hover:underline' href={`tel:${product.phone}`}>
+                    {product.phone}
+                  </a>
+                </div>
+              </li>
+            )}
+
+            {product.address && (
+              <li>
+                <div className='flex items-center mb-1'>
+                  <ImLocation className='inline-block mr-2 self-start mt-1 min-w-max' />
+                  <div className='inline-block'>
+                    <a
+                      className='hover:underline'
+                      target='blank'
+                      href={`http://maps.google.com/?q=${product.address}`}
+                    >
+                      {product.address}
+                    </a>
+                  </div>
+                </div>
+              </li>
+            )}
+
+            {product.guests && (
+              <li>
+                <div className='flex items-center mb-1'>
+                  <BsPersonFill className='inline-block mr-2 self-start mt-1'></BsPersonFill>
+                  <div className='inline-block'>
+                    <p>Max {product.guests} gäster</p>
+                  </div>
+                </div>
+              </li>
+            )}
+
+            {product.rating === 0 && (
+              <li>
+                <div className='flex items-center mb-1'>
+                  <AiFillStar className='inline-block mr-2 self-start mt-1' />
+                  <div className='inline-block'>
+                    <p>{product.rating}</p>
+                  </div>
+                </div>
+              </li>
+            )}
+          </div>
+          <div className='socials'>
+            {product.website && (
+              <li>
+                <div className='flex items-center mb-1'>
+                  <FaGlobeAmericas className='inline-block text-sm mr-2 self-start mt-1 min-w-max' />
+                  <div className='inline-block'>
+                    <a href={product.website} className='hover:underline'>
+                      {product.website}
+                    </a>
+                  </div>
+                </div>
+              </li>
+            )}
+
+            {product.instagram && (
+              <li>
+                <div className='flex items-center mb-1'>
+                  <AiOutlineInstagram className='inline-block mr-2 self-start mt-1 min-w-max' />
+                  <div className='inline-block'>
+                    <a href={product.instagram} className='hover:underline'>
+                      {product.instagram}
+                    </a>
+                  </div>
+                </div>
+              </li>
+            )}
+
+            {product.facebook && (
+              <li>
+                <div className='flex items-center mb-1'>
+                  <AiFillFacebook className='inline-block mr-2 self-start mt-1 min-w-max' />
+                  <div className='inline-block'>
+                    <a href={product.facebook} className='hover:underline'>
+                      {product.facebook}
+                    </a>
+                  </div>
+                </div>
+              </li>
+            )}
+          </div>
         </ul>
       </div>
       <div className='flex justify-end'>{checkCart()}</div>

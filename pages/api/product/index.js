@@ -79,39 +79,60 @@ const createProduct = async (req, res) => {
       return res.status(400).json({ err: 'Authentication is not valid.' })
 
     const {
+      userid,
       title,
-      price,
-      inStock,
       description,
       content,
+      about,
       category,
+      guests,
+      email,
+      phone,
+      instagram,
+      facebook,
+      website,
       images,
+      county,
+      address,
+      coordinates,
     } = req.body
 
     if (
       !title ||
-      !price ||
-      !inStock ||
       !description ||
       !content ||
-      category === 'all' ||
-      images.length === 0
+      !about ||
+      !email ||
+      !phone ||
+      !category ||
+      images.length === 0 ||
+      county.length === 0 ||
+      (category === '6097c79b9a472e0a50e1550b' && !guests)
     )
       return res.status(400).json({ err: 'Please add all the fields.' })
 
     const newProduct = new Products({
+      userid,
       title: title.toLowerCase(),
-      price,
-      inStock,
       description,
       content,
+      about,
       category,
+      guests,
+      email,
+      phone,
+      instagram,
+      facebook,
+      website,
       images,
+      county,
+      address,
+      coordinates,
     })
 
     await newProduct.save()
 
-    res.json({ msg: 'Success, create a new product!' })
+    res.json({ msg: 'Success, created a new product!' })
   } catch (err) {
     return res.status(500).json({ err: err.message })
   }

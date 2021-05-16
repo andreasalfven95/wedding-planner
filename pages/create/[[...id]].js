@@ -6,23 +6,62 @@ import { imageUpload } from '../../utils/imageUpload'
 import { postData, getData, putData } from '../../utils/fetchData'
 import { useRouter } from 'next/router'
 
+import valid from '../../utils/valid'
+import { patchData } from '../../utils/fetchData'
+import County from '../../data/County'
+import Select from 'react-select'
+
+import PlacesAutocomplete from 'react-places-autocomplete'
+import {
+  geocodeByAddress,
+  geocodeByPlaceId,
+  getLatLng,
+} from 'react-places-autocomplete'
+
 const ProductsManager = () => {
-  const initialState = {
+  const initialStateProduct = {
+    userid: '',
     title: '',
-    price: 0,
-    inStock: 0,
     description: '',
     content: '',
+    about: '',
     category: '',
+    guests: '',
+    email: '',
+    phone: '',
+    instagram: '',
+    facebook: '',
+    website: '',
   }
 
-  const [product, setProduct] = useState(initialState)
-  const { title, price, inStock, description, content, category } = product
+  const [product, setProduct] = useState(initialStateProduct)
+  const {
+    userid,
+    title,
+    description,
+    content,
+    about,
+    category,
+    guests,
+    email,
+    phone,
+    instagram,
+    facebook,
+    website,
+  } = product
 
+  /* const [data, setData] = useState(initialStateUser)
+  const { avatar, name, password, cf_password } = data */
+
+  const [show, setShow] = useState(false)
   const [images, setImages] = useState([])
+  const [county, setCounty] = useState([])
+  const [address, setAddress] = useState('')
+  const [primAddress, setPrimAddress] = useState('')
+  const [coordinates, setCoordinates] = useState({ lat: null, lng: null })
 
   const { state, dispatch } = useContext(DataContext)
-  const { categories, auth } = state
+  const { auth, notify, categories } = state
 
   const router = useRouter()
   const { id } = router.query
@@ -34,13 +73,34 @@ const ProductsManager = () => {
       getData(`product/${id}`).then((res) => {
         setProduct(res.product)
         setImages(res.product.images)
+        setCounty(res.product.county)
+        console.log(county)
+        setPrimAddress(res.product.address)
+        setAddress(res.product.address)
+        setCoordinates(res.product.coordinates)
       })
     } else {
       setOnEdit(false)
-      setProduct(initialState)
+      setProduct(initialStateProduct)
       setImages([])
+      setCounty([])
+      setAddress('')
+      setCoordinates({})
     }
   }, [id])
+
+  const searchOptions = {
+    /* types: ['address'], */
+    componentRestrictions: { country: 'se' },
+  }
+
+  const handleSelect = async (value) => {
+    const results = await geocodeByAddress(value)
+    const latLng = await getLatLng(results[0])
+    setPrimAddress(value)
+    setAddress(value)
+    setCoordinates(latLng)
+  }
 
   const handleChangeInput = (e) => {
     const { name, value } = e.target
@@ -90,24 +150,45 @@ const ProductsManager = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    if (auth.user.role !== 'admin')
-      return dispatch({
-        type: 'NOTIFY',
-        payload: { error: 'Authentication is not valid.' },
-      })
 
     if (
       !title ||
-      !price ||
-      !inStock ||
       !description ||
       !content ||
-      category === 'all' ||
-      images.length === 0
+      !about ||
+      !email ||
+      !phone ||
+      !category ||
+      images.length === 0 ||
+      county.length === 0 ||
+      (category === '6097c79b9a472e0a50e1550b' && !guests)
     )
       return dispatch({
         type: 'NOTIFY',
         payload: { error: 'Please add all the fields.' },
+      })
+
+    if (!address || coordinates.lat === null || coordinates.lng === null) {
+      return dispatch({
+        type: 'NOTIFY',
+        payload: {
+          error: 'Skriv in adressen igen och markera ett av valen i listan.',
+        },
+      })
+    }
+
+    if (county.length > 1 && category === '6097c79b9a472e0a50e1550b') {
+      return dispatch({
+        type: 'NOTIFY',
+        payload: {
+          error: 'Du kan bara välja ett län inom inom denna kategori.',
+        },
+      })
+    }
+    if (auth.user.role !== 'admin')
+      return dispatch({
+        type: 'NOTIFY',
+        payload: { error: 'Authentication is not valid.' },
       })
 
     dispatch({
@@ -127,6 +208,9 @@ const ProductsManager = () => {
         {
           ...product,
           images: [...imgOldURL, ...media],
+          county: [county],
+          address: address,
+          coordinates: { coordinates },
         },
         auth.token
       )
@@ -141,6 +225,9 @@ const ProductsManager = () => {
         {
           ...product,
           images: [...imgOldURL, ...media],
+          county: [county],
+          address: address,
+          coordinates: { coordinates },
         },
         auth.token
       )
@@ -156,80 +243,61 @@ const ProductsManager = () => {
     })
   }
 
+  /* const checkCounty = () => {
+    if (category === '6097c79b9a472e0a50e1550b') {
+      if (county.count > 1) {
+        return console.log('Mer än ett län')
+      }
+    }
+  } */
+
   return (
     <div>
       <Head>
         <title>Products Manager</title>
       </Head>
 
-      <form onSubmit={handleSubmit}>
-        <div className=''>
-          <input
-            type='text'
-            placeholder='Title'
-            name='title'
-            value={title}
-            onChange={handleChangeInput}
-            className='shadow appearance-none border border-red rounded w-full py-2 px-3 text-grey-darker'
-          />
-        </div>
-
-        <div className=''>
-          <label
-            className='block text-grey-darker text-sm font-bold my-2'
-            htmlFor='price'
-          >
-            Price
-          </label>
-          <input
-            type='number'
-            placeholder='Price'
-            name='price'
-            value={price}
-            onChange={handleChangeInput}
-            className='shadow appearance-none border border-red rounded w-full py-2 px-3 text-grey-darker'
-          />
-          <label
-            className='block text-grey-darker text-sm font-bold my-2'
-            htmlFor='inStock'
-          >
-            In stock
-          </label>
-          <input
-            type='number'
-            placeholder='In stock'
-            name='inStock'
-            value={inStock}
-            onChange={handleChangeInput}
-            className='shadow appearance-none border border-red rounded w-full py-2 px-3 text-grey-darker'
-          />
-        </div>
-
-        <div className=''>
-          <textarea
-            type='text'
-            placeholder='Description'
-            name='description'
-            id='description'
-            value={description}
-            cols='30'
-            rows='4'
-            onChange={handleChangeInput}
-            className='shadow appearance-none border border-red rounded w-full py-2 px-3 text-grey-darker'
-          />
-          <textarea
-            type='text'
-            placeholder='Content'
-            name='content'
-            id='content'
-            value={content}
-            cols='30'
-            rows='6'
-            onChange={handleChangeInput}
-            className='shadow appearance-none border border-red rounded w-full py-2 px-3 text-grey-darker'
-          />
+      <div className='mt-8'>
+        <form onSubmit={handleSubmit}>
           <div className=''>
+            <label
+              className='block text-grey-darker text-sm font-bold my-2'
+              for='show'
+            >
+              Show product?
+            </label>
+            <input
+              className='h-5 w-5'
+              type='checkbox'
+              name='show'
+              id='show' /* value={setShow} */
+            />
+          </div>
+          <div className=''>
+            <label
+              className='block text-grey-darker text-sm font-bold my-2'
+              htmlFor='userid'
+            >
+              User ID:
+            </label>
+            <input
+              type='text'
+              placeholder='User ID'
+              name='userid'
+              value={userid}
+              onChange={handleChangeInput}
+              className='shadow appearance-none border border-red rounded w-full py-2 px-3 text-grey-darker'
+            />
+          </div>
+          <div className=''>
+            <label
+              className='block text-grey-darker text-sm font-bold my-2'
+              htmlFor='category'
+            >
+              Kategori*
+            </label>
             <select
+              required
               onChange={handleChangeInput}
               name='category'
               id='category'
@@ -237,7 +305,7 @@ const ProductsManager = () => {
               className='shadow border border-red rounded w-full py-2 px-3 text-grey-darker'
             >
               <option value='all' className=''>
-                All Products
+                Välj en kategori
               </option>
               {categories.map((item) => (
                 <option key={item._id} value={item._id}>
@@ -246,47 +314,307 @@ const ProductsManager = () => {
               ))}
             </select>
           </div>
-          <div className='block text-grey-darker text-sm font-bold my-2'>
-            <label htmlFor='upload' className=''>
-              Upload images (max 5)
+          {category === '6097c79b9a472e0a50e1550b' ? (
+            <div className=''>
+              <label
+                className='block text-grey-darker text-sm font-bold my-2'
+                htmlFor='guests'
+              >
+                Max antal gäster ni kan ta emot*
+              </label>
+              <input
+                required
+                type='text'
+                placeholder='Max antal gäster'
+                name='guests'
+                value={guests}
+                onChange={handleChangeInput}
+                className='shadow appearance-none border border-red rounded w-full py-2 px-3 text-grey-darker'
+              />
+            </div>
+          ) : (
+            <div className=''></div>
+          )}
+          <div className=''>
+            <label
+              className='block text-grey-darker text-sm font-bold my-2'
+              htmlFor='title'
+            >
+              Titel*
             </label>
-            <br />
             <input
-              type='file'
-              name='upload'
-              id='upload'
-              onChange={handleUploadInput}
-              multiple
-              accept='image/*'
+              required
+              type='text'
+              placeholder='Titel'
+              name='title'
+              value={title}
+              onChange={handleChangeInput}
+              className='shadow appearance-none border border-red rounded w-full py-2 px-3 text-grey-darker'
             />
           </div>
-          <div className='images w-full flex'>
-            {images.map((img, index) => (
-              <div key={index} className='img-file h-56 w-1/5 hover:opacity-75'>
-                <div className='w-full h-full p-1 relative'>
-                  <img
-                    src={img.url ? img.url : URL.createObjectURL(img)}
-                    alt=''
-                    className='img-thumbnail w-full h-full'
-                  />
-                  <span
-                    onClick={() => deleteImage(index)}
-                    className='cursor-pointer hover:scale-95 flex flex-row justify-center items-center text-2xl border border-gray-300 font-extrabold bg-white hover:bg-gray-300 h-8 w-8 rounded-full text-red-600 absolute top-0 right-0'
-                  >
-                    x
-                  </span>
-                </div>
-              </div>
-            ))}
+
+          <div>
+            <label
+              className='block text-grey-darker text-sm font-bold my-2'
+              htmlFor='description'
+            >
+              Slogan*
+            </label>
+            <textarea
+              required
+              type='text'
+              placeholder='Fånga läsaren!'
+              name='description'
+              id='description'
+              value={description}
+              cols='30'
+              rows='1'
+              onChange={handleChangeInput}
+              className='shadow appearance-none border border-red rounded w-full py-2 px-3 text-grey-darker'
+            />
+            <label
+              className='block text-grey-darker text-sm font-bold my-2'
+              htmlFor='description'
+            >
+              Sammanfattning*
+            </label>
+            <textarea
+              required
+              type='text'
+              placeholder='Det bästa med er...'
+              name='content'
+              id='content'
+              value={content}
+              cols='30'
+              rows='3'
+              onChange={handleChangeInput}
+              className='shadow appearance-none border border-red rounded w-full py-2 px-3 text-grey-darker'
+            />
+            <label
+              className='block text-grey-darker text-sm font-bold my-2'
+              htmlFor='description'
+            >
+              All information*
+            </label>
+            <textarea
+              required
+              type='text'
+              placeholder='Ge läsaren hela storyn...'
+              name='about'
+              id='about'
+              value={about}
+              cols='30'
+              rows='6'
+              onChange={handleChangeInput}
+              className='shadow appearance-none border border-red rounded w-full py-2 px-3 text-grey-darker'
+            />
           </div>
-        </div>
-        <button
-          type='submit'
-          className='bg-red-300 hover:bg-red-400 text-white font-bold py-2 px-4 rounded'
-        >
-          {onEdit ? 'Update' : 'Create'}
-        </button>
-      </form>
+          <div className=''>
+            <label
+              className='block text-grey-darker text-sm font-bold my-2'
+              htmlFor='Email'
+            >
+              Email*
+            </label>
+            <input
+              required
+              type='email'
+              placeholder='Email'
+              name='email'
+              value={email}
+              onChange={handleChangeInput}
+              className='shadow appearance-none border border-red rounded w-full py-2 px-3 text-grey-darker'
+            />
+            <label
+              className='block text-grey-darker text-sm font-bold my-2'
+              htmlFor='phone'
+            >
+              Telefon*
+            </label>
+            <input
+              required
+              type='tel'
+              placeholder='070-123 45 67'
+              name='phone'
+              value={phone}
+              onChange={handleChangeInput}
+              className='shadow appearance-none border border-red rounded w-full py-2 px-3 text-grey-darker'
+            />
+            <small>Format: 070-123 45 67</small>
+          </div>
+
+          <div className=''>
+            {/* <AddressForm setAddress={setAddress}></AddressForm> */}
+            <PlacesAutocomplete
+              name='address'
+              value={primAddress}
+              onChange={setPrimAddress}
+              onSelect={handleSelect}
+              searchOptions={searchOptions}
+            >
+              {({
+                getInputProps,
+                suggestions,
+                getSuggestionItemProps,
+                loading,
+              }) => (
+                <div>
+                  <label
+                    className='block text-grey-darker text-sm font-bold my-2'
+                    htmlFor='website'
+                  >
+                    Adress*
+                  </label>
+                  <input
+                    {...getInputProps({
+                      placeholder: 'Sök adress och välj sedan i listan ...',
+                      className:
+                        'location-search-input shadow appearance-none border border-red rounded w-full py-2 px-3 text-grey-darker',
+                    })}
+                  />
+                  <div className='autocomplete-dropdown-container shadow border rounded text-grey-darker'>
+                    {loading && <div>Loading...</div>}
+                    {suggestions.map((suggestion) => {
+                      const className = suggestion.active
+                        ? 'suggestion-item--active py-2 px-3 shadow border'
+                        : 'suggestion-item py-2 px-3 shadow border'
+                      // inline style for demonstration purpose
+                      const style = suggestion.active
+                        ? { backgroundColor: '#fafafa', cursor: 'pointer' }
+                        : { backgroundColor: '#ffffff', cursor: 'pointer' }
+                      return (
+                        <div
+                          {...getSuggestionItemProps(suggestion, {
+                            className,
+                            style,
+                          })}
+                        >
+                          <span>{suggestion.description}</span>
+                        </div>
+                      )
+                    })}
+                  </div>
+                </div>
+              )}
+            </PlacesAutocomplete>
+          </div>
+
+          <div className=''>
+            <label
+              className='block text-grey-darker text-sm font-bold my-2'
+              htmlFor='Email'
+            >
+              Län*
+            </label>
+            <Select
+              /* styles={styles} */
+              placeholder='Markera det/de län som är aktuella för er...'
+              defaultValue={county}
+              value={county}
+              name='county'
+              id='county'
+              onChange={setCounty}
+              closeMenuOnSelect={true}
+              isMulti
+              options={County}
+            />
+          </div>
+          {console.log(county.length)}
+          {console.log(county)}
+
+          <div className=''>
+            <div className='my-4'>
+              <label
+                htmlFor='upload'
+                className='block text-grey-darker text-sm font-bold'
+              >
+                Ladda upp bilder (max 5 st, max 1Mb/bild)*
+              </label>
+              <input
+                type='file'
+                name='upload'
+                id='upload'
+                onChange={handleUploadInput}
+                multiple
+                accept='image/*'
+              />
+            </div>
+            <div className='images w-full flex'>
+              {images.map((img, index) => (
+                <div
+                  key={index}
+                  className='img-file h-56 w-1/5 hover:opacity-75'
+                >
+                  <div className='w-full h-full p-1 relative'>
+                    <img
+                      src={img.url ? img.url : URL.createObjectURL(img)}
+                      alt=''
+                      className='img-thumbnail w-full h-full'
+                    />
+                    <span
+                      onClick={() => deleteImage(index)}
+                      className='cursor-pointer hover:scale-95 flex flex-row justify-center items-center text-2xl border border-gray-300 font-extrabold bg-white hover:bg-gray-300 h-8 w-8 rounded-full text-red-600 absolute top-0 right-0'
+                    >
+                      x
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className='socials mb-4'>
+            <label
+              className='block text-grey-darker text-sm font-bold my-2'
+              htmlFor='instagram'
+            >
+              Instagram
+            </label>
+            <input
+              type='text'
+              placeholder='Länk till eran Instagram'
+              name='instagram'
+              value={instagram}
+              onChange={handleChangeInput}
+              className='shadow appearance-none border border-red rounded w-full py-2 px-3 text-grey-darker'
+            />
+            <label
+              className='block text-grey-darker text-sm font-bold my-2'
+              htmlFor='facebook'
+            >
+              Facebook
+            </label>
+            <input
+              type='text'
+              placeholder='Länk till eran Facebook'
+              name='facebook'
+              value={facebook}
+              onChange={handleChangeInput}
+              className='shadow appearance-none border border-red rounded w-full py-2 px-3 text-grey-darker'
+            />
+            <label
+              className='block text-grey-darker text-sm font-bold my-2'
+              htmlFor='website'
+            >
+              Hemsida
+            </label>
+            <input
+              type='text'
+              placeholder='Länk till eran hemsida'
+              name='website'
+              value={website}
+              onChange={handleChangeInput}
+              className='shadow appearance-none border border-red rounded w-full py-2 px-3 text-grey-darker'
+            />
+          </div>
+
+          <button
+            type='submit'
+            className='bg-red-300 hover:bg-red-400 text-white font-bold py-2 px-4 rounded'
+          >
+            {onEdit ? 'Uppdatera' : 'Skapa'}
+          </button>
+        </form>
+      </div>
     </div>
   )
 }
