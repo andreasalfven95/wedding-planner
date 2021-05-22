@@ -72,9 +72,9 @@ const ProductsManager = () => {
       setOnEdit(true)
       getData(`product/${id}`).then((res) => {
         setProduct(res.product)
+        setShow(res.product.show)
         setImages(res.product.images)
         setCounty(res.product.county)
-        console.log(county)
         setPrimAddress(res.product.address)
         setAddress(res.product.address)
         setCoordinates(res.product.coordinates)
@@ -82,6 +82,7 @@ const ProductsManager = () => {
     } else {
       setOnEdit(false)
       setProduct(initialStateProduct)
+      setShow(false)
       setImages([])
       setCounty([])
       setAddress('')
@@ -90,7 +91,7 @@ const ProductsManager = () => {
   }, [id])
 
   const searchOptions = {
-    /* types: ['address'], */
+    types: ['address'],
     componentRestrictions: { country: 'se' },
   }
 
@@ -208,7 +209,7 @@ const ProductsManager = () => {
         {
           ...product,
           images: [...imgOldURL, ...media],
-          county: [county],
+          county: county,
           address: address,
           coordinates: { coordinates },
         },
@@ -225,7 +226,7 @@ const ProductsManager = () => {
         {
           ...product,
           images: [...imgOldURL, ...media],
-          county: [county],
+          county: county,
           address: address,
           coordinates: { coordinates },
         },
@@ -262,15 +263,17 @@ const ProductsManager = () => {
           <div className=''>
             <label
               className='block text-grey-darker text-sm font-bold my-2'
-              for='show'
+              htmlFor='show'
             >
               Show product?
             </label>
             <input
               className='h-5 w-5'
               type='checkbox'
+              checked={show}
+              /* defaultChecked={show} */
+              onChange={() => setShow(!show)}
               name='show'
-              id='show' /* value={setShow} */
             />
           </div>
           <div className=''>
@@ -509,8 +512,10 @@ const ProductsManager = () => {
             <Select
               /* styles={styles} */
               placeholder='Markera det/de län som är aktuella för er...'
-              defaultValue={county}
-              value={county}
+              /* defaultValue={(county[0])} */
+              value={county.map((item) => {
+                return item
+              })}
               name='county'
               id='county'
               onChange={setCounty}
@@ -519,8 +524,8 @@ const ProductsManager = () => {
               options={County}
             />
           </div>
-          {console.log(county.length)}
-          {console.log(county)}
+          {/* {console.log(county.length)}
+          {console.log(county)} */}
 
           <div className=''>
             <div className='my-4'>

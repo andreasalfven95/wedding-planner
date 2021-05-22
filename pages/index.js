@@ -46,14 +46,18 @@ export default function Home(props) {
         {/* <div className='text-center mb-8 text-5xl text-black'>{heading}</div> */}
         <div className='flex flex-wrap -mx-1 lg:-mx-4'>
           {products.length === 0 ? (
-            <h2>No products.</h2>
+            <h2 className='text-3xl text-center my-40 mx-auto'>
+              Inga produkter matchade sökningen.
+            </h2>
           ) : (
-            products.map((product) =>
-              product.show ? (
+            products.map(
+              (product) => (
+                /* product.show ? ( */
                 <Card key={product._id} product={product} />
-              ) : (
-                <div></div>
               )
+              /* ) : (
+                <div></div>
+              ) */
             )
           )}
         </div>
@@ -72,16 +76,43 @@ export default function Home(props) {
 }
 
 export async function getServerSideProps({ query }) {
+  /* const { state, dispatch } = useContext(DataContext)
+  const { auth } = state */
+
   const page = query.page || 1
   const category = query.category || 'all'
   const sort = query.sort || ''
   const search = query.search || 'all'
+  const show = query.show || true /* TRUE visar TRUE, FALSE visar FALSE */
+  const showAll = false /* query.showAll */
 
-  const res = await getData(
-    `product?limit=${
+  let filteringString = ''
+
+  if (showAll === true) {
+    filteringString = `product?limit=${
       page * 6
-    }&category=${category}&sort=${sort}&title=${search}`
-  )
+    }&category=${category}&sort=${sort}&title=${false}&show=${!show}`
+  } else {
+    filteringString = `product?limit=${
+      page * 6
+    }&category=${category}&sort=${sort}&title=${search}&show=${show}`
+  }
+
+  const res = await getData(filteringString)
+
+  /* if (showAll === false) {
+    const res = await getData(
+      `product?limit=${
+        page * 6
+      }&category=${category}&sort=${sort}&title=${search}&show=${show}`
+    )
+  } else {
+    const res = await getData(
+      `product?limit=${
+        page * 6
+      }&category=${category}&sort=${sort}&title=${search}`
+    )
+  } */
   // server side rendering
   return {
     props: {

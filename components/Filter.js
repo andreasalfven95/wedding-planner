@@ -1,16 +1,21 @@
-import React, { useState, useEffect } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import filterSearch from '../utils/filterSearch'
 import { getData } from '../utils/fetchData'
 import { useRouter } from 'next/router'
+import { DataContext } from '../store/GlobalState'
 
 const Filter = ({ state }) => {
   const [search, setSearch] = useState('')
   const [sort, setSort] = useState('')
   const [category, setCategory] = useState('')
+  /* const [showAll, setShowAll] = useState(false) */
 
   const { categories } = state
 
   const router = useRouter()
+
+  /* const { state, dispatch } = useContext(DataContext)
+  const { auth, categories } = state */
 
   const handleCategory = (e) => {
     setCategory(e.target.value)
@@ -22,12 +27,26 @@ const Filter = ({ state }) => {
     filterSearch({ router, sort: e.target.value })
   }
 
+  /* const handleShowAll = (e) => {
+    setShow(!showAll)
+    filterSearch({ router, sort: e.target.value })
+  } */
+
   useEffect(() => {
     filterSearch({ router, search: search ? search.toLowerCase() : 'all' })
   }, [search])
 
   return (
     <div className='input-group'>
+      {/* {auth.user.role === 'admin' && (
+        <input
+          className='h-5 w-5'
+          type='checkbox'
+          defaultChecked={showAll}
+          onChange={handleShowAll}
+          name='show'
+        />
+      )} */}
       <div className='input-group-prepend col-md-2 px-0 mt-2'>
         <select
           className='custom-select text-capitalize'
@@ -43,7 +62,6 @@ const Filter = ({ state }) => {
           ))}
         </select>
       </div>
-
       <form autoComplete='off' className='mt-2 col-md-8 px-0'>
         <input
           type='text'
@@ -53,7 +71,6 @@ const Filter = ({ state }) => {
           onChange={(e) => setSearch(e.target.value)}
         />
       </form>
-
       <div className='input-group-prepend col-md-2 px-0 mt-2'>
         <select
           className='custom-select text-capitalize'

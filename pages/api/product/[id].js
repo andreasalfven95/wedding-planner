@@ -41,6 +41,7 @@ const updateProduct = async (req, res) => {
     const { id } = req.query
     const {
       userid,
+      show,
       title,
       description,
       content,
@@ -77,6 +78,7 @@ const updateProduct = async (req, res) => {
       {
         /* Set updated title to lowercase */
         userid,
+        show,
         title: title.toLowerCase(),
         description,
         content,
@@ -89,6 +91,7 @@ const updateProduct = async (req, res) => {
         facebook,
         website,
         images,
+        county,
         address,
         coordinates,
       }

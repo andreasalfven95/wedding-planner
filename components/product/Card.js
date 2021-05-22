@@ -9,6 +9,7 @@ import { addToCart, deleteItem } from '../../store/Actions'
 import { AiOutlineMail, AiOutlinePhone } from 'react-icons/ai'
 import { VscGlobe } from 'react-icons/vsc'
 import { HiHeart, HiOutlineHeart } from 'react-icons/hi'
+import { useState } from 'react'
 
 const Card = ({ product }) => {
   const { state, dispatch } = useContext(DataContext)
@@ -65,6 +66,13 @@ const Card = ({ product }) => {
   const adminLink = () => {
     return (
       <>
+        <input
+          className='h-5 w-5'
+          type='checkbox'
+          disabled
+          defaultChecked={product.show}
+          name='show'
+        />
         <Link href={`/create/${product._id}`} passHref>
           <Button primary='true'>Edit</Button>
         </Link>

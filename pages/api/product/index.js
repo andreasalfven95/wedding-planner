@@ -14,6 +14,7 @@ export default async (req, res) => {
       break
   }
 }
+
 class APIfeatures {
   constructor(query, queryString) {
     this.query = query
@@ -25,8 +26,11 @@ class APIfeatures {
     const excludeFields = ['page', 'sort', 'limit']
     excludeFields.forEach((el) => delete queryObj[el])
 
+    if (queryObj.show !== true) this.query.find({ show: queryObj.show })
+
     if (queryObj.category !== 'all')
       this.query.find({ category: queryObj.category })
+
     if (queryObj.title !== 'all')
       this.query.find({ title: { $regex: queryObj.title } })
 
@@ -80,6 +84,7 @@ const createProduct = async (req, res) => {
 
     const {
       userid,
+      show,
       title,
       description,
       content,
@@ -113,6 +118,7 @@ const createProduct = async (req, res) => {
 
     const newProduct = new Products({
       userid,
+      show,
       title: title.toLowerCase(),
       description,
       content,
