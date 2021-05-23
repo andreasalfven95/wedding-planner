@@ -10,16 +10,22 @@ import Filter from '../components/Filter'
 
 export default function Home(props) {
   const [products, setProducts] = useState(props.products)
+  const [productsToDisplay, setProductsToDisplay] = useState([])
+  const [showAll, setShowAll] = useState(true)
 
   const [page, setPage] = useState(1)
   const router = useRouter()
 
   const { state, dispatch } = useContext(DataContext)
-  const { auth } = state
+  const { auth, categories } = state
 
   useEffect(() => {
     setProducts(props.products)
   }, [props.products])
+
+  useEffect(() => {
+    setProductsToDisplay(products.filter((product) => product.show === true))
+  }, [products])
 
   useEffect(() => {
     if (Object.keys(router.query).length === 0) setPage(1)
@@ -43,22 +49,37 @@ export default function Home(props) {
       <Filter state={state} />
 
       <div className='container mx-auto'>
-        {/* <div className='text-center mb-8 text-5xl text-black'>{heading}</div> */}
         <div className='flex flex-wrap -mx-1 lg:-mx-4'>
-          {products.length === 0 ? (
+          {auth.user !== undefined && auth.user.role === 'admin' ? (
+            products.length === 0 ? (
+              <h2 className='text-3xl text-center my-40 mx-auto'>
+                Inga produkter matchade sökningen.
+              </h2>
+            ) : (
+              <>
+                <input
+                  className='h-5 w-5'
+                  type='checkbox'
+                  checked={showAll}
+                  onChange={() => setShowAll(!showAll)}
+                />
+                {showAll
+                  ? products.map((product) => (
+                      <Card key={product._id} product={product} />
+                    ))
+                  : productsToDisplay.map((product) => (
+                      <Card key={product._id} product={product} />
+                    ))}
+              </>
+            )
+          ) : productsToDisplay.length === 0 ? (
             <h2 className='text-3xl text-center my-40 mx-auto'>
               Inga produkter matchade sökningen.
             </h2>
           ) : (
-            products.map(
-              (product) => (
-                /* product.show ? ( */
-                <Card key={product._id} product={product} />
-              )
-              /* ) : (
-                <div></div>
-              ) */
-            )
+            productsToDisplay.map((product) => (
+              <Card key={product._id} product={product} />
+            ))
           )}
         </div>
       </div>
@@ -76,43 +97,17 @@ export default function Home(props) {
 }
 
 export async function getServerSideProps({ query }) {
-  /* const { state, dispatch } = useContext(DataContext)
-  const { auth } = state */
-
   const page = query.page || 1
   const category = query.category || 'all'
   const sort = query.sort || ''
   const search = query.search || 'all'
-  const show = query.show || true /* TRUE visar TRUE, FALSE visar FALSE */
-  const showAll = false /* query.showAll */
 
-  let filteringString = ''
-
-  if (showAll === true) {
-    filteringString = `product?limit=${
+  const res = await getData(
+    `product?limit=${
       page * 6
-    }&category=${category}&sort=${sort}&title=${false}&show=${!show}`
-  } else {
-    filteringString = `product?limit=${
-      page * 6
-    }&category=${category}&sort=${sort}&title=${search}&show=${show}`
-  }
+    }&category=${category}&sort=${sort}&title=${search}`
+  )
 
-  const res = await getData(filteringString)
-
-  /* if (showAll === false) {
-    const res = await getData(
-      `product?limit=${
-        page * 6
-      }&category=${category}&sort=${sort}&title=${search}&show=${show}`
-    )
-  } else {
-    const res = await getData(
-      `product?limit=${
-        page * 6
-      }&category=${category}&sort=${sort}&title=${search}`
-    )
-  } */
   // server side rendering
   return {
     props: {

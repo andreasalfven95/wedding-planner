@@ -26,10 +26,19 @@ class APIfeatures {
     const excludeFields = ['page', 'sort', 'limit']
     excludeFields.forEach((el) => delete queryObj[el])
 
-    if (queryObj.show !== true) this.query.find({ show: queryObj.show })
-
     if (queryObj.category !== 'all')
       this.query.find({ category: queryObj.category })
+    /* 
+
+
+ */
+
+    /* if (queryObj.county !== 'all') this.query.find({ county: queryObj.county }) */
+    /* 
+
+
+
+ */
 
     if (queryObj.title !== 'all')
       this.query.find({ title: { $regex: queryObj.title } })
@@ -43,7 +52,7 @@ class APIfeatures {
       const sortBy = this.queryString.sort.split(',').join('')
       this.query = this.query.sort(sortBy)
     } else {
-      this.query = this.query.sort('-createdAt')
+      this.query = this.query.sort('createdAt')
     }
     return this
   }

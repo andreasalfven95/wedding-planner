@@ -208,6 +208,7 @@ const ProductsManager = () => {
         `product/${id}`,
         {
           ...product,
+          show: show,
           images: [...imgOldURL, ...media],
           county: county,
           address: address,
@@ -225,6 +226,7 @@ const ProductsManager = () => {
         'product',
         {
           ...product,
+          show: show,
           images: [...imgOldURL, ...media],
           county: county,
           address: address,
@@ -243,14 +245,6 @@ const ProductsManager = () => {
       payload: { success: res.msg },
     })
   }
-
-  /* const checkCounty = () => {
-    if (category === '6097c79b9a472e0a50e1550b') {
-      if (county.count > 1) {
-        return console.log('Mer än ett län')
-      }
-    }
-  } */
 
   return (
     <div>
@@ -271,7 +265,6 @@ const ProductsManager = () => {
               className='h-5 w-5'
               type='checkbox'
               checked={show}
-              /* defaultChecked={show} */
               onChange={() => setShow(!show)}
               name='show'
             />

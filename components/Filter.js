@@ -1,21 +1,16 @@
-import React, { useContext, useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import filterSearch from '../utils/filterSearch'
 import { getData } from '../utils/fetchData'
 import { useRouter } from 'next/router'
-import { DataContext } from '../store/GlobalState'
 
 const Filter = ({ state }) => {
   const [search, setSearch] = useState('')
   const [sort, setSort] = useState('')
   const [category, setCategory] = useState('')
-  /* const [showAll, setShowAll] = useState(false) */
 
   const { categories } = state
 
   const router = useRouter()
-
-  /* const { state, dispatch } = useContext(DataContext)
-  const { auth, categories } = state */
 
   const handleCategory = (e) => {
     setCategory(e.target.value)
@@ -27,33 +22,19 @@ const Filter = ({ state }) => {
     filterSearch({ router, sort: e.target.value })
   }
 
-  /* const handleShowAll = (e) => {
-    setShow(!showAll)
-    filterSearch({ router, sort: e.target.value })
-  } */
-
   useEffect(() => {
     filterSearch({ router, search: search ? search.toLowerCase() : 'all' })
   }, [search])
 
   return (
     <div className='input-group'>
-      {/* {auth.user.role === 'admin' && (
-        <input
-          className='h-5 w-5'
-          type='checkbox'
-          defaultChecked={showAll}
-          onChange={handleShowAll}
-          name='show'
-        />
-      )} */}
       <div className='input-group-prepend col-md-2 px-0 mt-2'>
         <select
           className='custom-select text-capitalize'
           value={category}
           onChange={handleCategory}
         >
-          <option value='all'>All Products</option>
+          <option value='all'>Alla kategorier</option>
 
           {categories.map((item) => (
             <option key={item._id} value={item._id}>
@@ -77,11 +58,11 @@ const Filter = ({ state }) => {
           value={sort}
           onChange={handleSort}
         >
-          <option value='-createdAt'>Newest</option>
-          <option value='oldest'>Oldest</option>
-          <option value='-sold'>Most sold</option>
-          <option value='-price'>Price: Hight-Low</option>
-          <option value='price'>Price: Low-Hight</option>
+          {/* <option value='random'>Slumpmässigt</option> */}
+          <option value='createdAt'>Tidigaste</option>
+          <option value='-createdAt'>Senaste</option>
+          <option value='title'>A-Ö</option>
+          <option value='-title'>Ö-A</option>
         </select>
       </div>
     </div>
