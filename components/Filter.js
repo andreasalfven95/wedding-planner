@@ -20,12 +20,11 @@ const Filter = ({ state }) => {
     filterSearch({ router, category: e.target.value })
   }
 
-  const handleCounty = (e) => {
+  /* const handleCounty = (e) => {
     setCounty(e)
     console.log(e.target)
     console.log(county)
-    /* filterSearch({ router, county: county.value }) */
-  }
+  } */
 
   const handleSort = (e) => {
     setSort(e.target.value)
@@ -34,16 +33,12 @@ const Filter = ({ state }) => {
   }
 
   useEffect(() => {
-    /* county.map((item) => console.log(item)) */
     filterSearch({
       router,
       county: county.map((item) => {
         return item.value.toString()
       }),
-      /* .toString(), */
     })
-    console.log(county)
-    /* filterSearch({ router, county: county.value }) */
   }, [county])
 
   useEffect(() => {
