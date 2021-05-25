@@ -370,7 +370,7 @@ const ProductsManager = () => {
             />
             <label
               className='block text-grey-darker text-sm font-bold my-2'
-              htmlFor='description'
+              htmlFor='content'
             >
               Sammanfattning*
             </label>
@@ -388,7 +388,7 @@ const ProductsManager = () => {
             />
             <label
               className='block text-grey-darker text-sm font-bold my-2'
-              htmlFor='description'
+              htmlFor='about'
             >
               All information*
             </label>
@@ -498,7 +498,7 @@ const ProductsManager = () => {
           <div className=''>
             <label
               className='block text-grey-darker text-sm font-bold my-2'
-              htmlFor='Email'
+              htmlFor='county'
             >
               Län*
             </label>

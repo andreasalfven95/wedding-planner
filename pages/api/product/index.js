@@ -28,17 +28,114 @@ class APIfeatures {
 
     if (queryObj.category !== 'all')
       this.query.find({ category: queryObj.category })
-    /* 
 
+    /* console.log(queryObj.county.length) */
+    console.log(queryObj.county)
 
- */
+    if (queryObj.county !== 'all') {
+      const counties = queryObj.county.split(',')
+      console.log('Markerade län är: ', counties)
+      console.log('1a län är: ', counties[0])
 
-    /* if (queryObj.county !== 'all') this.query.find({ county: queryObj.county }) */
-    /* 
+      this.query.find(
+        {
+          $or: [
+            {
+              $or: [
+                { county: { $elemMatch: { value: counties[0].toString() } } },
+              ],
+            },
+          ],
+        }
+        /* {
+          $or: [
+            {
+              $or: [{ county: { $elemMatch: { value: 'stockholm' } } }],
+              $or: [{ county: { $elemMatch: { value: 'skåne' } } }],
+            },
+          ],
+        } */
+        /* {
+          $or: [
+            counties.forEach((item) => {
+              return {
+                $or: [{ county: { $elemMatch: { value: item.toString() } } }],
+              }
+            }),
+          ],
+        } */
+      )
+    }
+    /*  {counties.map((item) =>
+          {county: { $elemMatch: { value: item }}
+          )}
+        ) */
+    /* counties.map(item) => {
+            $or: [{ county: { $elemMatch: { value: item } } }],
+        } */
+    /* {
+          $or: [
+            counties.forEach((item) => {
+              return {
+                $or: [{ county: { $elemMatch: { value: { item } } } }],
+              }
+            }),
+          ],
+        } */
 
+    /* {
+          $or: [
+            { county: { $elemMatch: { value: 'stockholm', value: 'skåne' } } },
+            counties.forEach((item) => {
+              if (!item) {
+                return { county: { $elemMatch: { value: `stockholm` } } }
+              }
+            }),
+            counties.map((item) => {
+              return { county: { $elemMatch: { value: `${item}` } } }
+            }),
+          ],
+          { county: { $regex: queryObj.county } }
+        }, */
 
+    /* this.query.find({ county: queryObj.county.value })
+        console.log('fungerar') */
+    /* this.query.find({ county: { $elemMatch: { value: 'stockholm' } } }) */
+    /* console.log(county) */
+    /* this.query.find({ county: { $elemMatch: { value: 'stockholm' } } }) */
 
- */
+    /* {
+          $in: [
+            {
+              county: {
+                $elemMatch: {
+                  value: 'stockholm',
+                },
+              },
+            },
+            {
+              county: {
+                $elemMatch: {
+                  value: 'skåne',
+                },
+              },
+            },
+          ],
+        } */
+    /* { county: { value: { $in: ['stockholm', 'skåne'] } } } */
+
+    /*       
+        ) 
+        */
+    /* .map(function (u) {
+        return counties.forEach((item) => {
+          return {
+            $or: [{ county: { $elemMatch: { value: { item } } } }],
+          }
+        }),
+      }) 
+    }
+    */
 
     if (queryObj.title !== 'all')
       this.query.find({ title: { $regex: queryObj.title } })

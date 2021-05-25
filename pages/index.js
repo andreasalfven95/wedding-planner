@@ -99,13 +99,14 @@ export default function Home(props) {
 export async function getServerSideProps({ query }) {
   const page = query.page || 1
   const category = query.category || 'all'
+  const county = query.county || 'all'
   const sort = query.sort || ''
   const search = query.search || 'all'
 
   const res = await getData(
     `product?limit=${
       page * 6
-    }&category=${category}&sort=${sort}&title=${search}`
+    }&category=${category}&county=${county}&sort=${sort}&title=${search}`
   )
 
   // server side rendering

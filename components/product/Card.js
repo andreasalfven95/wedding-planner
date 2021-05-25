@@ -146,8 +146,17 @@ const Card = ({ product }) => {
             <div className='flex items-center mb-1'>
               <ImLocation className='inline-block mr-2 self-start mt-1' />
               <div className='inline-block'>
-                <p>Fyrislundsgatan 26</p>
-                <p>754 46 Uppsala</p>
+                <p>{product.address}</p>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div className='flex items-center mb-1'>
+              <ImLocation className='inline-block mr-2 self-start mt-1' />
+              <div className='inline-block'>
+                {product.county.map((item) => (
+                  <p className='mr-2'>{item.label}</p>
+                ))}
               </div>
             </div>
           </li>

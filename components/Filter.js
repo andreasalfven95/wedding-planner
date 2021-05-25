@@ -2,11 +2,14 @@ import React, { useState, useEffect } from 'react'
 import filterSearch from '../utils/filterSearch'
 import { getData } from '../utils/fetchData'
 import { useRouter } from 'next/router'
+import County from '../data/County'
+import Select from 'react-select'
 
 const Filter = ({ state }) => {
   const [search, setSearch] = useState('')
   const [sort, setSort] = useState('')
   const [category, setCategory] = useState('')
+  const [county, setCounty] = useState([])
 
   const { categories } = state
 
@@ -17,10 +20,31 @@ const Filter = ({ state }) => {
     filterSearch({ router, category: e.target.value })
   }
 
+  const handleCounty = (e) => {
+    setCounty(e)
+    console.log(e.target)
+    console.log(county)
+    /* filterSearch({ router, county: county.value }) */
+  }
+
   const handleSort = (e) => {
     setSort(e.target.value)
+    console.log(e.target.value)
     filterSearch({ router, sort: e.target.value })
   }
+
+  useEffect(() => {
+    /* county.map((item) => console.log(item)) */
+    filterSearch({
+      router,
+      county: county.map((item) => {
+        return item.value.toString()
+      }),
+      /* .toString(), */
+    })
+    console.log(county)
+    /* filterSearch({ router, county: county.value }) */
+  }, [county])
 
   useEffect(() => {
     filterSearch({ router, search: search ? search.toLowerCase() : 'all' })
@@ -43,11 +67,29 @@ const Filter = ({ state }) => {
           ))}
         </select>
       </div>
+
+      <div className=''>
+        <Select
+          /* styles={styles} */
+          placeholder='Markera de län som är aktuella för er...'
+          value={county.map((item) => {
+            return item
+          })}
+          name='county'
+          id='county'
+          onChange={setCounty}
+          closeMenuOnSelect={true}
+          isMulti
+          options={County}
+        />
+      </div>
+
       <form autoComplete='off' className='mt-2 col-md-8 px-0'>
         <input
           type='text'
           className='shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker'
           list='title_product'
+          placeholder='Namn på plats eller företag...'
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
@@ -61,6 +103,7 @@ const Filter = ({ state }) => {
           {/* <option value='random'>Slumpmässigt</option> */}
           <option value='createdAt'>Tidigaste</option>
           <option value='-createdAt'>Senaste</option>
+          {/* <option value='-rating'>Bäst betyg</option> */}
           <option value='title'>A-Ö</option>
           <option value='-title'>Ö-A</option>
         </select>
