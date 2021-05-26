@@ -30,19 +30,26 @@ class APIfeatures {
       this.query.find({ category: queryObj.category })
 
     if (queryObj.county !== 'all') {
-      const counties = queryObj.county.split(',')
-      /* console.log('Markerade län är: ', counties) */
-
       this.query.find({
-        $or: [
-          {
-            $or: [
-              { county: { $elemMatch: { value: counties[0].toString() } } },
-            ],
-          },
-        ],
+        $or: [{ county: { $elemMatch: { value: queryObj.county } } }],
       })
     }
+    /* if (queryObj.county !== 'all') {
+      const counties = queryObj.county.split(',')
+
+      this.query.find(
+        {
+          $or: [
+            {
+              $or: [
+                { county: { $elemMatch: { value: counties[0].toString() } } },
+              ],
+            },
+          ],
+        }
+        {'Keys':{$elemMatch:{$elemMatch:{$in:['carrot']}}}}
+      )
+    } */
 
     if (queryObj.title !== 'all')
       this.query.find({ title: { $regex: queryObj.title } })

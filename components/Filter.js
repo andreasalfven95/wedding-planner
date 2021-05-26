@@ -10,6 +10,7 @@ const Filter = ({ state }) => {
   const [sort, setSort] = useState('')
   const [category, setCategory] = useState('')
   const [county, setCounty] = useState([])
+  /* const [county, setCounty] = useState([]) */
 
   const { categories } = state
 
@@ -33,13 +34,27 @@ const Filter = ({ state }) => {
   }
 
   useEffect(() => {
+    if (county === null) {
+      filterSearch({
+        router,
+        county: 'all',
+      })
+    } else {
+      filterSearch({
+        router,
+        county: county.value,
+      })
+    }
+  }, [county])
+
+  /* useEffect(() => {
     filterSearch({
       router,
       county: county.map((item) => {
         return item.value.toString()
       }),
     })
-  }, [county])
+  }, [county]) */
 
   useEffect(() => {
     filterSearch({ router, search: search ? search.toLowerCase() : 'all' })
@@ -65,7 +80,19 @@ const Filter = ({ state }) => {
 
       <div className=''>
         <Select
-          /* styles={styles} */
+          placeholder='Markera det län som är aktuellt för er...'
+          value={county}
+          name='county'
+          id='county'
+          onChange={setCounty}
+          closeMenuOnSelect={true}
+          options={County}
+          isClearable={true}
+          /* clearValue={setCounty('all')} */
+          /* BESTÄM VAD SOM HÄNDER NÄR MAN CLICKAR BORT VALDA LÄN, isClearable */
+        />
+
+        {/* <Select
           placeholder='Markera de län som är aktuella för er...'
           value={county.map((item) => {
             return item
@@ -74,9 +101,10 @@ const Filter = ({ state }) => {
           id='county'
           onChange={setCounty}
           closeMenuOnSelect={true}
-          isMulti
           options={County}
-        />
+          isMulti
+          isClearable={true}
+        /> */}
       </div>
 
       <form autoComplete='off' className='mt-2 col-md-8 px-0'>
