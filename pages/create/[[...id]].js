@@ -10,6 +10,11 @@ import valid from '../../utils/valid'
 import { patchData } from '../../utils/fetchData'
 import County from '../../data/County'
 import Select from 'react-select'
+import dynamic from 'next/dynamic'
+
+const TextEditor = dynamic(() => import('../../components/Editor'), {
+  ssr: false,
+})
 
 import PlacesAutocomplete from 'react-places-autocomplete'
 import {
@@ -24,7 +29,7 @@ const ProductsManager = () => {
     title: '',
     description: '',
     content: '',
-    about: '',
+    /* about: '', */
     category: '',
     guests: '',
     email: '',
@@ -40,7 +45,7 @@ const ProductsManager = () => {
     title,
     description,
     content,
-    about,
+    /* about, */
     category,
     guests,
     email,
@@ -54,6 +59,7 @@ const ProductsManager = () => {
   const { avatar, name, password, cf_password } = data */
 
   const [show, setShow] = useState(false)
+  const [about, setAbout] = useState('')
   const [images, setImages] = useState([])
   const [county, setCounty] = useState([])
   const [address, setAddress] = useState('')
@@ -72,6 +78,7 @@ const ProductsManager = () => {
       setOnEdit(true)
       getData(`product/${id}`).then((res) => {
         setProduct(res.product)
+        setAbout(res.product.about)
         setShow(res.product.show)
         setImages(res.product.images)
         setCounty(res.product.county)
@@ -82,6 +89,7 @@ const ProductsManager = () => {
     } else {
       setOnEdit(false)
       setProduct(initialStateProduct)
+      setAbout('')
       setShow(false)
       setImages([])
       setCounty([])
@@ -108,6 +116,17 @@ const ProductsManager = () => {
     setProduct({ ...product, [name]: value })
     dispatch({ type: 'NOTIFY', payload: {} })
   }
+
+  useEffect(() => {
+    console.log(about)
+    dispatch({ type: 'NOTIFY', payload: {} })
+  }, [about])
+
+  /* const aboutInputChange = () => {
+    console.log(about)
+    setAbout(...about)
+    console.log(about)
+  } */
 
   const handleUploadInput = (e) => {
     dispatch({ type: 'NOTIFY', payload: {} })
@@ -390,20 +409,12 @@ const ProductsManager = () => {
               className='block text-grey-darker text-sm font-bold my-2'
               htmlFor='about'
             >
-              All information*
+              All information* (inga bilder)
             </label>
-            <textarea
-              required
-              type='text'
-              placeholder='Ge läsaren hela storyn...'
-              name='about'
-              id='about'
-              value={about}
-              cols='30'
-              rows='6'
-              onChange={handleChangeInput}
-              className='shadow appearance-none border border-red rounded w-full py-2 px-3 text-grey-darker'
-            />
+
+            <div>
+              <TextEditor about={about} setAbout={setAbout} />
+            </div>
           </div>
           <div className=''>
             <label
