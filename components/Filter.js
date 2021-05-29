@@ -124,8 +124,8 @@ const Filter = ({ state }) => {
           onChange={handleSort}
         >
           {/* <option value='random'>Slumpmässigt</option> */}
-          <option value='createdAt'>Tidigaste</option>
           <option value='-createdAt'>Senaste</option>
+          <option value='createdAt'>Tidigaste</option>
           {/* <option value='-rating'>Bäst betyg</option> */}
           <option value='title'>A-Ö</option>
           <option value='-title'>Ö-A</option>

@@ -100,7 +100,7 @@ export async function getServerSideProps({ query }) {
   const page = query.page || 1
   const category = query.category || 'all'
   const county = query.county || 'all'
-  const sort = query.sort || ''
+  const sort = query.sort || '-createdAt'
   const search = query.search || 'all'
 
   const res = await getData(

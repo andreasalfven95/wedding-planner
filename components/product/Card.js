@@ -155,7 +155,9 @@ const Card = ({ product }) => {
               <ImLocation className='inline-block mr-2 self-start mt-1' />
               <div className='inline-block'>
                 {product.county.map((item) => (
-                  <p className='mr-2'>{item.label}</p>
+                  <p key={item.value} className='mr-2'>
+                    {item.label}
+                  </p>
                 ))}
               </div>
             </div>

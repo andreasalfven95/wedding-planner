@@ -17,6 +17,7 @@ import {
 import { HiHeart, HiOutlineHeart } from 'react-icons/hi'
 import { BsPersonFill } from 'react-icons/bs'
 import { FaGlobeAmericas } from 'react-icons/fa'
+import parse from 'html-react-parser'
 
 const DetailProduct = (props) => {
   const [product] = useState(props.product)
@@ -73,6 +74,8 @@ const DetailProduct = (props) => {
     }
   }
 
+  parse('<h1>single</h1>')
+
   return (
     <div className='detail-page pb-4'>
       <Head>
@@ -110,7 +113,7 @@ const DetailProduct = (props) => {
           <p className='leading-6 italic pb-3 font-extralight'>
             {product.content}
           </p>
-          <p className='leading-6'>{product.about}</p>
+          <div className='about leading-6'>{parse(product.about)}</div>
         </div>
       </div>
       <div className='company-info justify-end break-all text-base'>
@@ -186,7 +189,11 @@ const DetailProduct = (props) => {
                 <div className='flex items-center mb-1'>
                   <FaGlobeAmericas className='inline-block text-sm mr-2 self-start mt-1 min-w-max' />
                   <div className='inline-block'>
-                    <a href={product.website} className='hover:underline'>
+                    <a
+                      target='blank'
+                      href={product.website}
+                      className='hover:underline'
+                    >
                       {product.website}
                     </a>
                   </div>
@@ -199,7 +206,11 @@ const DetailProduct = (props) => {
                 <div className='flex items-center mb-1'>
                   <AiOutlineInstagram className='inline-block mr-2 self-start mt-1 min-w-max' />
                   <div className='inline-block'>
-                    <a href={product.instagram} className='hover:underline'>
+                    <a
+                      target='blank'
+                      href={product.instagram}
+                      className='hover:underline'
+                    >
                       {product.instagram}
                     </a>
                   </div>
@@ -212,7 +223,11 @@ const DetailProduct = (props) => {
                 <div className='flex items-center mb-1'>
                   <AiFillFacebook className='inline-block mr-2 self-start mt-1 min-w-max' />
                   <div className='inline-block'>
-                    <a href={product.facebook} className='hover:underline'>
+                    <a
+                      target='blank'
+                      href={product.facebook}
+                      className='hover:underline'
+                    >
                       {product.facebook}
                     </a>
                   </div>

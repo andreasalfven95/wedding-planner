@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react'
+import React, { useRef, useEffect, useState } from 'react'
 import dynamic from 'next/dynamic'
 import 'suneditor/dist/css/suneditor.min.css' // Import Sun Editor's CSS File
 import { buttonList } from 'suneditor-react'
@@ -7,7 +7,7 @@ const SunEditor = dynamic(() => import('suneditor-react'), {
   ssr: false,
 })
 
-const TextEditor = ({ about, setAbout }) => {
+const TextEditor = ({ about, setAbout, updatedAbout, setUpdatedAbout }) => {
   /**
    * @type {React.MutableRefObject<SunEditor>} get type definitions for editor
    */
@@ -34,25 +34,18 @@ const TextEditor = ({ about, setAbout }) => {
     ],
   ]
 
-  /* const handlePaste = (e, cleanData, maxCharCount){
-    console.log(e, cleanData, maxCharCount)
-  } */
-
   const handlePaste = (e, cleanData) => {
     console.log(e, cleanData)
   }
 
   const handleChange = (e) => {
-    setAbout(about)
+    setUpdatedAbout(e)
   }
 
   return (
     <div>
       <SunEditor
-        /* setContents="My contents"
-        appendContents="My contents"
-        defaultValue="<p>The editor's default value</p>"*/
-        defaultValue={about}
+        setContents={about}
         lang='se'
         name='about'
         placeholder='Ge all information här...'
@@ -60,11 +53,10 @@ const TextEditor = ({ about, setAbout }) => {
         onChange={handleChange}
         getImagesInfo={handlePaste}
         onDrop={handlePaste}
-        value={about}
         setOptions={{
           buttonList: buttonList,
-          pasteTagsWhitelist: 'p, span, strong, b, em, u, del, ul, ol, li',
-          attributesWhitelist: 'p, span, strong, b, em,  u, del, ul, ol, li',
+          pasteTagsWhitelist: 'p, strong, b, em, u, del, ul, ol, li, br',
+          attributesWhitelist: 'p, strong, b, em,  u, del, ul, ol, li, br',
           tagsBlacklist: 'h1, h2, h3, h4, h5, h6, img, p>img',
           pasteTagsBlacklist: 'h1, h2, h3, h4, h5, h6, img, p>img',
           imageFileInput: false,
@@ -116,8 +108,6 @@ const TextEditor = ({ about, setAbout }) => {
 
             unorderList: 'Unordered list',
           },
-
-          controller: {},
         }}
         setDefaultStyle=' font-size: 1em;'
       />

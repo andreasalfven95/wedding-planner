@@ -29,7 +29,6 @@ const ProductsManager = () => {
     title: '',
     description: '',
     content: '',
-    /* about: '', */
     category: '',
     guests: '',
     email: '',
@@ -45,7 +44,6 @@ const ProductsManager = () => {
     title,
     description,
     content,
-    /* about, */
     category,
     guests,
     email,
@@ -60,6 +58,7 @@ const ProductsManager = () => {
 
   const [show, setShow] = useState(false)
   const [about, setAbout] = useState('')
+  const [updatedAbout, setUpdatedAbout] = useState('')
   const [images, setImages] = useState([])
   const [county, setCounty] = useState([])
   const [address, setAddress] = useState('')
@@ -122,12 +121,6 @@ const ProductsManager = () => {
     dispatch({ type: 'NOTIFY', payload: {} })
   }, [about])
 
-  /* const aboutInputChange = () => {
-    console.log(about)
-    setAbout(...about)
-    console.log(about)
-  } */
-
   const handleUploadInput = (e) => {
     dispatch({ type: 'NOTIFY', payload: {} })
     let newImages = []
@@ -175,7 +168,8 @@ const ProductsManager = () => {
       !title ||
       !description ||
       !content ||
-      !about ||
+      /* !about || */
+      !updatedAbout ||
       !email ||
       !phone ||
       !category ||
@@ -227,6 +221,7 @@ const ProductsManager = () => {
         `product/${id}`,
         {
           ...product,
+          about: updatedAbout,
           show: show,
           images: [...imgOldURL, ...media],
           county: county,
@@ -245,6 +240,7 @@ const ProductsManager = () => {
         'product',
         {
           ...product,
+          about: updatedAbout,
           show: show,
           images: [...imgOldURL, ...media],
           county: county,
@@ -413,7 +409,12 @@ const ProductsManager = () => {
             </label>
 
             <div>
-              <TextEditor about={about} setAbout={setAbout} />
+              <TextEditor
+                about={about}
+                setAbout={setAbout}
+                updatedAbout={updatedAbout}
+                setUpdatedAbout={setUpdatedAbout}
+              />
             </div>
           </div>
           <div className=''>

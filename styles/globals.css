@@ -50,3 +50,17 @@ img {
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.about p {
+  display: block;
+  margin: 0 0 15px;
+}
+
+.about ol {
+  list-style: decimal inside;
+  margin: 0 0 15px;
+}
+.about ul {
+  list-style: disc inside;
+  margin: 0 0 15px;
+}
