@@ -23,7 +23,7 @@ class APIfeatures {
   filtering() {
     const queryObj = { ...this.queryString }
 
-    const excludeFields = ['page', 'sort', 'limit']
+    const excludeFields = [/* 'page', */ 'sort', 'limit']
     excludeFields.forEach((el) => delete queryObj[el])
 
     if (queryObj.category !== 'all')
@@ -33,6 +33,10 @@ class APIfeatures {
       this.query.find({
         $or: [{ county: { $elemMatch: { value: queryObj.county } } }],
       })
+    }
+
+    if (queryObj.userid) {
+      this.query.find({ userid: queryObj.userid })
     }
     /* if (queryObj.county !== 'all') {
       const counties = queryObj.county.split(',')
@@ -68,13 +72,13 @@ class APIfeatures {
     return this
   }
 
-  paginating() {
+  /* paginating() {
     const page = this.queryString.page * 1 || 1
     const limit = this.queryString.limit * 1 || 6
     const skip = (page - 1) * limit
     this.query = this.query.skip(skip).limit(limit)
     return this
-  }
+  } */
 }
 
 const getProducts = async (req, res) => {
@@ -82,7 +86,7 @@ const getProducts = async (req, res) => {
     const features = new APIfeatures(Products.find(), req.query)
       .filtering()
       .sorting()
-      .paginating()
+    /* .paginating() */
 
     const products = await features.query
 

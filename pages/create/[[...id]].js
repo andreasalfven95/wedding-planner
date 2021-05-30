@@ -74,6 +74,7 @@ const ProductsManager = () => {
 
   useEffect(() => {
     if (id) {
+      console.log(id)
       setOnEdit(true)
       getData(`product/${id}`).then((res) => {
         setProduct(res.product)

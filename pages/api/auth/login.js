@@ -43,6 +43,7 @@ const login = async (req, res) => {
       refresh_token,
       access_token,
       user: {
+        id: user._id,
         name: user.name,
         email: user.email,
         role: user.role,

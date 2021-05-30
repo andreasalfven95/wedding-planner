@@ -20,9 +20,11 @@ export default async (req, res) => {
     if (!user) return res.status(400).json({ err: 'User does not exist.' })
 
     const access_token = createAccessToken({ id: user._id })
+
     res.json({
       access_token,
       user: {
+        id: user._id,
         name: user.name,
         email: user.email,
         role: user.role,

@@ -13,7 +13,7 @@ export default function Home(props) {
   const [productsToDisplay, setProductsToDisplay] = useState([])
   const [showAll, setShowAll] = useState(true)
 
-  const [page, setPage] = useState(1)
+  /* const [page, setPage] = useState(1) */
   const router = useRouter()
 
   const { state, dispatch } = useContext(DataContext)
@@ -27,14 +27,14 @@ export default function Home(props) {
     setProductsToDisplay(products.filter((product) => product.show === true))
   }, [products])
 
-  useEffect(() => {
+  /* useEffect(() => {
     if (Object.keys(router.query).length === 0) setPage(1)
-  }, [router.query])
+  }, [router.query]) */
 
-  const handleLoadMore = () => {
+  /* const handleLoadMore = () => {
     setPage(page + 1)
     filterSearch({ router, page: page + 1 })
-  }
+  } */
 
   return (
     <>
@@ -85,28 +85,31 @@ export default function Home(props) {
       </div>
 
       {/* <Products products={products} heading='Products' /> */}
-      {props.result < page * 6 ? (
+      {/* {props.result < page * 6 ? (
         ''
       ) : (
         <button className='block mx-auto mb-4' onClick={handleLoadMore}>
           Load more...
         </button>
-      )}
+      )} */}
     </>
   )
 }
 
 export async function getServerSideProps({ query }) {
-  const page = query.page || 1
+  /* const page = query.page || 1 */
   const category = query.category || 'all'
   const county = query.county || 'all'
   const sort = query.sort || '-createdAt'
   const search = query.search || 'all'
 
-  const res = await getData(
+  /* const res = await getData(
     `product?limit=${
       page * 6
     }&category=${category}&county=${county}&sort=${sort}&title=${search}`
+  ) */
+  const res = await getData(
+    `product?category=${category}&county=${county}&sort=${sort}&title=${search}`
   )
 
   // server side rendering
