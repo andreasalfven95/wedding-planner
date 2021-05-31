@@ -154,11 +154,15 @@ const Card = ({ product }) => {
             <div className='flex items-center mb-1'>
               <ImLocation className='inline-block mr-2 self-start mt-1' />
               <div className='inline-block'>
-                {product.county.map((item) => (
-                  <p key={item.value} className='mr-2'>
-                    {item.label}
-                  </p>
-                ))}
+                {product.county.length >= 21 ? (
+                  <p className='mr-2'>Hela Sverige</p>
+                ) : (
+                  product.county.map((item) => (
+                    <p key={item.value} className='mr-2'>
+                      {item.label}
+                    </p>
+                  ))
+                )}
               </div>
             </div>
           </li>

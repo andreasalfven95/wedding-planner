@@ -11,17 +11,16 @@ import { patchData } from '../../utils/fetchData'
 import County from '../../data/County'
 import Select from 'react-select'
 import dynamic from 'next/dynamic'
-
-const TextEditor = dynamic(() => import('../../components/Editor'), {
-  ssr: false,
-})
-
 import PlacesAutocomplete from 'react-places-autocomplete'
 import {
   geocodeByAddress,
   geocodeByPlaceId,
   getLatLng,
 } from 'react-places-autocomplete'
+
+const TextEditor = dynamic(() => import('../../components/Editor'), {
+  ssr: false,
+})
 
 const ProductsManager = () => {
   const initialStateProduct = {
@@ -53,9 +52,6 @@ const ProductsManager = () => {
     website,
   } = product
 
-  /* const [data, setData] = useState(initialStateUser)
-  const { avatar, name, password, cf_password } = data */
-
   const [show, setShow] = useState(false)
   const [about, setAbout] = useState('')
   const [updatedAbout, setUpdatedAbout] = useState('')
@@ -67,8 +63,8 @@ const ProductsManager = () => {
 
   const { state, dispatch } = useContext(DataContext)
   const { auth, notify, categories } = state
-
   const router = useRouter()
+
   const { id } = router.query
   const [onEdit, setOnEdit] = useState(false)
 
@@ -525,7 +521,7 @@ const ProductsManager = () => {
               name='county'
               id='county'
               onChange={setCounty}
-              closeMenuOnSelect={true}
+              closeMenuOnSelect={false}
               isMulti
               options={County}
             />

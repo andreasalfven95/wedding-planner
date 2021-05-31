@@ -47,7 +47,6 @@ const Profile = () => {
   }
 
   const [product, setProduct] = useState(initialStateProduct)
-
   const {
     userid,
     title,
@@ -76,20 +75,41 @@ const Profile = () => {
 
   const { state, dispatch } = useContext(DataContext)
   const { auth, notify, categories } = state
-
   const router = useRouter()
+
   const [onEdit, setOnEdit] = useState(false)
+  let { id } = []
   const [userProducts, setUserProducts] = useState([])
-  const [id, setId] = useState([])
 
   useEffect(() => {
     if (auth.user) setData({ ...data, name: auth.user.name })
   }, [auth.user])
 
   useEffect(() => {
-    if (id) {
+    if (auth.user) {
+      if (auth.user.id !== undefined) {
+        getUserProducts(auth.user.id)
+      }
+    }
+  }, [auth])
+
+  const getUserProducts = (props) => {
+    getData(
+      `product?category=${'all'}&county=${'all'}&title=${'all'}&userid=${props}`
+    ).then((res) => {
+      /* id = res.products[0]._id
+      console.log(id) */
+      setUserProducts(res.products)
+    })
+  }
+
+  useEffect(() => {
+    if (userProducts.length > 0) {
+      console.log('Finns produkt: ', userProducts)
+      /* console.log('ID:', id) */
       setOnEdit(true)
-      getData(`product/${id}`).then((res) => {
+      getData(`product/${userProducts[0]._id}`).then((res) => {
+        console.log(res)
         setProduct(res.product)
         setAbout(res.product.about)
         setShow(res.product.show)
@@ -100,6 +120,7 @@ const Profile = () => {
         setCoordinates(res.product.coordinates)
       })
     } else {
+      console.log('finns INTE', userProducts)
       setOnEdit(false)
       setProduct(initialStateProduct)
       setAbout('')
@@ -109,26 +130,7 @@ const Profile = () => {
       setAddress('')
       setCoordinates({})
     }
-  }, [id])
-
-  const getUserProducts = () => {
-    getData(
-      `product?category=${'all'}&county=${'all'}&title=${'all'}&userid=${
-        auth.user.id
-      }`
-    ).then((res) => {
-      setUserProducts(res.products)
-      setId([res.products[0]._id])
-    })
-  }
-
-  useEffect(() => {
-    if (auth.user) {
-      if (auth.user.id !== undefined) {
-        getUserProducts()
-      }
-    }
-  }, [auth])
+  }, [userProducts])
 
   const searchOptions = {
     types: ['address'],
