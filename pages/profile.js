@@ -89,6 +89,7 @@ const Profile = () => {
     if (auth.user) {
       if (auth.user.id !== undefined) {
         getUserProducts(auth.user.id)
+        console.log('User id is ', auth.user.id)
       }
     }
   }, [auth])
@@ -222,7 +223,11 @@ const Profile = () => {
       })
     }
 
-    if (county.length > 1 && category === '6097c79b9a472e0a50e1550b') {
+    if (
+      county.length > 1 &&
+      (category === '6097c79b9a472e0a50e1550b' ||
+        category === '60aa71fb00912e43a869cf61')
+    ) {
       return dispatch({
         type: 'NOTIFY',
         payload: {
@@ -230,11 +235,21 @@ const Profile = () => {
         },
       })
     }
-    if (auth.user.role !== 'admin')
+    setProduct({ ...product, [userid]: auth.user.id })
+
+    if (auth.user.role !== 'admin' && auth.user.role !== 'user') {
       return dispatch({
         type: 'NOTIFY',
         payload: { error: 'Authentication is not valid.' },
       })
+    }
+
+    if (userid !== auth.user.id) {
+      return dispatch({
+        type: 'NOTIFY',
+        payload: { error: 'User ID and id on products does not match.' },
+      })
+    }
 
     dispatch({
       type: 'NOTIFY',
@@ -249,7 +264,7 @@ const Profile = () => {
     let res
     if (onEdit) {
       res = await putData(
-        `product/${id}`,
+        `product/${userProducts[0]._id}`,
         {
           ...product,
           about: updatedAbout,
@@ -382,7 +397,7 @@ const Profile = () => {
 
       <section className='my-3'>
         <div className=''>
-          <h3 className='text-center uppercase'>
+          <h3 className='text-center uppercase font-medium underline'>
             {auth.user.role === 'user' ? 'User Profile' : 'Admin Profile'}
           </h3>
           <div className='w-40 h-40 overflow-hidden relative my-4 mx-auto border border-solid border-gray-300 rounded-full'>
@@ -467,13 +482,12 @@ const Profile = () => {
         </div>
 
         <div>
-          <Head>
-            <title>Products Manager</title>
-          </Head>
-
           <div className='mt-8'>
+            <h3 className='text-center uppercase font-medium underline'>
+              Produkt:
+            </h3>
             <form onSubmit={handleSubmit}>
-              <div className=''>
+              {/* <div className=''>
                 <label
                   className='block text-grey-darker text-sm font-bold my-2'
                   htmlFor='show'
@@ -487,16 +501,17 @@ const Profile = () => {
                   onChange={() => setShow(!show)}
                   name='show'
                 />
-              </div>
+              </div> */}
               <div className=''>
-                <label
+                {/* <label
                   className='block text-grey-darker text-sm font-bold my-2'
                   htmlFor='userid'
                 >
                   User ID:
-                </label>
+                </label> */}
                 <input
                   type='text'
+                  disabled
                   placeholder='User ID'
                   name='userid'
                   value={userid}
