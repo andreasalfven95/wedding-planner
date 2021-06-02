@@ -89,7 +89,6 @@ const Profile = () => {
     if (auth.user) {
       if (auth.user.id !== undefined) {
         getUserProducts(auth.user.id)
-        console.log('User id is ', auth.user.id)
       }
     }
   }, [auth])
@@ -107,10 +106,9 @@ const Profile = () => {
   useEffect(() => {
     if (userProducts.length > 0) {
       console.log('Finns produkt: ', userProducts)
-      /* console.log('ID:', id) */
+
       setOnEdit(true)
       getData(`product/${userProducts[0]._id}`).then((res) => {
-        console.log(res)
         setProduct(res.product)
         setAbout(res.product.about)
         setShow(res.product.show)
@@ -133,6 +131,17 @@ const Profile = () => {
     }
   }, [userProducts])
 
+  useEffect(() => {
+    if (!product.userid) {
+      if (auth.user) {
+        if (auth.user.id) {
+          console.log('test')
+          setProduct({ ...product, userid: auth.user.id })
+        }
+      }
+    }
+  }, [product])
+
   const searchOptions = {
     types: ['address'],
     componentRestrictions: { country: 'se' },
@@ -147,7 +156,6 @@ const Profile = () => {
   }
 
   const handleChangeInput = (e) => {
-    console.log(auth)
     const { name, value } = e.target
     setProduct({ ...product, [name]: value })
     dispatch({ type: 'NOTIFY', payload: {} })
@@ -235,7 +243,6 @@ const Profile = () => {
         },
       })
     }
-    setProduct({ ...product, [userid]: auth.user.id })
 
     if (auth.user.role !== 'admin' && auth.user.role !== 'user') {
       return dispatch({
@@ -715,6 +722,7 @@ const Profile = () => {
                                 className,
                                 style,
                               })}
+                              key={suggestion.placeId}
                             >
                               <span>{suggestion.description}</span>
                             </div>
@@ -743,7 +751,7 @@ const Profile = () => {
                   name='county'
                   id='county'
                   onChange={setCounty}
-                  closeMenuOnSelect={true}
+                  closeMenuOnSelect={false}
                   isMulti
                   options={County}
                 />

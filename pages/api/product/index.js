@@ -104,7 +104,7 @@ const createProduct = async (req, res) => {
   try {
     const result = await auth(req, res)
     /* ADDED USER AS VALID CREATER OF PRODUCT */
-    if (result.role !== 'admin' || result.role !== 'user')
+    if (result.role !== 'admin' && result.role !== 'user')
       return res.status(400).json({ err: 'Authentication is not valid.' })
 
     const {

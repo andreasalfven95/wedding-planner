@@ -62,7 +62,7 @@ export default function Register() {
           onSubmit={handleSubmit}
         >
           <div className='block text-grey-darker text-sm font-bold mb-2'>
-            <label htmlFor='name'>Company</label>
+            <label htmlFor='name'>Företagsnamn</label>
             <input
               required
               type='text'
@@ -75,7 +75,7 @@ export default function Register() {
           </div>
 
           <div className='block text-grey-darker text-sm font-bold mb-2'>
-            <label htmlFor='exampleInputEmail1'>Email address</label>
+            <label htmlFor='exampleInputEmail1'>Email-adress</label>
             <input
               required
               type='email'
@@ -89,12 +89,12 @@ export default function Register() {
               onChange={handleChangeInput}
             />
             <small id='emailHelp' className='form-text text-muted'>
-              We'll never share your email without permission.
+              Vi kommer aldirg att lämna ut er email utan tillåtelse.
             </small>
           </div>
 
           <div className='block text-grey-darker text-sm font-bold mb-2'>
-            <label htmlFor='exampleInputPassword1'>Password</label>
+            <label htmlFor='exampleInputPassword1'>Lösenord</label>
             <input
               required
               pattern='.{6,}'
@@ -110,7 +110,7 @@ export default function Register() {
           </div>
 
           <div className='block text-grey-darker text-sm font-bold mb-2'>
-            <label htmlFor='exampleInputPassword2'>Confirm password</label>
+            <label htmlFor='exampleInputPassword2'>Bekräfta lösenord</label>
             <input
               required
               pattern='.{6,}'
@@ -129,19 +129,19 @@ export default function Register() {
               type='submit'
               className='bg-red-300 hover:bg-red-400 text-white font-bold py-2 px-4 rounded'
             >
-              Register
+              Registrera
             </button>
           </div>
 
           <p>
-            Already have an account?
+            Har ni redan ett konto?
             {/* <NavBtn>
               <Button primary='true' round='true' href='/trips'>
                 Register
               </Button>
             </NavBtn> */}
             <Link href='/signin'>
-              <a style={{ color: '#F26A2E' }}> Sign in!</a>
+              <a style={{ color: '#F26A2E' }}> Logga in!</a>
             </Link>
           </p>
         </form>
