@@ -14,12 +14,37 @@ const Filter = ({ state }) => {
 
   const { categories } = state
 
+  const Sort = [
+    /* <option value='random'>Slumpmässigt</option> */
+    /* <option value='-rating'>Bäst betyg</option> */
+    { value: '-createdAt', label: 'Senaste' },
+    { value: 'createdAt', label: 'Tidigaste' },
+    { value: 'title', label: 'A-Ö' },
+    { value: '-title', label: 'Ö-A' },
+  ]
+
+  /* const Categories = {categories.map((item) => {
+    return{
+      value: item._id,
+      label: item._id
+    }
+  })}
+  
+  [
+    { value: 'all', label: 'Alla kategorier' },
+          {categories.map((item) => (
+            <option key={item._id} value={item._id}>
+              {item.name}
+            </option>
+          ))}
+  ] */
+
   const router = useRouter()
 
-  const handleCategory = (e) => {
+  /* const handleCategory = (e) => {
     setCategory(e.target.value)
     filterSearch({ router, category: e.target.value })
-  }
+  } */
 
   /* const handleCounty = (e) => {
     setCounty(e)
@@ -27,11 +52,34 @@ const Filter = ({ state }) => {
     console.log(county)
   } */
 
-  const handleSort = (e) => {
+  /* const handleSort = (e) => {
     setSort(e.target.value)
     console.log(e.target.value)
     filterSearch({ router, sort: e.target.value })
-  }
+  } */
+
+  useEffect(() => {
+    console.log(sort)
+    filterSearch({
+      router,
+      sort: sort.value,
+    })
+  }, [sort])
+
+  useEffect(() => {
+    console.log(category)
+    if (category === null) {
+      filterSearch({
+        router,
+        category: 'all',
+      })
+    } else {
+      filterSearch({
+        router,
+        category: category.value,
+      })
+    }
+  }, [category])
 
   useEffect(() => {
     if (county === null) {
@@ -63,8 +111,24 @@ const Filter = ({ state }) => {
   return (
     <div className='input-group'>
       <div className='input-group-prepend col-md-2 px-0 mt-2'>
-        <select
-          className='custom-select text-capitalize'
+        <Select
+          placeholder='Alla kategorier'
+          value={category}
+          name='category'
+          id='category'
+          onChange={setCategory}
+          closeMenuOnSelect={true}
+          isClearable={true}
+
+          options={categories.map((item) => {
+            return{
+              label: item.name,
+              value: item._id
+            }
+          })}
+        />
+        {/* <select
+          className='custom-select text-capitalize shadow border rounded w-full py-2 pl-1 pr-4 text-grey-darker'
           value={category}
           onChange={handleCategory}
         >
@@ -75,12 +139,13 @@ const Filter = ({ state }) => {
               {item.name}
             </option>
           ))}
-        </select>
+        </select> */}
       </div>
 
-      <div className=''>
+      <div className='input-group-prepend col-md-2 px-0 mt-2'>
         <Select
-          placeholder='Markera det län som är aktuellt för er...'
+          /* placeholder='Markera det län som är aktuellt för er...' */
+          placeholder='Alla län'
           value={county}
           name='county'
           id='county'
@@ -88,8 +153,6 @@ const Filter = ({ state }) => {
           closeMenuOnSelect={true}
           options={County}
           isClearable={true}
-          /* clearValue={setCounty('all')} */
-          /* BESTÄM VAD SOM HÄNDER NÄR MAN CLICKAR BORT VALDA LÄN, isClearable */
         />
 
         {/* <Select
@@ -110,7 +173,7 @@ const Filter = ({ state }) => {
       <form autoComplete='off' className='mt-2 col-md-8 px-0'>
         <input
           type='text'
-          className='shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker'
+          className='shadow appearance-none border rounded w-full py-2 px-2'
           list='title_product'
           placeholder='Namn på plats eller företag...'
           value={search}
@@ -118,18 +181,27 @@ const Filter = ({ state }) => {
         />
       </form>
       <div className='input-group-prepend col-md-2 px-0 mt-2'>
-        <select
-          className='custom-select text-capitalize'
+      <Select
+          placeholder='Sortera efter'
+          value={sort}
+          onChange={setSort}
+          closeMenuOnSelect={true}
+          options={Sort}
+          isSearchable={false}
+        />
+
+        {/* <select
+          className='custom-select text-capitalize shadow border rounded w-full py-2 pl-1 text-grey-darker'
           value={sort}
           onChange={handleSort}
         >
-          {/* <option value='random'>Slumpmässigt</option> */}
+          <option value='random'>Slumpmässigt</option>
           <option value='-createdAt'>Senaste</option>
           <option value='createdAt'>Tidigaste</option>
-          {/* <option value='-rating'>Bäst betyg</option> */}
+          <option value='-rating'>Bäst betyg</option>
           <option value='title'>A-Ö</option>
           <option value='-title'>Ö-A</option>
-        </select>
+        </select> */}
       </div>
     </div>
   )
