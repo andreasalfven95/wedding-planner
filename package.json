@@ -10,6 +10,7 @@
   "dependencies": {
     "autoprefixer": "^10.2.4",
     "bcrypt": "^5.0.0",
+    "file-loader": "^6.2.0",
     "google-map-react": "^2.1.9",
     "html-react-parser": "^1.2.6",
     "js-cookie": "^2.2.1",
@@ -27,7 +28,8 @@
     "styled-components": "^5.2.1",
     "suneditor": "^2.39.0",
     "suneditor-react": "^3.1.1",
-    "tailwindcss": "^2.0.3"
+    "tailwindcss": "^2.0.3",
+    "url-loader": "^4.1.1"
   },
   "devDependencies": {
     "babel-plugin-styled-components": "^1.12.0"

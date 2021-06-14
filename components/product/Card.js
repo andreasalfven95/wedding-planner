@@ -105,12 +105,17 @@ const Card = ({ product }) => {
           <h2 className='text-3xl capitalize'>{product.title}</h2>
         </header>
         <div className='flex-col'>
-          <img
-            src={product.images[0].url}
-            alt={product.images[0].url}
-            layout='fill'
-            className='block max-h-80 md:max-w-sm mx-auto md:m-0'
-          />
+          <div className='imageContainer'>
+            <img
+              src={product.images[0].url}
+              alt={product.images[0].url}
+              layout='fill'
+              /* className='image' */
+              /* layout='fill'
+              objectFit='cover' */
+              className='block max-h-80 md:max-w-sm mx-auto md:m-0'
+            />
+          </div>
           <div className='information py-2 border-b border-black mb-2'>
             <h3 className='text-lg pb-1'>{product.description}</h3>
             <p className='text-sm leading-6'>{product.content}</p>
