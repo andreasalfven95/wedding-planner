@@ -17,6 +17,8 @@ const Filter = ({ state }) => {
 
   const { categories } = state
 
+  const [img, setImg] = useState("cat_all.jpg")
+
   const Sort = [
     /* <option value='random'>Slumpmässigt</option> */
     /* <option value='-rating'>Bäst betyg</option> */
@@ -62,7 +64,6 @@ const Filter = ({ state }) => {
   } */
 
   useEffect(() => {
-    console.log(sort)
     filterSearch({
       router,
       sort: sort.value,
@@ -70,8 +71,8 @@ const Filter = ({ state }) => {
   }, [sort])
 
   useEffect(() => {
-    console.log(category)
     if (category === null) {
+      setImg("cat_all.jpg")
       filterSearch({
         router,
         category: 'all',
@@ -81,8 +82,29 @@ const Filter = ({ state }) => {
         router,
         category: category.value,
       })
+      //Festlokal
+      if (category.value==="6097c79b9a472e0a50e1550b") {
+        setImg("cat_venue.jpg")
+      }
+      //Brudsalong
+      if (category.value==="60aa71fb00912e43a869cf61") {
+        setImg("cat_salong.jpg")
+      }
+      //Bröllopsplanerare
+      if (category.value==="60aa720800912e43a869cf62") {
+        setImg("cat_planner.jpg")
+      }
+      //Florist
+      if (category.value==="60aa721400912e43a869cf63") {
+        setImg("cat_flowers.jpg")
+      }
+      //Fotograf
+      if (category.value==="60aa721a00912e43a869cf64") {
+        setImg("cat_photo.jpg")
+      }
     }
   }, [category])
+  
 
   useEffect(() => {
     if (county === null) {
@@ -113,7 +135,7 @@ const Filter = ({ state }) => {
 
   return (
     <div className=''>
-      <div className='p-16'>
+      <div className=''>
         <div /* className='w-full h-full max-w-full max-h-full absolute z-0' */>
           {/* <NextImage
             layout='fill'
@@ -121,14 +143,16 @@ const Filter = ({ state }) => {
             src={backgroundImage}
             alt={title}
           /> */}
-          <img
+          {/* <img
             src='/img/wedding.jpg'
             alt='logo'
             className='pointer-events-none'
-          />
+          /> */}
         </div>
       </div>
-      <div className='input-group p-16 bg-opacity-50 bg-white z-10'>
+      <div className='input-group p-16 bg-opacity-50 bg-white z-10'
+       style={{backgroundImage: `url(${'/img/' + img})` , backgroundRepeat: "no-repeat", backgroundSize: "cover", backgroundPosition: "center"}}
+       >
         <div className='input-group-prepend col-md-2 px-0 mt-2'>
           <Select
             placeholder='Alla kategorier'
