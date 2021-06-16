@@ -114,7 +114,7 @@ const Filter = ({ state }) => {
   return (
     <div className=''>
       <div className='p-16'>
-        <div className='w-full h-full max-w-full max-h-full absolute z-0'>
+        <div /* className='w-full h-full max-w-full max-h-full absolute z-0' */>
           {/* <NextImage
             layout='fill'
             className='object-center object-cover pointer-events-none'

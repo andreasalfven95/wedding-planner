@@ -108,10 +108,17 @@ const Navbar = ({ toggle }) => {
   return (
     <nav className='bg-transparent h-20 flex flex-row z-30 relative justify-between'>
       <div className='flex flex-row justify-start'>
-        <Link href='/' passHref>
-          <a className='text-black flex items-center no-underline h-full cursor-pointer transition duration-200 ease-in-out text-2xl sm:text-3xl'>
+        <Link href='/' passHref className="flex items-center">
+          <img src="/img/sqLogo.svg" className='h-full py-3 cursor-pointer block sm:hidden'/>
+          {/* <a className='text-black flex items-center no-underline h-full cursor-pointer transition duration-200 ease-in-out text-2xl sm:text-3xl'>
             Wed2Be
-          </a>
+          </a> */}
+        </Link>
+        <Link href='/' passHref className="flex items-center">
+          <img src="/img/logo.svg" className='h-full py-3 cursor-pointer hidden sm:block'/>
+          {/* <a className='text-black flex items-center no-underline h-full cursor-pointer transition duration-200 ease-in-out text-2xl sm:text-3xl'>
+            Wed2Be
+          </a> */}
         </Link>
         <div className='hidden md:flex flex-row items-center'>
           {menuData.map((item, index) => (
