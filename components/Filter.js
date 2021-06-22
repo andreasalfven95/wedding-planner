@@ -64,10 +64,22 @@ const Filter = ({ state }) => {
   } */
 
   useEffect(() => {
-    filterSearch({
+    /* filterSearch({
       router,
       sort: sort.value,
-    })
+    }) */
+
+    if (sort === null) {
+      filterSearch({
+        router,
+        sort: 'random',
+      })
+    } else {
+      filterSearch({
+        router,
+        sort: sort.value,
+      })
+    }
   }, [sort])
 
   useEffect(() => {
@@ -226,10 +238,13 @@ const Filter = ({ state }) => {
           <Select
             placeholder='Sortera efter'
             value={sort}
+            name="sort"
+            id="sort"
             onChange={setSort}
             closeMenuOnSelect={true}
             options={Sort}
             isSearchable={false}
+            isClearable={true}
           />
 
           {/* <select
