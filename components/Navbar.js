@@ -106,7 +106,7 @@ const Navbar = ({ toggle }) => {
   }
 
   return (
-    <nav className='bg-transparent h-20 flex flex-row z-30 relative justify-between'>
+    <nav className='contain bg-transparent h-20 flex flex-row z-30 relative justify-between'>
       <div className='flex flex-row justify-start'>
         <Link href='/' passHref className="flex items-center">
           <img src="/img/sqLogo.svg" className='h-full py-3 cursor-pointer block sm:hidden'/>

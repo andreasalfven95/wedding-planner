@@ -48,7 +48,7 @@ export default function Home(props) {
 
       <Filter state={state} />
 
-      <div className='container mx-auto'>
+      <div className='contain'>
         <div className='flex flex-wrap -mx-1 lg:-mx-4'>
           {auth.user !== undefined && auth.user.role === 'admin' ? (
             products.length === 0 ? (

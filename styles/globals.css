@@ -4,10 +4,10 @@ body {
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 
-body {
+/* body {
   padding-left: max(calc((100vw - 1300px) / 2), 1rem);
   padding-right: max(calc((100vw - 1300px) / 2), 1rem);
-}
+} */
 
 a {
   color: inherit;
@@ -50,6 +50,14 @@ img {
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer utilities {
+  .contain {
+    padding-left: max(calc((100vw - 1300px) / 2), 1rem);
+    padding-right: max(calc((100vw - 1300px) / 2), 1rem);
+    margin: auto;
+  }
+}
 
 .about p {
   display: block;

@@ -706,7 +706,7 @@ const Profile = () => {
                             'location-search-input shadow appearance-none border border-red rounded w-full py-2 px-3 text-grey-darker',
                         })}
                       />
-                      <div className='autocomplete-dropdown-container shadow border rounded text-grey-darker'>
+                      <div className='autocomplete-dropdown-contain shadow border rounded text-grey-darker'>
                         {loading && <div>Loading...</div>}
                         {suggestions.map((suggestion) => {
                           const className = suggestion.active

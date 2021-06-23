@@ -23,7 +23,7 @@ export default function Cart() {
         <title>WedPlan | Favoriter</title>
       </Head>
 
-      <div className='container mx-auto'>
+      <div className='contain'>
         <h2 className='uppercase text-xl text-center'>Sparade:</h2>
 
         {cart.map((item) => (

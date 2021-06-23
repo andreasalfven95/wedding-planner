@@ -146,24 +146,11 @@ const Filter = ({ state }) => {
   }, [search])
 
   return (
-    <div className=''>
-      <div className=''>
-        <div /* className='w-full h-full max-w-full max-h-full absolute z-0' */>
-          {/* <NextImage
-            layout='fill'
-            className='object-center object-cover pointer-events-none'
-            src={backgroundImage}
-            alt={title}
-          /> */}
-          {/* <img
-            src='/img/wedding.jpg'
-            alt='logo'
-            className='pointer-events-none'
-          /> */}
-        </div>
-      </div>
-      <div className='input-group p-16 bg-opacity-50 bg-white z-10'
-       style={{backgroundImage: `url(${'/img/' + img})` , backgroundRepeat: "no-repeat", backgroundSize: "cover", backgroundPosition: "center"}}
+    <div className='border-none'
+    style={{backgroundImage: `url(${'/img/' + img})` , backgroundRepeat: "no-repeat", backgroundSize: "cover", backgroundPosition: "center"}}
+    >
+      <div className='input-group p-12 z-10 border-none'
+      style={{backgroundImage: "linear-gradient(rgba(255,255,255,0.7), rgba(255,255,255,0.2), rgba(255,255,255,0.5))"}}
        >
         <div className='input-group-prepend col-md-2 px-0 mt-2'>
           <Select
@@ -229,7 +216,7 @@ const Filter = ({ state }) => {
             type='text'
             className='shadow appearance-none border rounded w-full py-2 px-2'
             list='title_product'
-            placeholder='Namn på plats eller företag...'
+            placeholder='Namn på företag...'
             value={search}
             onChange={(e) => setSearch(e.target.value)}
           />

@@ -99,7 +99,7 @@ const Card = ({ product }) => {
   }
 
   return (
-    <div className='p-2 border-t border-b mt-8 card-container border-black shadow-xl transition-shadow flex-col w-full md:flex-row md:text-left'>
+    <div className='p-2 border-t border-b my-4 card-container border-black shadow-xl transition-shadow flex-col w-full md:flex-row md:text-left'>
       <div className='w-full'>
         <header className=' border-b border-black mb-2 pb-2'>
           <h2 className='text-3xl capitalize'>{product.title}</h2>
