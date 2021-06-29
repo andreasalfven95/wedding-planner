@@ -17,7 +17,7 @@ const Filter = ({ state }) => {
 
   const { categories } = state
 
-  const [img, setImg] = useState("cat_all.jpg")
+  const [img, setImg] = useState('cat_all.jpg')
 
   const Sort = [
     /* <option value='random'>Slumpmässigt</option> */
@@ -84,7 +84,7 @@ const Filter = ({ state }) => {
 
   useEffect(() => {
     if (category === null) {
-      setImg("cat_all.jpg")
+      setImg('cat_all.jpg')
       filterSearch({
         router,
         category: 'all',
@@ -95,28 +95,27 @@ const Filter = ({ state }) => {
         category: category.value,
       })
       //Festlokal
-      if (category.value==="6097c79b9a472e0a50e1550b") {
-        setImg("cat_venue.jpg")
+      if (category.value === '6097c79b9a472e0a50e1550b') {
+        setImg('cat_venue.jpg')
       }
       //Brudsalong
-      if (category.value==="60aa71fb00912e43a869cf61") {
-        setImg("cat_salong.jpg")
+      if (category.value === '60aa71fb00912e43a869cf61') {
+        setImg('cat_salong.jpg')
       }
       //Bröllopsplanerare
-      if (category.value==="60aa720800912e43a869cf62") {
-        setImg("cat_planner.jpg")
+      if (category.value === '60aa720800912e43a869cf62') {
+        setImg('cat_planner.jpg')
       }
       //Florist
-      if (category.value==="60aa721400912e43a869cf63") {
-        setImg("cat_flowers.jpg")
+      if (category.value === '60aa721400912e43a869cf63') {
+        setImg('cat_flowers.jpg')
       }
       //Fotograf
-      if (category.value==="60aa721a00912e43a869cf64") {
-        setImg("cat_photo.jpg")
+      if (category.value === '60aa721a00912e43a869cf64') {
+        setImg('cat_photo.jpg')
       }
     }
   }, [category])
-  
 
   useEffect(() => {
     if (county === null) {
@@ -146,29 +145,40 @@ const Filter = ({ state }) => {
   }, [search])
 
   return (
-    <div className='border-none'
-    style={{backgroundImage: `url(${'/img/' + img})` , backgroundRepeat: "no-repeat", backgroundSize: "cover", backgroundPosition: "center"}}
+    <div
+      className='border-none rounded-b-xl rounded-t-xl'
+      style={{
+        backgroundImage: `url(${'/img/' + img})`,
+        backgroundRepeat: 'no-repeat',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+      }}
     >
-      <div className='input-group p-12 z-10 border-none'
-      style={{backgroundImage: "linear-gradient(rgba(255,255,255,0.7), rgba(255,255,255,0.2), rgba(255,255,255,0.5))"}}
-       >
-        <div className='input-group-prepend col-md-2 px-0 mt-2'>
-          <Select
-            placeholder='Alla kategorier'
-            value={category}
-            name='category'
-            id='category'
-            onChange={setCategory}
-            closeMenuOnSelect={true}
-            isClearable={true}
-            options={categories.map((item) => {
-              return {
-                label: item.name,
-                value: item._id,
-              }
-            })}
-          />
-          {/* <select
+      <div
+        className='input-group p-12 z-10 border-none'
+        style={{
+          backgroundImage:
+            'linear-gradient(rgba(255,255,255,0.7), rgba(255,255,255,0.2), rgba(255,255,255,0.5))',
+        }}
+      >
+        <div className='mx-auto md:max-w-md'>
+          <div className='input-group-prepend col-md-2 px-0 mt-2'>
+            <Select
+              placeholder='Alla kategorier'
+              value={category}
+              name='category'
+              id='category'
+              onChange={setCategory}
+              closeMenuOnSelect={true}
+              isClearable={true}
+              options={categories.map((item) => {
+                return {
+                  label: item.name,
+                  value: item._id,
+                }
+              })}
+            />
+            {/* <select
           className='custom-select text-capitalize shadow border rounded w-full py-2 pl-1 pr-4 text-grey-darker'
           value={category}
           onChange={handleCategory}
@@ -181,22 +191,22 @@ const Filter = ({ state }) => {
             </option>
           ))}
         </select> */}
-        </div>
+          </div>
 
-        <div className='input-group-prepend col-md-2 px-0 mt-2'>
-          <Select
-            /* placeholder='Markera det län som är aktuellt för er...' */
-            placeholder='Alla län'
-            value={county}
-            name='county'
-            id='county'
-            onChange={setCounty}
-            closeMenuOnSelect={true}
-            options={County}
-            isClearable={true}
-          />
+          <div className='input-group-prepend col-md-2 px-0 mt-2'>
+            <Select
+              /* placeholder='Markera det län som är aktuellt för er...' */
+              placeholder='Alla län'
+              value={county}
+              name='county'
+              id='county'
+              onChange={setCounty}
+              closeMenuOnSelect={true}
+              options={County}
+              isClearable={true}
+            />
 
-          {/* <Select
+            {/* <Select
           placeholder='Markera de län som är aktuella för er...'
           value={county.map((item) => {
             return item
@@ -209,32 +219,32 @@ const Filter = ({ state }) => {
           isMulti
           isClearable={true}
         /> */}
-        </div>
+          </div>
 
-        <form autoComplete='off' className='mt-2 col-md-8 px-0'>
-          <input
-            type='text'
-            className='shadow appearance-none border rounded w-full py-2 px-2'
-            list='title_product'
-            placeholder='Namn på företag...'
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-          />
-        </form>
-        <div className='input-group-prepend col-md-2 px-0 mt-2'>
-          <Select
-            placeholder='Sortera efter'
-            value={sort}
-            name="sort"
-            id="sort"
-            onChange={setSort}
-            closeMenuOnSelect={true}
-            options={Sort}
-            isSearchable={false}
-            isClearable={true}
-          />
+          <form autoComplete='off' className='mt-2 col-md-8 px-0'>
+            <input
+              type='text'
+              className='appearance-none border rounded w-full py-2 px-2'
+              list='title_product'
+              placeholder='Namn på företag...'
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+            />
+          </form>
+          <div className='input-group-prepend col-md-2 px-0 mt-2'>
+            <Select
+              placeholder='Sortera efter'
+              value={sort}
+              name='sort'
+              id='sort'
+              onChange={setSort}
+              closeMenuOnSelect={true}
+              options={Sort}
+              isSearchable={false}
+              isClearable={true}
+            />
 
-          {/* <select
+            {/* <select
           className='custom-select text-capitalize shadow border rounded w-full py-2 pl-1 text-grey-darker'
           value={sort}
           onChange={handleSort}
@@ -246,6 +256,7 @@ const Filter = ({ state }) => {
           <option value='title'>A-Ö</option>
           <option value='-title'>Ö-A</option>
         </select> */}
+          </div>
         </div>
       </div>
     </div>

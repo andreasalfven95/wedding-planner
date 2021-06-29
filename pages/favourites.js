@@ -11,20 +11,22 @@ export default function Cart() {
     return (
       <>
         <Head>
-          <title>WedPlan | Favoriter</title>
+          <title>Wed2Be | Favoriter</title>
         </Head>
-        <h2 className='text-5xl text-center my-60'>Inga sparade favoriter.</h2>
+        <h2 className='text-5xl font-light text-center my-60'>
+          Inga sparade favoriter.
+        </h2>
       </>
     )
 
   return (
-    <div className='flex flex-row mx-auto w-full'>
+    <div className='contain bg-beige-lighter'>
       <Head>
-        <title>WedPlan | Favoriter</title>
+        <title>Wed2Be | Favoriter</title>
       </Head>
 
-      <div className='contain'>
-        <h2 className='uppercase text-xl text-center'>Sparade:</h2>
+      <div className=''>
+        <h2 className='uppercase text-xl text-center'>Favoriter:</h2>
 
         {cart.map((item) => (
           <CartItem

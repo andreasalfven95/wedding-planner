@@ -109,7 +109,7 @@ const TextEditor = ({ about, setAbout, updatedAbout, setUpdatedAbout }) => {
             unorderList: 'Unordered list',
           },
         }}
-        setDefaultStyle=' font-size: 1em;'
+        setDefaultStyle='font-size: 1em;'
       />
     </div>
   )

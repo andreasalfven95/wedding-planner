@@ -75,7 +75,7 @@ const Categories = () => {
         <button
           type='submit'
           onClick={createCategory}
-          className='bg-red-300 hover:bg-red-400 text-white font-bold py-2 px-4 rounded ml-1'
+          className='bg-beige-normal hover:bg-beige-dark text-white font-bold py-2 px-4 rounded ml-1'
         >
           {id ? 'Update' : 'Create'}
         </button>

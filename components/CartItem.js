@@ -13,18 +13,26 @@ const CartItem = ({ item, dispatch, cart }) => {
   }
 
   return (
-    <div className='p-2 border-t border-b mt-8 card-container border-black shadow-xl transition-shadow flex-col w-full md:flex-row md:text-left'>
+    <div className='transition bg-white p-3 my-4 card-container rounded-xl border border-beige-light shadow-md hover:shadow-lg flex-col w-full md:flex-row md:text-left'>
+      {/* <div className='bg-white p-2 my-4 card-container 
+    border-t border-b border-black shadow-xl transition-shadow 
+    flex-col w-full md:flex-row md:text-left'> */}
       <div className='w-full'>
         <header className=' border-b border-black mb-2 pb-2'>
           <h2 className='text-3xl capitalize'>{item.title}</h2>
         </header>
         <div className='flex-col'>
-          <img
-            src={item.images[0].url}
-            alt={item.images[0].url}
-            layout='fill'
-            className='block max-h-80 md:max-w-sm mx-auto md:m-0'
-          />
+          <div className='imageContainer'>
+            <img
+              src={item.images[0].url}
+              alt={item.images[0].url}
+              layout='fill'
+              /* className='image' */
+              /* layout='fill'
+              objectFit='cover' */
+              className='block max-h-80 md:max-w-sm mx-auto md:m-0'
+            />
+          </div>
           <div className='information py-2 border-b border-black mb-2'>
             <h3 className='text-lg pb-1'>{item.description}</h3>
             <p className='text-sm leading-6'>{item.content}</p>
@@ -60,8 +68,23 @@ const CartItem = ({ item, dispatch, cart }) => {
             <div className='flex items-center mb-1'>
               <ImLocation className='inline-block mr-2 self-start mt-1' />
               <div className='inline-block'>
-                <p>Fyrislundsgatan 26</p>
-                <p>754 46 Uppsala</p>
+                <p>{item.address}</p>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div className='flex items-center mb-1'>
+              <ImLocation className='inline-block mr-2 self-start mt-1' />
+              <div className='inline-block'>
+                {item.county.length >= 21 ? (
+                  <p className='mr-2'>Hela Sverige</p>
+                ) : (
+                  item.county.map((item) => (
+                    <p key={item.value} className='mr-2'>
+                      {item.label}
+                    </p>
+                  ))
+                )}
               </div>
             </div>
           </li>
@@ -69,7 +92,7 @@ const CartItem = ({ item, dispatch, cart }) => {
       </div>
       <div className='mt-2'>
         <div className='flex justify-end'>
-          <Link href={`/product/${item._id}`} passHref>
+          <Link href={`/item/${item._id}`} passHref>
             <Button primary='true' className='mr-2'>
               Läs mer...
             </Button>

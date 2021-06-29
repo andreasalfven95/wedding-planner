@@ -264,7 +264,7 @@ const ProductsManager = () => {
         <title>Products Manager</title>
       </Head>
 
-      <div className='mt-8'>
+      <div className='py-3 contain bg-beige-lighter'>
         <form onSubmit={handleSubmit}>
           <div className=''>
             <label
@@ -405,7 +405,7 @@ const ProductsManager = () => {
               All information* (inga bilder)
             </label>
 
-            <div>
+            <div className='w-11/12 md:w-full'>
               <TextEditor
                 about={about}
                 setAbout={setAbout}
@@ -550,7 +550,7 @@ const ProductsManager = () => {
               {images.map((img, index) => (
                 <div
                   key={index}
-                  className='img-file h-56 w-1/5 hover:opacity-75'
+                  className='img-file h-28 w-1/5 hover:opacity-75'
                 >
                   <div className='w-full h-full p-1 relative'>
                     <img
@@ -616,7 +616,7 @@ const ProductsManager = () => {
 
           <button
             type='submit'
-            className='bg-red-300 hover:bg-red-400 text-white font-bold py-2 px-4 rounded'
+            className='bg-beige-normal hover:bg-beige-dark text-white font-bold py-2 px-4 rounded'
           >
             {onEdit ? 'Uppdatera' : 'Skapa'}
           </button>

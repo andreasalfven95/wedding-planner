@@ -2,37 +2,26 @@ module.exports = {
   purge: ['./pages/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,jsx,tsx}'],
   darkMode: false, // or 'media' or 'class'
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        transparent: 'transparent',
+        current: 'currentColor',
+        beige: {
+          lighter: 'rgba(244,242,239,0.4)',
+          /* lighter: '#E8E6E3', */
+          /* lighter: '#F1EFE9', */
+          /* lighter: '#ede9e6', */
+          /* lighter: '#FFF9F2', */
+          light: '#e5e0da',
+          normal: '#CCC2B5',
+          dark: '#9B9287',
+          darker: '#6D6356',
+        },
+      },
+    },
   },
   variants: {
     extend: {},
   },
   plugins: [],
-  /* theme: {
-    colors: {
-      gray: colors.coolGray,
-      blue: colors.lightBlue,
-      red: colors.rose,
-      pink: colors.fuchsia,
-    },
-    fontFamily: {
-      sans: ['Graphik', 'sans-serif'],
-      serif: ['Merriweather', 'serif'],
-    },
-    extend: {
-      spacing: {
-        '128': '32rem',
-        '144': '36rem',
-      },
-      borderRadius: {
-        '4xl': '2rem',
-      }
-    }
-  },
-  variants: {
-    extend: {
-      borderColor: ['focus-visible'],
-      opacity: ['disabled'],
-    }
-  } */
 }

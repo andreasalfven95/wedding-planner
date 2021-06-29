@@ -10,7 +10,7 @@ function Sidebar({ isOpen, toggle }) {
       onClick={toggle}
       className={
         isOpen
-          ? 'md:hidden grid grid-rows-3 text-center items-center border-b border-t mb-4'
+          ? 'md:hidden grid grid-rows-3 text-center items-center border-b border-t border-beige-light bg-beige-lighter'
           : 'hidden'
       }
     >

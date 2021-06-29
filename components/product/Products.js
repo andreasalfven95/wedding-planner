@@ -4,7 +4,7 @@ import Card from './Card'
 
 function Products({ products, heading }) {
   return (
-    <div className='contain mx-auto'>
+    <div className='contain'>
       <div className='text-center mb-8 text-5xl text-black'>{heading}</div>
       <div className='flex flex-wrap -mx-1 lg:-mx-4'>
         {products.length === 0 ? (

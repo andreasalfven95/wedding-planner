@@ -106,20 +106,22 @@ const Navbar = ({ toggle }) => {
   }
 
   return (
-    <nav className='contain bg-transparent h-20 flex flex-row z-30 relative justify-between'>
+    <nav className='contain h-20 flex flex-row z-30 relative justify-between bg-beige-lighter'>
       <div className='flex flex-row justify-start'>
-        <Link href='/' passHref className="flex items-center">
-          <img src="/img/sqLogo.svg" className='h-full py-3 cursor-pointer block sm:hidden'/>
-          {/* <a className='text-black flex items-center no-underline h-full cursor-pointer transition duration-200 ease-in-out text-2xl sm:text-3xl'>
-            Wed2Be
-          </a> */}
-        </Link>
-        <Link href='/' passHref className="flex items-center">
-          <img src="/img/logo.svg" className='h-full py-3 cursor-pointer hidden sm:block'/>
-          {/* <a className='text-black flex items-center no-underline h-full cursor-pointer transition duration-200 ease-in-out text-2xl sm:text-3xl'>
-            Wed2Be
-          </a> */}
-        </Link>
+        {/* <Link href='/' passHref className='flex items-center'>
+          <img
+            src='/img/sqLogo.svg'
+            className='h-full py-3 cursor-pointer block sm:hidden'
+          />
+        </Link> */}
+        <div className='w-full h-full flex items-center py-3 pr-4'>
+          <Link href='/' passHref className='flex items-center'>
+            <img
+              src='/img/logo.svg'
+              className='w-full max-h-full cursor-pointer'
+            />
+          </Link>
+        </div>
         <div className='hidden md:flex flex-row items-center'>
           {menuData.map((item, index) => (
             <Link href={item.link} passHref key={index}>
@@ -134,7 +136,11 @@ const Navbar = ({ toggle }) => {
         {Object.keys(auth).length === 0 ? (
           <div className='flex items-center'>
             <Link href='/signin' passHref>
-              {/* <Button className='mr-4'>Sign In</Button> */}
+              <Button primary='true' round='true' className='px-3 md:px-4'>
+                <div className='block font-bold'>Företag?</div>
+              </Button>
+            </Link>
+            {/* <Link href='/signin' passHref>
               <Button primary='true' className='mr-4 px-3 md:px-4'>
                 <div className='hidden md:block md:mr-3'>Logga in</div>
                 <VscSignIn className=''></VscSignIn>
@@ -145,7 +151,7 @@ const Navbar = ({ toggle }) => {
               <Button primary='true' className=''>
                 Registrera
               </Button>
-            </Link>
+            </Link> */}
           </div>
         ) : (
           loggedRouter()

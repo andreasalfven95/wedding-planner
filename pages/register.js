@@ -1,13 +1,10 @@
 import Head from 'next/head'
 import React, { useState, useContext, useEffect } from 'react'
-import styled from 'styled-components'
 import Link from 'next/link'
 import valid from '../utils/valid'
 import { DataContext } from '../store/GlobalState'
 import { postData } from '../utils/fetchData'
 import { useRouter } from 'next/router'
-
-/* import { Button } from '../components/Button' */
 
 export default function Register() {
   const initialState = { name: '', email: '', password: '', cf_password: '' }
@@ -50,14 +47,14 @@ export default function Register() {
   }, [auth])
 
   return (
-    <>
+    <div className='contain bg-beige-lighter h-screen'>
       <Head>
         <title>Register</title>
       </Head>
-      <RegisterContainer>
+      <div className='pt-36'>
         <form
           method='POST'
-          className='mx-auto my-4'
+          className='mx-auto'
           style={{ maxWidth: '500px' }}
           onSubmit={handleSubmit}
         >
@@ -75,7 +72,7 @@ export default function Register() {
           </div>
 
           <div className='block text-grey-darker text-sm font-bold mb-2'>
-            <label htmlFor='exampleInputEmail1'>Email-adress</label>
+            <label htmlFor='exampleInputEmail1'>E-postadress</label>
             <input
               required
               type='email'
@@ -89,7 +86,7 @@ export default function Register() {
               onChange={handleChangeInput}
             />
             <small id='emailHelp' className='form-text text-muted'>
-              Vi kommer aldirg att lämna ut er email utan tillåtelse.
+              Vi kommer aldrig att lämna ut er e-postadress utan tillåtelse.
             </small>
           </div>
 
@@ -124,42 +121,25 @@ export default function Register() {
               onChange={handleChangeInput}
             />
           </div>
-          <div className='flex items-center justify-between mb-3'>
+          <div className='flex items-center justify-between mb-6'>
             <button
               type='submit'
-              className='bg-red-300 hover:bg-red-400 text-white font-bold py-2 px-4 rounded'
+              className='bg-beige-normal hover:bg-beige-dark text-white font-bold py-2 px-4 rounded'
             >
               Registrera
             </button>
           </div>
 
-          <p>
+          <p className='font-bold'>
             Har ni redan ett konto?
-            {/* <NavBtn>
-              <Button primary='true' round='true' href='/trips'>
-                Register
-              </Button>
-            </NavBtn> */}
             <Link href='/signin'>
-              <a style={{ color: '#F26A2E' }}> Logga in!</a>
+              <a className='ml-1 text-white bg-beige-normal p-2 px-3 rounded-xl font-bold'>
+                Logga in här!
+              </a>
             </Link>
           </p>
         </form>
-      </RegisterContainer>
-    </>
+      </div>
+    </div>
   )
 }
-
-const RegisterContainer = styled.div`
-  width: 100%;
-  background: #fcfcfc;
-  color: #000;
-  padding: 5rem calc((100vw - 1300px) / 2);
-  padding-left: 1rem;
-  padding-right: 1rem;
-`
-
-/* const NavBtn = styled.div`
-  display: flex;
-  align-items: center;
-` */

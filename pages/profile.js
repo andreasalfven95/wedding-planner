@@ -402,7 +402,7 @@ const Profile = () => {
         <title>Profile</title>
       </Head>
 
-      <section className='my-3'>
+      <section className='py-3 contain bg-beige-lighter'>
         <div className=''>
           <h3 className='text-center uppercase font-medium underline'>
             {auth.user.role === 'user' ? 'User Profile' : 'Admin Profile'}
@@ -480,7 +480,7 @@ const Profile = () => {
 
           <button
             /* type='submit' */
-            className='bg-red-300 hover:bg-red-400 text-white font-bold py-2 px-4 rounded'
+            className='bg-beige-normal hover:bg-beige-dark text-white font-bold py-2 px-4 rounded'
             disabled={notify.loading}
             onClick={handleUpdateProfile}
           >
@@ -634,7 +634,7 @@ const Profile = () => {
                   All information* (inga bilder)
                 </label>
 
-                <div>
+                <div className='w-11/12 md:w-full'>
                   <TextEditor
                     about={about}
                     setAbout={setAbout}
@@ -780,7 +780,7 @@ const Profile = () => {
                   {images.map((img, index) => (
                     <div
                       key={index}
-                      className='img-file h-56 w-1/5 hover:opacity-75'
+                      className='img-file h-28 w-1/5 hover:opacity-75'
                     >
                       <div className='w-full h-full p-1 relative'>
                         <img
@@ -846,7 +846,7 @@ const Profile = () => {
 
               <button
                 type='submit'
-                className='bg-red-300 hover:bg-red-400 text-white font-bold py-2 px-4 rounded'
+                className='bg-beige-normal hover:bg-beige-dark text-white font-bold py-2 px-4 rounded'
               >
                 {onEdit ? 'Uppdatera' : 'Skapa'}
               </button>
