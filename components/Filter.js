@@ -158,7 +158,7 @@ const Filter = ({ state }) => {
         className='input-group p-12 z-10 border-none'
         style={{
           backgroundImage:
-            'linear-gradient(rgba(255,255,255,0.7), rgba(255,255,255,0.2), rgba(255,255,255,0.5))',
+            'linear-gradient(rgba(244,242,239,0.7), rgba(255,255,255,0.3), rgba(244,242,239,0.5))',
         }}
       >
         <div className='mx-auto md:max-w-md'>

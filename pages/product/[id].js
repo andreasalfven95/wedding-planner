@@ -1,12 +1,12 @@
 import Head from 'next/head'
 import React from 'react'
-import { ImLocation } from 'react-icons/im'
 import { useState, useContext, useEffect, useRef } from 'react'
 import { getData } from '../../utils/fetchData'
 import { Button } from '../../components/Button'
 import Link from 'next/link'
 import { DataContext } from '../../store/GlobalState'
 import { addToCart, deleteItem } from '../../store/Actions'
+
 import {
   AiOutlineMail,
   AiOutlinePhone,
@@ -14,6 +14,7 @@ import {
   AiOutlineInstagram,
   AiFillFacebook,
 } from 'react-icons/ai'
+import { ImLocation } from 'react-icons/im'
 import { HiHeart, HiOutlineHeart } from 'react-icons/hi'
 import { BsPersonFill } from 'react-icons/bs'
 import { FaGlobeAmericas, FaMapMarkedAlt } from 'react-icons/fa'
@@ -78,7 +79,7 @@ const DetailProduct = (props) => {
   parse('<h1>single</h1>')
 
   return (
-    <div className='detail-page pb-4'>
+    <div className='detail-page contain bg-beige-lighter pb-4'>
       <Head>
         <title>{product.title}</title>
       </Head>
@@ -123,7 +124,9 @@ const DetailProduct = (props) => {
             {product.email && (
               <li>
                 <div className='flex items-center mb-1'>
-                  <AiOutlineMail className='text-gray-400 inline-block mr-2 self-start mt-1 min-w-max'></AiOutlineMail>
+                <div className="w-min self-start text-beige-normal inline-block mr-4 mt-1">
+                  <AiOutlineMail></AiOutlineMail>
+                </div>
                   <a
                     className='hover:underline'
                     href={`mailto:${product.email}`}
@@ -137,7 +140,9 @@ const DetailProduct = (props) => {
             {product.phone && (
               <li>
                 <div className='flex items-center mb-1'>
-                  <AiOutlinePhone className='text-gray-400 inline-block mr-2 self-start mt-1 min-w-max'></AiOutlinePhone>
+                <div className="w-min self-start text-beige-normal inline-block mr-4 mt-1">
+                  <AiOutlinePhone></AiOutlinePhone>
+                </div>
                   <a className='hover:underline' href={`tel:${product.phone}`}>
                     {product.phone}
                   </a>
@@ -148,7 +153,9 @@ const DetailProduct = (props) => {
             {product.address && (
               <li>
                 <div className='flex items-center mb-1'>
-                  <FaMapMarkedAlt className='text-gray-400 inline-block mr-2 self-start mt-1 min-w-max' />
+                <div className="w-min self-start text-beige-normal inline-block mr-4 mt-1">
+                  <FaMapMarkedAlt/>
+                </div>
                   <div className='inline-block'>
                     <a
                       className='hover:underline'
@@ -165,7 +172,9 @@ const DetailProduct = (props) => {
             {product.guests && (
               <li>
                 <div className='flex items-center mb-1'>
-                  <BsPersonFill className='min-w-min text-gray-400 inline-block mr-2 self-start mt-1'></BsPersonFill>
+                <div className="w-min self-start text-beige-normal inline-block mr-4 mt-1">
+                  <BsPersonFill></BsPersonFill>
+                </div>
                   <div className='inline-block'>
                     <p>Max {product.guests} gäster</p>
                   </div>
@@ -176,7 +185,9 @@ const DetailProduct = (props) => {
             {product.rating === 0 && (
               <li>
                 <div className='flex items-center mb-1'>
-                  <AiFillStar className='min-w-min text-gray-400 inline-block mr-2 self-start mt-1' />
+                <div className="w-min self-start text-beige-normal inline-block mr-4 mt-1">
+                  <AiFillStar/>
+                </div>
                   <div className='inline-block'>
                     <p>{product.rating}</p>
                   </div>
@@ -187,14 +198,16 @@ const DetailProduct = (props) => {
             {product.county && (
               <li>
                 <div className='flex items-center mb-1'>
-                  <ImLocation className='min-w-min text-gray-400 inline-block mr-2 self-start mt-1' />
+                  <div className="w-min self-start text-beige-normal inline-block mr-4 mt-1">
+                    <ImLocation />
+                  </div>
                   <div className='inline-block'>
                     {product.county.length >= 21 ? (
                       <p className='mr-2'>Hela Sverige</p>
                     ) : (
                       product.county.map((item) => (
                         <div key={item.value} className='mr-2 inline-block'>
-                          {item.label},
+                          {item.label}
                         </div>
                       ))
                     )}
@@ -207,7 +220,9 @@ const DetailProduct = (props) => {
             {product.website && (
               <li>
                 <div className='flex items-center mb-1'>
-                  <FaGlobeAmericas className='text-gray-400 inline-block text-sm mr-2 self-start mt-1 min-w-max' />
+                <div className="w-min self-start text-beige-normal inline-block mr-4 mt-1">
+                  <FaGlobeAmericas/>
+                </div>
                   <div className='inline-block'>
                     <a
                       target='blank'
@@ -224,7 +239,9 @@ const DetailProduct = (props) => {
             {product.instagram && (
               <li>
                 <div className='flex items-center mb-1'>
-                  <AiOutlineInstagram className='text-gray-400 inline-block mr-2 self-start mt-1 min-w-max' />
+                <div className="w-min self-start text-beige-normal inline-block mr-4 mt-1">
+                  <AiOutlineInstagram/>
+                </div>
                   <div className='inline-block'>
                     <a
                       target='blank'
@@ -241,7 +258,9 @@ const DetailProduct = (props) => {
             {product.facebook && (
               <li>
                 <div className='flex items-center mb-1'>
-                  <AiFillFacebook className='text-gray-400 inline-block mr-2 self-start mt-1 min-w-max' />
+                <div className="w-min self-start text-beige-normal inline-block mr-4 mt-1">
+                  <AiFillFacebook/>
+                </div>
                   <div className='inline-block'>
                     <a
                       target='blank'

@@ -1,10 +1,20 @@
 import Link from 'next/link'
 import { Button } from '../components/Button'
 import { deleteItem } from '../store/Actions'
-import { ImLocation } from 'react-icons/im'
-import { AiOutlineMail, AiOutlinePhone } from 'react-icons/ai'
-import { VscGlobe } from 'react-icons/vsc'
+
 import { FiTrash } from 'react-icons/fi'
+import { VscGlobe } from 'react-icons/vsc'
+import {
+  AiOutlineMail,
+  AiOutlinePhone,
+  AiFillStar,
+  AiOutlineInstagram,
+  AiFillFacebook,
+} from 'react-icons/ai'
+import { ImLocation } from 'react-icons/im'
+import { HiHeart, HiOutlineHeart } from 'react-icons/hi'
+import { BsPersonFill } from 'react-icons/bs'
+import { FaGlobeAmericas, FaMapMarkedAlt } from 'react-icons/fa'
 
 /* MAKE ALL ITEM SMALLER, LIKE A LIST OF ITEMS? */
 const CartItem = ({ item, dispatch, cart }) => {
@@ -39,55 +49,122 @@ const CartItem = ({ item, dispatch, cart }) => {
           </div>
         </div>
       </div>
-      <div className='company-info justify-end break-words'>
+      <div className='company-info justify-end break-all text-base'>
         <ul className=''>
-          <li>
-            <div className='flex items-center mb-1'>
-              <AiOutlineMail className='inline-block mr-2'> </AiOutlineMail>
-              test@gmail.com
-            </div>
-          </li>
-          <li>
-            <div className='flex items-center mb-1'>
-              <AiOutlinePhone className='inline-block mr-2'> </AiOutlinePhone>
-              0761857993
-            </div>
-          </li>
-          <li>
-            <div className='flex items-center mb-1'>
-              <VscGlobe className='inline-block mr-2'></VscGlobe>
-              <a
-                href='https://andreasalfven95.github.io/portfolio/'
-                className='hover:underline'
-              >
-                https://andreasalfven95.github.io/portfolio/
-              </a>
-            </div>
-          </li>
-          <li>
-            <div className='flex items-center mb-1'>
-              <ImLocation className='inline-block mr-2 self-start mt-1' />
-              <div className='inline-block'>
-                <p>{item.address}</p>
-              </div>
-            </div>
-          </li>
-          <li>
-            <div className='flex items-center mb-1'>
-              <ImLocation className='inline-block mr-2 self-start mt-1' />
-              <div className='inline-block'>
-                {item.county.length >= 21 ? (
-                  <p className='mr-2'>Hela Sverige</p>
-                ) : (
-                  item.county.map((item) => (
-                    <p key={item.value} className='mr-2'>
-                      {item.label}
-                    </p>
-                  ))
-                )}
-              </div>
-            </div>
-          </li>
+          <div className='information mb-4 pb-2 border-b'>
+          {item.email && (
+              <li>
+                <div className='flex items-center mb-1'>
+                <div className="w-min self-start text-beige-normal inline-block mr-4 mt-1">
+                  <AiOutlineMail></AiOutlineMail>
+                </div>
+                  <a
+                    className='hover:underline'
+                    href={`mailto:${item.email}`}
+                  >
+                    {item.email}
+                  </a>
+                </div>
+              </li>
+            )}
+
+            {item.phone && (
+              <li>
+                <div className='flex items-center mb-1'>
+                <div className="w-min self-start text-beige-normal inline-block mr-4 mt-1">
+                  <AiOutlinePhone></AiOutlinePhone>
+                </div>
+                  <a className='hover:underline' href={`tel:${item.phone}`}>
+                    {item.phone}
+                  </a>
+                </div>
+              </li>
+            )}
+
+            {/* {item.address && (
+              <li>
+                <div className='flex items-center mb-1'>
+                  <FaMapMarkedAlt className='text-beige-normal inline-block mr-4 self-start mt-1' />
+                  <div className='inline-block'>
+                    <a
+                      className='hover:underline'
+                      target='blank'
+                      href={`http://maps.google.com/?q=${item.address}`}
+                    >
+                      {item.address}
+                    </a>
+                  </div>
+                </div>
+              </li>
+            )} */}
+
+{item.guests && (
+              <li>
+                <div className='flex items-center mb-1'>
+                <div className="w-min self-start text-beige-normal inline-block mr-4 mt-1">
+                  <BsPersonFill></BsPersonFill>
+                </div>
+                  <div className='inline-block'>
+                    <p>Max {item.guests} gäster</p>
+                  </div>
+                </div>
+              </li>
+            )}
+
+{item.rating === 0 && (
+              <li>
+                <div className='flex items-center mb-1'>
+                <div className="w-min self-start text-beige-normal inline-block mr-4 mt-1">
+                  <AiFillStar/>
+                </div>
+                  <div className='inline-block'>
+                    <p>{item.rating}</p>
+                  </div>
+                </div>
+              </li>
+            )}
+
+            
+{item.website && (
+              <li>
+                <div className='flex items-center mb-1'>
+                <div className="w-min self-start text-beige-normal inline-block mr-4 mt-1">
+                  <FaGlobeAmericas/>
+                </div>
+                  <div className='inline-block'>
+                    <a
+                      target='blank'
+                      href={item.website}
+                      className='hover:underline'
+                    >
+                      {item.website}
+                    </a>
+                  </div>
+                </div>
+              </li>
+            )}
+              {item.county && (
+              <li>
+                <div className='flex items-center mb-1'>
+                  <div className="w-min self-start text-beige-normal inline-block mr-4 mt-1">
+                    <ImLocation />
+                  </div>
+                  <div className='inline-block'>
+                    {item.county.length >= 21 ? (
+                      <p className='mr-2'>Hela Sverige</p>
+                    ) : (
+                      item.county.map((item) => (
+                        <div key={item.value} className='mr-2 inline-block'>
+                          {item.label}
+                        </div>
+                      ))
+                    )}
+                  </div>
+                </div>
+              </li>
+            )}
+          </div>
+          
         </ul>
       </div>
       <div className='mt-2'>

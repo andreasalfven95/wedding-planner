@@ -1,15 +1,24 @@
 import Image from 'next/image'
-import { ImLocation } from 'react-icons/im'
 import { Button } from '../Button'
 import Link from 'next/link'
 import React from 'react'
 import { useContext } from 'react'
 import { DataContext } from '../../store/GlobalState'
 import { addToCart, deleteItem } from '../../store/Actions'
-import { AiOutlineMail, AiOutlinePhone } from 'react-icons/ai'
-import { VscGlobe } from 'react-icons/vsc'
-import { HiHeart, HiOutlineHeart } from 'react-icons/hi'
 import { useState } from 'react'
+
+import { VscGlobe } from 'react-icons/vsc'
+import {
+  AiOutlineMail,
+  AiOutlinePhone,
+  AiFillStar,
+  AiOutlineInstagram,
+  AiFillFacebook,
+} from 'react-icons/ai'
+import { ImLocation } from 'react-icons/im'
+import { HiHeart, HiOutlineHeart } from 'react-icons/hi'
+import { BsPersonFill } from 'react-icons/bs'
+import { FaGlobeAmericas, FaMapMarkedAlt } from 'react-icons/fa'
 
 const Card = ({ product }) => {
   const { state, dispatch } = useContext(DataContext)
@@ -99,7 +108,7 @@ const Card = ({ product }) => {
   }
 
   return (
-    <div className='transition bg-white p-3 my-4 card-container rounded-xl border border-beige-light shadow-md hover:shadow-lg flex-col w-full md:flex-row md:text-left'>
+    <div className='transition bg-white p-3 mt-4 card-container rounded-xl border border-beige-light shadow-md hover:shadow-lg flex-col w-full md:flex-row md:text-left'>
       {/* <div className='bg-white p-2 my-4 card-container 
     border-t border-b border-black shadow-xl transition-shadow 
     flex-col w-full md:flex-row md:text-left'> */}
@@ -125,57 +134,129 @@ const Card = ({ product }) => {
           </div>
         </div>
       </div>
-      <div className='company-info justify-end break-words'>
+
+
+
+
+      <div className='company-info justify-end break-all text-base'>
         <ul className=''>
-          <li>
-            <div className='flex items-center mb-1'>
-              <AiOutlineMail className='inline-block mr-2'> </AiOutlineMail>
-              test@gmail.com
-            </div>
-          </li>
-          <li>
-            <div className='flex items-center mb-1'>
-              <AiOutlinePhone className='inline-block mr-2'> </AiOutlinePhone>
-              0761857993
-            </div>
-          </li>
-          <li>
-            <div className='flex items-center mb-1'>
-              <VscGlobe className='inline-block mr-2'></VscGlobe>
-              <a
-                href='https://andreasalfven95.github.io/portfolio/'
-                className='hover:underline'
-              >
-                https://andreasalfven95.github.io/portfolio/
-              </a>
-            </div>
-          </li>
-          <li>
-            <div className='flex items-center mb-1'>
-              <ImLocation className='inline-block mr-2 self-start mt-1' />
-              <div className='inline-block'>
-                <p>{product.address}</p>
-              </div>
-            </div>
-          </li>
-          <li>
-            <div className='flex items-center mb-1'>
-              <ImLocation className='inline-block mr-2 self-start mt-1' />
-              <div className='inline-block'>
-                {product.county.length >= 21 ? (
-                  <p className='mr-2'>Hela Sverige</p>
-                ) : (
-                  product.county.map((item) => (
-                    <p key={item.value} className='mr-2'>
-                      {item.label}
-                    </p>
-                  ))
-                )}
-              </div>
-            </div>
-          </li>
+          <div className='information mb-4 pb-2 border-b'>
+          {product.email && (
+              <li>
+                <div className='flex items-center mb-1'>
+                <div className="w-min self-start text-beige-normal inline-block mr-4 mt-1">
+                  <AiOutlineMail></AiOutlineMail>
+                </div>
+                  <a
+                    className='hover:underline'
+                    href={`mailto:${product.email}`}
+                  >
+                    {product.email}
+                  </a>
+                </div>
+              </li>
+            )}
+
+            {product.phone && (
+              <li>
+                <div className='flex items-center mb-1'>
+                <div className="w-min self-start text-beige-normal inline-block mr-4 mt-1">
+                  <AiOutlinePhone></AiOutlinePhone>
+                </div>
+                  <a className='hover:underline' href={`tel:${product.phone}`}>
+                    {product.phone}
+                  </a>
+                </div>
+              </li>
+            )}
+
+            {/* {product.address && (
+              <li>
+                <div className='flex items-center mb-1'>
+                  <FaMapMarkedAlt className='text-beige-normal inline-block mr-4 self-start mt-1' />
+                  <div className='inline-block'>
+                    <a
+                      className='hover:underline'
+                      target='blank'
+                      href={`http://maps.google.com/?q=${product.address}`}
+                    >
+                      {product.address}
+                    </a>
+                  </div>
+                </div>
+              </li>
+            )} */}
+
+{product.guests && (
+              <li>
+                <div className='flex items-center mb-1'>
+                <div className="w-min self-start text-beige-normal inline-block mr-4 mt-1">
+                  <BsPersonFill></BsPersonFill>
+                </div>
+                  <div className='inline-block'>
+                    <p>Max {product.guests} gäster</p>
+                  </div>
+                </div>
+              </li>
+            )}
+
+{product.rating === 0 && (
+              <li>
+                <div className='flex items-center mb-1'>
+                <div className="w-min self-start text-beige-normal inline-block mr-4 mt-1">
+                  <AiFillStar/>
+                </div>
+                  <div className='inline-block'>
+                    <p>{product.rating}</p>
+                  </div>
+                </div>
+              </li>
+            )}
+
+            
+{product.website && (
+              <li>
+                <div className='flex items-center mb-1'>
+                <div className="w-min self-start text-beige-normal inline-block mr-4 mt-1">
+                  <FaGlobeAmericas/>
+                </div>
+                  <div className='inline-block'>
+                    <a
+                      target='blank'
+                      href={product.website}
+                      className='hover:underline'
+                    >
+                      {product.website}
+                    </a>
+                  </div>
+                </div>
+              </li>
+            )}
+              {product.county && (
+              <li>
+                <div className='flex items-center mb-1'>
+                  <div className="w-min self-start text-beige-normal inline-block mr-4 mt-1">
+                    <ImLocation />
+                  </div>
+                  <div className='inline-block'>
+                    {product.county.length >= 21 ? (
+                      <p className='mr-2'>Hela Sverige</p>
+                    ) : (
+                      product.county.map((item) => (
+                        <div key={item.value} className='mr-2 inline-block'>
+                          {item.label}
+                        </div>
+                      ))
+                    )}
+                  </div>
+                </div>
+              </li>
+            )}
+          </div>
+          
         </ul>
       </div>
+
       <div className='mt-2'>
         <div className='flex justify-end'>
           {!auth.user || auth.user.role !== 'admin' ? userLink() : adminLink()}
