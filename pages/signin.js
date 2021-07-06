@@ -6,6 +6,7 @@ import { DataContext } from '../store/GlobalState'
 import { postData } from '../utils/fetchData'
 import Cookie from 'js-cookie'
 import { useRouter } from 'next/router'
+import { Button } from '../components/Button'
 
 export default function SignIn() {
   const initialState = { email: '', password: '' }
@@ -58,15 +59,15 @@ export default function SignIn() {
   }, [auth])
 
   return (
-    <div className='contain bg-beige-lighter h-screen'>
+    <div className='contain bg-beige-lighter'>
       <Head>
         <title>Sign in</title>
       </Head>
       <div className='pt-44'>
         <form
           method='POST'
-          className='mx-auto'
-          style={{ maxWidth: '500px' }}
+          className='mx-auto max-w-screen-sm'
+          /* style={{ maxWidth: '500px' }} */
           onSubmit={handleSubmit}
         >
           <div className='block text-grey-darker text-sm font-bold mb-2'>
@@ -84,22 +85,21 @@ export default function SignIn() {
               onChange={handleChangeInput}
             />
           </div>
-          <div className='block text-grey-darker text-sm font-bold mb-2'>
+          <div className='block text-grey-darker text-sm font-bold mb-4'>
             <label htmlFor='exampleInputPassword1'>Lösenord</label>
             <input
               required
               pattern='.{6,}'
               title='6 characters minimum'
               type='password'
-              className='shadow appearance-none border border-red rounded w-full py-2 px-3 text-grey-darker mb-3'
+              className='shadow appearance-none border border-red rounded w-full py-2 px-3 text-grey-darker'
               id='exampleInputPassword1'
               name='password'
               value={password}
               onChange={handleChangeInput}
             />
           </div>
-
-          <div className='flex items-center justify-between mb-6'>
+          <div className='flex items-center justify-between mb-8'>
             <button
               type='submit'
               className='bg-beige-normal hover:bg-beige-dark text-white font-bold py-2 px-4 rounded'
@@ -114,14 +114,16 @@ export default function SignIn() {
             </a> */}
           </div>
 
-          <p className='font-bold'>
-            Har ni inget konto?
-            <Link href='/register'>
-              <a className='ml-1 text-white bg-beige-normal p-2 px-3 rounded-xl font-bold'>
-                Registrera er här!
-              </a>
-            </Link>
-          </p>
+          <div className="flex items-center">
+            <p className='font-bold mr-2'>
+              Har ni inget konto?
+            </p>
+              <Link href='/register' passHref>
+                <Button primary='true' round='true'>
+                  <a className='block font-bold'>Registrera er här!</a>
+                </Button>
+              </Link>
+          </div>
         </form>
       </div>
     </div>

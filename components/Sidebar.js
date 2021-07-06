@@ -10,13 +10,13 @@ function Sidebar({ isOpen, toggle }) {
       onClick={toggle}
       className={
         isOpen
-          ? 'md:hidden grid grid-rows-3 text-center items-center border-b border-t border-beige-light bg-beige-lighter'
+          ? 'md:hidden grid grid-rows-3 border-t text-center items-center border-beige-light bg-beige-lighter'
           : 'hidden'
       }
     >
       {menuData.map((item, index) => (
         <Link href={item.link} passHref key={index}>
-          <a className='p-3 text-gray-500 text-center items-center -no-underline h-full cursor-pointer transition duration-200 ease-in-out hover:text-black'>
+          <a className='p-3 border-b rounded-t-none rounded-xl text-beige-darker border-beige-light text-center items-center h-full cursor-pointer transition duration-200 ease-in-out hover:text-black hover:bg-beige-light'>
             {item.title}
           </a>
         </Link>

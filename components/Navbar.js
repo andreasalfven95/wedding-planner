@@ -137,7 +137,7 @@ const Navbar = ({ toggle }) => {
           <div className='flex items-center'>
             <Link href='/signin' passHref>
               <Button primary='true' round='true' className='px-3 md:px-4'>
-                <div className='block font-bold'>Företag?</div>
+                <a className='block font-bold'>Företag?</a>
               </Button>
             </Link>
             {/* <Link href='/signin' passHref>

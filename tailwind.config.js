@@ -3,11 +3,15 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
+      width: {
+        '96': '96%',
+      },
       colors: {
         transparent: 'transparent',
         current: 'currentColor',
         beige: {
-          lighter: 'rgba(244,242,239,0.4)',
+          /* lighter: 'rgba(244,242,239,0.4)', */
+          lighter: '#fffaf7',
           /* lighter: '#E8E6E3', */
           /* lighter: '#F1EFE9', */
           /* lighter: '#ede9e6', */

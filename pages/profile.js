@@ -634,7 +634,7 @@ const Profile = () => {
                   All information* (inga bilder)
                 </label>
 
-                <div className='w-11/12 md:w-full'>
+                <div className='w-96 md:w-full'>
                   <TextEditor
                     about={about}
                     setAbout={setAbout}

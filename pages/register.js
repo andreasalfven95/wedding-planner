@@ -5,6 +5,7 @@ import valid from '../utils/valid'
 import { DataContext } from '../store/GlobalState'
 import { postData } from '../utils/fetchData'
 import { useRouter } from 'next/router'
+import { Button } from '../components/Button'
 
 export default function Register() {
   const initialState = { name: '', email: '', password: '', cf_password: '' }
@@ -47,7 +48,7 @@ export default function Register() {
   }, [auth])
 
   return (
-    <div className='contain bg-beige-lighter h-screen'>
+    <div className='contain bg-beige-lighter'>
       <Head>
         <title>Register</title>
       </Head>
@@ -106,7 +107,7 @@ export default function Register() {
             />
           </div>
 
-          <div className='block text-grey-darker text-sm font-bold mb-2'>
+          <div className='block text-grey-darker text-sm font-bold mb-4'>
             <label htmlFor='exampleInputPassword2'>Bekräfta lösenord</label>
             <input
               required
@@ -121,7 +122,7 @@ export default function Register() {
               onChange={handleChangeInput}
             />
           </div>
-          <div className='flex items-center justify-between mb-6'>
+          <div className='flex items-center justify-between mb-8'>
             <button
               type='submit'
               className='bg-beige-normal hover:bg-beige-dark text-white font-bold py-2 px-4 rounded'
@@ -130,14 +131,16 @@ export default function Register() {
             </button>
           </div>
 
-          <p className='font-bold'>
-            Har ni redan ett konto?
-            <Link href='/signin'>
-              <a className='ml-1 text-white bg-beige-normal p-2 px-3 rounded-xl font-bold'>
-                Logga in här!
-              </a>
+          <div className="flex items-center">
+            <p className='font-bold mr-2'>
+              Har ni redan ett konto?
+            </p>
+            <Link href='/signin' passHref>
+              <Button primary='true' round='true'>
+                <a className='block font-bold'>Logga in här!</a>
+              </Button>
             </Link>
-          </p>
+          </div>
         </form>
       </div>
     </div>
