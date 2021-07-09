@@ -90,7 +90,8 @@ const ProductsManager = () => {
       setImages([])
       setCounty([])
       setAddress('')
-      setCoordinates({})
+      setCoordinates({ lat: null, lng: null })
+      /* setCoordinates({}) */
     }
   }, [id])
 
@@ -223,7 +224,7 @@ const ProductsManager = () => {
           images: [...imgOldURL, ...media],
           county: county,
           address: address,
-          coordinates: { coordinates },
+          coordinates: coordinates,
         },
         auth.token
       )
@@ -242,7 +243,7 @@ const ProductsManager = () => {
           images: [...imgOldURL, ...media],
           county: county,
           address: address,
-          coordinates: { coordinates },
+          coordinates: coordinates,
         },
         auth.token
       )

@@ -7,11 +7,18 @@ import filterSearch from '../utils/filterSearch'
 import { useRouter } from 'next/router'
 import Card from '../components/product/Card'
 import Filter from '../components/Filter'
+import dynamic from 'next/dynamic'
+
+/* import Map from '../components/Map' */
 
 export default function Home(props) {
+  const Map = dynamic(() => import('../components/Map'), {
+    ssr: false,
+  })
+
   const [products, setProducts] = useState(props.products)
   const [productsToDisplay, setProductsToDisplay] = useState([])
-  const [showAll, setShowAll] = useState(true)
+  /* const [showAll, setShowAll] = useState(true) */
 
   /* const [page, setPage] = useState(1) */
   const router = useRouter()
@@ -48,7 +55,14 @@ export default function Home(props) {
 
       <Filter state={state} />
 
-      <div className='contain bg-beige-lighter'>
+      <Map productsToDisplay={productsToDisplay} />
+
+      <Products
+        products={products}
+        productsToDisplay={productsToDisplay}
+        state={state}
+      />
+      {/* <div className='contain bg-beige-lighter pb-4'>
         <div className='flex flex-wrap -mx-1 lg:-mx-4'>
           {auth.user !== undefined && auth.user.role === 'admin' ? (
             products.length === 0 ? (
@@ -78,12 +92,14 @@ export default function Home(props) {
             </h2>
           ) : (
             productsToDisplay.map((product) => (
-              <Card key={product._id} product={product} />
+              <>
+                <Card key={product._id} product={product} />
+                <h1 className='text-2xl'>Bajs</h1>
+              </>
             ))
           )}
         </div>
-      </div>
-
+      </div> */}
       {/* <Products products={products} heading='Products' /> */}
       {/* {props.result < page * 6 ? (
         ''

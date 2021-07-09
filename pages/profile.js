@@ -127,7 +127,8 @@ const Profile = () => {
       setImages([])
       setCounty([])
       setAddress('')
-      setCoordinates({})
+      setCoordinates({ lat: null, lng: null })
+      /* setCoordinates({}) */
     }
   }, [userProducts])
 
@@ -279,7 +280,7 @@ const Profile = () => {
           images: [...imgOldURL, ...media],
           county: county,
           address: address,
-          coordinates: { coordinates },
+          coordinates: coordinates,
         },
         auth.token
       )
@@ -298,7 +299,7 @@ const Profile = () => {
           images: [...imgOldURL, ...media],
           county: county,
           address: address,
-          coordinates: { coordinates },
+          coordinates: coordinates,
         },
         auth.token
       )

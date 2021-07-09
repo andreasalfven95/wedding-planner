@@ -8,8 +8,8 @@ export default class MyDocument extends Document {
     const sheet = new ServerStyleSheet()
 
     // Step 2: Retrieve styles from components in the page
-    const page = renderPage((App) => (props) =>
-      sheet.collectStyles(<App {...props} />)
+    const page = renderPage(
+      (App) => (props) => sheet.collectStyles(<App {...props} />)
     )
 
     // Step 3: Extract the styles as <style> tags
@@ -37,6 +37,19 @@ export default class MyDocument extends Document {
             href='https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400;500;600&family=Raleway:wght@200;400;600&display=swap'
             rel='stylesheet'
           ></link>
+
+          <link
+            rel='stylesheet'
+            href='https://unpkg.com/leaflet@1.7.1/dist/leaflet.css'
+            integrity='sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=='
+            crossorigin=''
+          />
+          <script
+            src='https://unpkg.com/leaflet@1.7.1/dist/leaflet.js'
+            integrity='sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=='
+            crossorigin=''
+          ></script>
+
           <script src='https://code.jquery.com/jquery-3.5.1.slim.min.js'></script>
 
           <script src={process.env.PLACES_API_URL}></script>
