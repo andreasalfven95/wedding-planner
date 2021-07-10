@@ -18,6 +18,11 @@ export default function Home(props) {
 
   const [products, setProducts] = useState(props.products)
   const [productsToDisplay, setProductsToDisplay] = useState([])
+  const [coordinates, setCoordinates] = useState([
+    [50.505, -29.09],
+    [52.505, 29.09],
+  ])
+  let markerBounds = []
   /* const [showAll, setShowAll] = useState(true) */
 
   /* const [page, setPage] = useState(1) */
@@ -35,6 +40,18 @@ export default function Home(props) {
   }, [products])
 
   /* useEffect(() => {
+    console.log('Coordinates', coordinates)
+  }, [coordinates]) */
+
+  useEffect(() => {
+    productsToDisplay.forEach((item) => {
+      markerBounds.push([item.coordinates.lat, item.coordinates.lng])
+    })
+    setCoordinates(markerBounds)
+    /* console.log('MarkerBounds', markerBounds) */
+  }, [productsToDisplay])
+
+  /* useEffect(() => {
     if (Object.keys(router.query).length === 0) setPage(1)
   }, [router.query]) */
 
@@ -42,6 +59,8 @@ export default function Home(props) {
     setPage(page + 1)
     filterSearch({ router, page: page + 1 })
   } */
+
+  const [showMap, setShowMap] = useState(false)
 
   return (
     <>
@@ -55,13 +74,29 @@ export default function Home(props) {
 
       <Filter state={state} />
 
-      <Map productsToDisplay={productsToDisplay} />
+      <div className=''>
+        <button
+          className='mx-auto'
+          onClick={() => {
+            setShowMap(!showMap)
+          }}
+        >
+          {showMap ? 'Dölj karta' : 'Visa karta'}
+        </button>
+      </div>
+
+      {showMap && productsToDisplay.length > 0 ? (
+        <Map productsToDisplay={productsToDisplay} coordinates={coordinates} />
+      ) : (
+        <></>
+      )}
 
       <Products
         products={products}
         productsToDisplay={productsToDisplay}
         state={state}
       />
+
       {/* <div className='contain bg-beige-lighter pb-4'>
         <div className='flex flex-wrap -mx-1 lg:-mx-4'>
           {auth.user !== undefined && auth.user.role === 'admin' ? (
