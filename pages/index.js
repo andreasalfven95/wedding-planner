@@ -8,6 +8,9 @@ import { useRouter } from 'next/router'
 import Card from '../components/product/Card'
 import Filter from '../components/Filter'
 import dynamic from 'next/dynamic'
+import { Button } from '../components/Button'
+
+import { GrMapLocation } from 'react-icons/gr'
 
 /* import Map from '../components/Map' */
 
@@ -18,11 +21,11 @@ export default function Home(props) {
 
   const [products, setProducts] = useState(props.products)
   const [productsToDisplay, setProductsToDisplay] = useState([])
-  const [coordinates, setCoordinates] = useState([
+  /* const [coordinates, setCoordinates] = useState([
     [50.505, -29.09],
     [52.505, 29.09],
   ])
-  let markerBounds = []
+  let markerBounds = [] */
   /* const [showAll, setShowAll] = useState(true) */
 
   /* const [page, setPage] = useState(1) */
@@ -43,13 +46,12 @@ export default function Home(props) {
     console.log('Coordinates', coordinates)
   }, [coordinates]) */
 
-  useEffect(() => {
+  /* useEffect(() => {
     productsToDisplay.forEach((item) => {
       markerBounds.push([item.coordinates.lat, item.coordinates.lng])
     })
     setCoordinates(markerBounds)
-    /* console.log('MarkerBounds', markerBounds) */
-  }, [productsToDisplay])
+  }, [productsToDisplay]) */
 
   /* useEffect(() => {
     if (Object.keys(router.query).length === 0) setPage(1)
@@ -74,19 +76,21 @@ export default function Home(props) {
 
       <Filter state={state} />
 
-      <div className=''>
-        <button
-          className='mx-auto'
+      <div className='flex mt-4'>
+        <Button
+          round='true'
+          className='mx-auto items-center justify-center'
           onClick={() => {
             setShowMap(!showMap)
           }}
         >
           {showMap ? 'Dölj karta' : 'Visa karta'}
-        </button>
+          <GrMapLocation className='inline-block ml-2 text-lg text-beige-darker items-center justify-center' />
+        </Button>
       </div>
 
       {showMap && productsToDisplay.length > 0 ? (
-        <Map productsToDisplay={productsToDisplay} coordinates={coordinates} />
+        <Map productsToDisplay={productsToDisplay} />
       ) : (
         <></>
       )}
@@ -97,44 +101,6 @@ export default function Home(props) {
         state={state}
       />
 
-      {/* <div className='contain bg-beige-lighter pb-4'>
-        <div className='flex flex-wrap -mx-1 lg:-mx-4'>
-          {auth.user !== undefined && auth.user.role === 'admin' ? (
-            products.length === 0 ? (
-              <h2 className='text-3xl text-center my-40 mx-auto'>
-                Inga produkter matchade sökningen.
-              </h2>
-            ) : (
-              <>
-                <input
-                  className='h-5 w-5'
-                  type='checkbox'
-                  checked={showAll}
-                  onChange={() => setShowAll(!showAll)}
-                />
-                {showAll
-                  ? products.map((product) => (
-                      <Card key={product._id} product={product} />
-                    ))
-                  : productsToDisplay.map((product) => (
-                      <Card key={product._id} product={product} />
-                    ))}
-              </>
-            )
-          ) : productsToDisplay.length === 0 ? (
-            <h2 className='text-3xl text-center my-40 mx-auto'>
-              Inga produkter matchade sökningen.
-            </h2>
-          ) : (
-            productsToDisplay.map((product) => (
-              <>
-                <Card key={product._id} product={product} />
-                <h1 className='text-2xl'>Bajs</h1>
-              </>
-            ))
-          )}
-        </div>
-      </div> */}
       {/* <Products products={products} heading='Products' /> */}
       {/* {props.result < page * 6 ? (
         ''

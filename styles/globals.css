@@ -73,3 +73,19 @@ img {
   list-style: disc inside;
   margin: 0 0 15px;
 }
+
+.marker-cluster {
+  background-color: rgba(201, 190, 167, 0.4) !important;
+  display: flex;
+  align-items: center;
+  justify-items: center;
+}
+
+.marker-cluster div {
+  background-color: rgba(201, 190, 167, 0.8) !important;
+}
+
+.marker-cluster div span {
+  font-weight: 900 !important;
+  font-size: 1.2em;
+}

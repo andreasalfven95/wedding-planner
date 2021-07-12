@@ -19,7 +19,8 @@ export const Button = styled.div`
   width: min-content;
 
   &:hover {
-    background: ${({ primary }) => (primary ? '#9B9287' : '#fff')};
-    color: ${({ primary }) => (primary ? '#fff' : '#000')};
+    background: ${({ primary }) => (primary ? '#9B9287' : '#CCC2B5')};
+    border: ${({ primary }) => (primary ? '0px' : '#1px solid #6D6356')};
+    color: ${({ primary }) => (primary ? '#fff' : '#fff')};
   }
 `

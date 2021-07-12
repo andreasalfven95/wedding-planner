@@ -5,18 +5,20 @@ import 'leaflet/dist/leaflet.css'
 import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css'
 import 'leaflet-defaulticon-compatibility'
 import { useEffect, useState } from 'react'
+import MarkerClusterGroup from 'react-leaflet-markercluster'
+import 'react-leaflet-markercluster/dist/styles.min.css'
 
-const Map = ({ productsToDisplay, coordinates }) => {
-  const [activeMarker, setActiveMarker] = useState(null)
-  const [center, setCenter] = useState([59.8680023, 17.6825141])
-  const [zoom, setZoom] = useState(10)
+const Map = ({ productsToDisplay }) => {
+  /* const [activeMarker, setActiveMarker] = useState(null) */
+  const [center, setCenter] = useState([62.597203, 16.491682])
+  const [zoom, setZoom] = useState(4)
 
   const icon = new Icon({
-    iconUrl: '',
-    iconSize: [25, 25],
+    iconUrl: '/icons/marker_icon.svg',
+    iconSize: [35, 35],
   })
 
-  function Bounds({ coordinates }) {
+  /* function Bounds({ coordinates }) {
     const map = useMap()
     useEffect(() => {
       if (!map) return
@@ -24,13 +26,15 @@ const Map = ({ productsToDisplay, coordinates }) => {
       map.fitBounds(coordinates)
     }, [map, coordinates])
     return null
-  }
+  } */
 
   return (
-    <div id='mapid' className='w-screen h-96 z-0 my-4'>
+    <div id='mapid' className='w-screen h-96 z-0 mt-4'>
       <MapContainer
-        bounds={coordinates}
-        /* LatLngBounds={coordinates} */
+        /* whenCreated={map => OpenStreetMapProvider(map)} */
+        /* bounds={coordinates} */
+        /* boundsOptions={{ padding: [500, 500] }} */
+        className='markercluster-map'
         center={center}
         zoom={zoom}
         scrollWheelZoom={false}
@@ -38,28 +42,37 @@ const Map = ({ productsToDisplay, coordinates }) => {
       >
         <TileLayer
           url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
-          attribution='Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           /* , Imagery © <a href="https://www.mapbox.com/">Mapbox</a> */
         />
 
-        {productsToDisplay.map((item) => (
-          <Marker
-            key={item._id}
-            position={[item.coordinates.lat, item.coordinates.lng]}
-            eventHandlers={{
-              click: (e) => {
-                console.log(e)
-                console.log(item)
-                setActiveMarker(item)
-              },
-            }}
-            //icon={icon}
-          />
-        ))}
+        <MarkerClusterGroup showCoverageOnHover={false}>
+          {productsToDisplay.map((item) => (
+            <Marker
+              key={item._id}
+              position={[item.coordinates.lat, item.coordinates.lng]}
+              /* eventHandlers={{
+                click: (e) => {
+                  console.log(e)
+                  console.log(item)
+                  setActiveMarker(item)
+                },
+              }} */
+              icon={icon}
+            >
+              <Popup /* minWidth={200} */>
+                <div>
+                  <b>Hello world!</b>
+                  <p>I am a clustered popup.</p>
+                </div>
+              </Popup>
+            </Marker>
+          ))}
+        </MarkerClusterGroup>
 
-        <Bounds coordinates={coordinates} />
+        {/* <Bounds coordinates={coordinates} /> */}
 
-        {activeMarker && (
+        {/* {activeMarker && (
           <Popup
             position={[
               activeMarker.coordinates.lat,
@@ -70,7 +83,7 @@ const Map = ({ productsToDisplay, coordinates }) => {
               <h1>hej</h1>
             </div>
           </Popup>
-        )}
+        )} */}
       </MapContainer>
     </div>
   )
