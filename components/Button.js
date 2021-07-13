@@ -20,7 +20,6 @@ export const Button = styled.div`
 
   &:hover {
     background: ${({ primary }) => (primary ? '#9B9287' : '#CCC2B5')};
-    border: ${({ primary }) => (primary ? '0px' : '#1px solid #6D6356')};
     color: ${({ primary }) => (primary ? '#fff' : '#fff')};
   }
 `

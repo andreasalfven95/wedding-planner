@@ -29,8 +29,6 @@ const Map = ({ productsToDisplay }) => {
     iconSize: [35, 35],
   })
 
-  let isAdded = false
-
   /* const printer = ({item}) => {
     if (item !== undefined) {
       return(
@@ -48,7 +46,9 @@ const Map = ({ productsToDisplay }) => {
 
   
 
-  const checkCart = ({item}) => {
+  const checkCart = ({ item }) => {
+    let isAdded = false
+
     const check = cart.every((product) => {
       return product._id !== item._id
     })
@@ -60,22 +60,22 @@ const Map = ({ productsToDisplay }) => {
     if (isAdded === false) {
       return (
         <Button
-          className='w-min p-1'
+          className='w-min p-2 h-8'
           primary='true'
           onClick={() => dispatch(addToCart(item, cart))}
         >
-          <HiOutlineHeart className='text-3xl p-0 min' />
+          <HiOutlineHeart className='text-xl p-0' />
         </Button>
       )
     }
     if (isAdded === true) {
       return (
         <Button
-          className='w-min p-1'
+          className='w-min p-2 h-8'
           primary='true'
           onClick={() => dispatch(deleteItem(cart, item._id, 'ADD_CART'))}
         >
-          <HiHeart className='text-3xl p-0 min' />
+          <HiHeart className='text-xl p-0' />
         </Button>
       )
     }
@@ -92,7 +92,7 @@ const Map = ({ productsToDisplay }) => {
   } */
 
   return (
-    <div id='mapid' className='w-full h-96 z-0 mt-4'>
+    <div id='mapid' className='w-full z-0 mt-4'>
       <MapContainer
         /* whenCreated={map => OpenStreetMapProvider(map)} */
         /* bounds={coordinates} */
@@ -102,7 +102,7 @@ const Map = ({ productsToDisplay }) => {
         zoom={zoom}
         scrollWheelZoom={false}
         tap={false}
-        style={{ height: '100%', width: '100%', zIndex: '0' }}
+        style={{ height: '500px', width: '100%', zIndex: '0' }}
       >
         <TileLayer
           url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
@@ -127,11 +127,13 @@ const Map = ({ productsToDisplay }) => {
             >
               <Popup maxWidth={200}>
                 <div className="flex flex-col">
-                  <h2 className="capitalize text-lg font-bold">{item.title}</h2>
+                  <div className="border-b mb-2">
+                    <h2 className="capitalize text-base font-bold">{item.title}</h2>
+                  </div>
                   <div className="">
                     <img className="block max-h-32 md:max-w-sm mx-auto md:m-0" layout='fill' src={item.images[0].url} alt={item.images[0].url}></img>
                   </div>
-                  <p className="my-0">{item.description}</p>
+                  <div className="mt-2 mb-1 border-b border-t py-1">{item.description}</div>
 
                   {item.email && (
                       <div className='flex items-center mb-1'>
@@ -158,15 +160,15 @@ const Map = ({ productsToDisplay }) => {
                       </div>
                   )}
 
-                  <div className='flex justify-end'>
+
+                  <div className='flex justify-end border-t pt-1'>
                     <Link href={`/product/${item._id}`} passHref>
-                      <Button primary='true' className='mr-2'>
+                      <Button primary='true' className='mr-2 p-2 w-min h-8'>
                         Läs mer...
                       </Button>
-                      </Link>
-
-                      {checkCart({item})}
-                      {/* <CheckCart>Test</CheckCart> */}
+                    </Link>
+                    
+                    {checkCart({item})}
                   </div>
                   
                 </div>
