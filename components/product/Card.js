@@ -125,7 +125,7 @@ const Card = ({ product }) => {
               /* className='image' */
               /* layout='fill'
               objectFit='cover' */
-              className='block max-h-80 md:max-w-sm mx-auto md:m-0'
+              className='block max-h-80 md:max-w-sm mx-auto lg:m-0'
             />
           </div>
           <div className='information py-2 border-b border-black mb-2'>
@@ -135,18 +135,15 @@ const Card = ({ product }) => {
         </div>
       </div>
 
-
-
-
       <div className='company-info justify-end break-all text-base'>
         <ul className=''>
           <div className='information mb-4 pb-2 border-b'>
-          {product.email && (
+            {product.email && (
               <li>
                 <div className='flex items-center mb-1'>
-                <div className="w-min self-start text-beige-normal inline-block mr-4 mt-1">
-                  <AiOutlineMail></AiOutlineMail>
-                </div>
+                  <div className='w-min self-start text-beige-normal inline-block mr-4 mt-1'>
+                    <AiOutlineMail></AiOutlineMail>
+                  </div>
                   <a
                     className='hover:underline'
                     href={`mailto:${product.email}`}
@@ -160,9 +157,9 @@ const Card = ({ product }) => {
             {product.phone && (
               <li>
                 <div className='flex items-center mb-1'>
-                <div className="w-min self-start text-beige-normal inline-block mr-4 mt-1">
-                  <AiOutlinePhone></AiOutlinePhone>
-                </div>
+                  <div className='w-min self-start text-beige-normal inline-block mr-4 mt-1'>
+                    <AiOutlinePhone></AiOutlinePhone>
+                  </div>
                   <a className='hover:underline' href={`tel:${product.phone}`}>
                     {product.phone}
                   </a>
@@ -187,12 +184,12 @@ const Card = ({ product }) => {
               </li>
             )} */}
 
-{product.guests && (
+            {product.guests && (
               <li>
                 <div className='flex items-center mb-1'>
-                <div className="w-min self-start text-beige-normal inline-block mr-4 mt-1">
-                  <BsPersonFill></BsPersonFill>
-                </div>
+                  <div className='w-min self-start text-beige-normal inline-block mr-4 mt-1'>
+                    <BsPersonFill></BsPersonFill>
+                  </div>
                   <div className='inline-block'>
                     <p>Max {product.guests} gäster</p>
                   </div>
@@ -200,12 +197,12 @@ const Card = ({ product }) => {
               </li>
             )}
 
-{product.rating === 0 && (
+            {product.rating === 0 && (
               <li>
                 <div className='flex items-center mb-1'>
-                <div className="w-min self-start text-beige-normal inline-block mr-4 mt-1">
-                  <AiFillStar/>
-                </div>
+                  <div className='w-min self-start text-beige-normal inline-block mr-4 mt-1'>
+                    <AiFillStar />
+                  </div>
                   <div className='inline-block'>
                     <p>{product.rating}</p>
                   </div>
@@ -213,13 +210,12 @@ const Card = ({ product }) => {
               </li>
             )}
 
-            
-{product.website && (
+            {product.website && (
               <li>
                 <div className='flex items-center mb-1'>
-                <div className="w-min self-start text-beige-normal inline-block mr-4 mt-1">
-                  <FaGlobeAmericas/>
-                </div>
+                  <div className='w-min self-start text-beige-normal inline-block mr-4 mt-1'>
+                    <FaGlobeAmericas />
+                  </div>
                   <div className='inline-block'>
                     <a
                       target='blank'
@@ -232,10 +228,10 @@ const Card = ({ product }) => {
                 </div>
               </li>
             )}
-              {product.county && (
+            {product.county && (
               <li>
                 <div className='flex items-center mb-1'>
-                  <div className="w-min self-start text-beige-normal inline-block mr-4 mt-1">
+                  <div className='w-min self-start text-beige-normal inline-block mr-4 mt-1'>
                     <ImLocation />
                   </div>
                   <div className='inline-block'>
@@ -253,7 +249,6 @@ const Card = ({ product }) => {
               </li>
             )}
           </div>
-          
         </ul>
       </div>
 

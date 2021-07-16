@@ -17,7 +17,8 @@ function Products({ products, state, productsToDisplay }) {
 
   return (
     <div className='contain bg-beige-lighter pb-4'>
-      <div className='flex flex-wrap -mx-1 lg:-mx-4'>
+      <div className='flex flex-wrap'>
+        {/* <div className='flex flex-wrap -mx-1 lg:-mx-4'> */}
         {auth.user !== undefined && auth.user.role === 'admin' ? (
           products.length === 0 ? (
             <h2 className='text-3xl text-center my-40 mx-auto'>

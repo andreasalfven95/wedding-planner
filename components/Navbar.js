@@ -26,8 +26,8 @@ const Navbar = ({ toggle }) => {
 
   const loggedRouter = () => {
     return (
-      <div className='items-center flex'>
-        <div className='dropdown_btn relative inline-block text-left mr-4'>
+      <div className='items-center flex z-50'>
+        <div className='dropdown_btn relative inline-block text-left mr-2'>
           <div className=''>
             <Link href='/profile' passHref>
               <Button primary='true' className='px-2 sm:px-4'>
@@ -38,7 +38,7 @@ const Navbar = ({ toggle }) => {
                     className='rounded-full w-full h-full align-middle object-cover'
                   />
                 </div>
-                <div className='ml-3 border-transparent hidden sm:flex'>
+                <div className='ml-3 border-transparent hidden lg:flex'>
                   {auth.user.name}
                   {auth.user.role === 'admin' && (
                     <svg
@@ -61,7 +61,7 @@ const Navbar = ({ toggle }) => {
           </div>
 
           {auth.user.role === 'admin' && (
-            <div className='origin-top-right absolute right-0 w-full shadow-lg bg-white ring-1 ring-black ring-opacity-5 hidden sm:block'>
+            <div className='origin-top-right absolute right-0 w-full shadow-lg bg-white ring-1 ring-black ring-opacity-5 hidden md:block min-w-min'>
               <div
                 className='py-1 dropdown'
                 role='menu'
@@ -98,7 +98,7 @@ const Navbar = ({ toggle }) => {
         </div>
 
         <Button primary='true' className='px-3 md:px-4' onClick={handleLogout}>
-          <div className='hidden md:block md:mr-3'>Logga ut</div>
+          <div className='hidden lg:block md:mr-3'>Logga ut</div>
           <GrLogout className=''></GrLogout>
         </Button>
       </div>
@@ -106,41 +106,42 @@ const Navbar = ({ toggle }) => {
   }
 
   return (
-    <nav className='contain py-3 h-20 flex flex-row z-30 relative bg-beige-lighter'>
-      <div className='flex flex-row justify-start'>
-        {/* <Link href='/' passHref className='flex items-center'>
+    <nav className='contain h-20 flex flex-row z-30 bg-beige-lighter'>
+      {/* <div className='flex flex-row justify-start'> */}
+      {/* <Link href='/' passHref className='flex items-center'>
           <img
             src='/img/sqLogo.svg'
             className='h-full py-3 cursor-pointer block sm:hidden'
           />
         </Link> */}
-        <div className='w-full h-full'>
-          <Link href='/' passHref className='flex items-center'>
+      <div className='w-full h-full flex flex-row items-center justify-between'>
+        <div className='flex items-center justify-start mr-2'>
+          <Link href='/' passHref className='flex items-center w-full h-full'>
             <img
               src='/img/logo.svg'
-              className='max-w-max h-full cursor-pointer'
+              className='h-full max-h-20 py-2 object-contain cursor-pointer'
             />
           </Link>
+          <div className='hidden md:flex flex-row justify-start items-center'>
+            {menuData.map((item, index) => (
+              <Link href={item.link} passHref key={index}>
+                <a className='text-gray-500 flex items-center ml-6 lg:ml-8 xl:ml-12 no-underline h-full cursor-pointer transition duration-200 ease-in-out hover:text-black'>
+                  {item.title}
+                </a>
+              </Link>
+            ))}
+          </div>
         </div>
-        <div className='hidden md:flex flex-row items-center'>
-          {menuData.map((item, index) => (
-            <Link href={item.link} passHref key={index}>
-              <a className='text-gray-500 flex items-center ml-6 lg:ml-14 xl:ml-16 no-underline h-full cursor-pointer transition duration-200 ease-in-out hover:text-black'>
-                {item.title}
-              </a>
-            </Link>
-          ))}
-        </div>
-      </div>
-      <div className='flex flex-row justify-end w-full'>
-        {Object.keys(auth).length === 0 ? (
-          <div className='flex items-center'>
-            <Link href='/signin' passHref>
-              <Button primary='true' round='true' className='px-3 md:px-4'>
-                <a className='block font-bold'>Företag?</a>
-              </Button>
-            </Link>
-            {/* <Link href='/signin' passHref>
+        {/* </div> */}
+        <div className='flex flex-row justify-end'>
+          {Object.keys(auth).length === 0 ? (
+            <div className='flex items-center'>
+              <Link href='/signin' passHref>
+                <Button primary='true' round='true' className='px-3 md:px-4'>
+                  <a className='block font-bold'>Företag?</a>
+                </Button>
+              </Link>
+              {/* <Link href='/signin' passHref>
               <Button primary='true' className='mr-4 px-3 md:px-4'>
                 <div className='hidden md:block md:mr-3'>Logga in</div>
                 <VscSignIn className=''></VscSignIn>
@@ -152,15 +153,16 @@ const Navbar = ({ toggle }) => {
                 Registrera
               </Button>
             </Link> */}
-          </div>
-        ) : (
-          loggedRouter()
-        )}
+            </div>
+          ) : (
+            loggedRouter()
+          )}
 
-        <FaBars
-          className='self-center ml-2 sm:ml-4 text-2xl cursor-pointer text-black md:hidden'
-          onClick={toggle}
-        ></FaBars>
+          <FaBars
+            className='self-center ml-2 sm:ml-4 text-2xl cursor-pointer text-black md:hidden'
+            onClick={toggle}
+          ></FaBars>
+        </div>
       </div>
     </nav>
   )
