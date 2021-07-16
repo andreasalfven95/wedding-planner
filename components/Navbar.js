@@ -106,7 +106,7 @@ const Navbar = ({ toggle }) => {
   }
 
   return (
-    <nav className='contain h-20 flex flex-row z-30 relative justify-between bg-beige-lighter'>
+    <nav className='contain py-3 h-20 flex flex-row z-30 relative bg-beige-lighter'>
       <div className='flex flex-row justify-start'>
         {/* <Link href='/' passHref className='flex items-center'>
           <img
@@ -114,11 +114,11 @@ const Navbar = ({ toggle }) => {
             className='h-full py-3 cursor-pointer block sm:hidden'
           />
         </Link> */}
-        <div className='w-full h-full flex items-center py-3 pr-4'>
+        <div className='w-full h-full'>
           <Link href='/' passHref className='flex items-center'>
             <img
               src='/img/logo.svg'
-              className='w-full max-h-full cursor-pointer'
+              className='max-w-max h-full cursor-pointer'
             />
           </Link>
         </div>
@@ -132,7 +132,7 @@ const Navbar = ({ toggle }) => {
           ))}
         </div>
       </div>
-      <div className='flex flex-row justify-end'>
+      <div className='flex flex-row justify-end w-full'>
         {Object.keys(auth).length === 0 ? (
           <div className='flex items-center'>
             <Link href='/signin' passHref>
@@ -158,7 +158,7 @@ const Navbar = ({ toggle }) => {
         )}
 
         <FaBars
-          className='ml-4 self-center justify-end text-2xl cursor-pointer text-black md:hidden'
+          className='self-center ml-2 sm:ml-4 text-2xl cursor-pointer text-black md:hidden'
           onClick={toggle}
         ></FaBars>
       </div>
