@@ -122,7 +122,7 @@ const Navbar = ({ toggle }) => {
               className='h-full max-h-20 py-2 object-contain cursor-pointer'
             />
           </Link>
-          <div className='hidden md:flex flex-row justify-start items-center'>
+          <div className='hidden md:flex flex-row min-w-max justify-start items-center'>
             {menuData.map((item, index) => (
               <Link href={item.link} passHref key={index}>
                 <a className='text-gray-500 flex items-center ml-6 lg:ml-8 xl:ml-12 no-underline h-full cursor-pointer transition duration-200 ease-in-out hover:text-black'>
