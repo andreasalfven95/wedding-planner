@@ -289,7 +289,7 @@ const CartItem = ({ item, dispatch, cart }) => {
 
       <div className='mt-2'>
         <div className='flex justify-end'>
-          <Link href={`/item/${item._id}`} passHref>
+          <Link href={`/product/${item._id}`} passHref>
             <Button primary='true' className='mr-2'>
               Läs mer...
             </Button>
