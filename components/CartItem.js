@@ -112,7 +112,7 @@ const CartItem = ({ item, dispatch, cart }) => {
               </li>
             )}
 
-            {item.rating === 0 && (
+            {item.rating !== 0 && (
               <li>
                 <div className='flex items-center mb-1'>
                   <div className='w-min self-start text-beige-normal inline-block mr-4 mt-1'>
@@ -153,11 +153,16 @@ const CartItem = ({ item, dispatch, cart }) => {
                     {item.county.length >= 21 ? (
                       <p className='mr-2'>Hela Sverige</p>
                     ) : (
-                      item.county.map((item) => (
-                        <div key={item.value} className='mr-2 inline-block'>
-                          {item.label}
+                      <>
+                      {item.county.map((product) => (
+                        <div key={product.value} className='mr-1 inline-block'>
+                          {product.label}
+                          {item.county.length > 1 ? (
+                          <div className="ml-1 inline-block">|</div>
+                          ) : (<></>)}
                         </div>
-                      ))
+                      ))}
+                      </>
                     )}
                   </div>
                 </div>
@@ -232,7 +237,7 @@ const CartItem = ({ item, dispatch, cart }) => {
               </li>
             )}
 
-            {item.rating === 0 && (
+            {item.rating !== 0 && (
               <li>
                 <div className='flex items-center mb-1'>
                   <div className='w-min self-start text-beige-normal inline-block mr-4 mt-1'>
@@ -273,11 +278,16 @@ const CartItem = ({ item, dispatch, cart }) => {
                     {item.county.length >= 21 ? (
                       <p className='mr-2'>Hela Sverige</p>
                     ) : (
-                      item.county.map((item) => (
-                        <div key={item.value} className='mr-2 inline-block'>
-                          {item.label}
+                      <>
+                      {item.county.map((product) => (
+                        <div key={product.value} className='mr-1 inline-block'>
+                          {product.label}
+                          {item.county.length > 1 ? (
+                          <div className="ml-1 inline-block">|</div>
+                          ) : (<></>)}
                         </div>
-                      ))
+                      ))}
+                      </>
                     )}
                   </div>
                 </div>

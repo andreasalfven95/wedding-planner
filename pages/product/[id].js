@@ -79,7 +79,7 @@ const DetailProduct = (props) => {
   parse('<h1>single</h1>')
 
   return (
-    <div className='detail-page contain bg-beige-lighter pb-4'>
+    <div className='detail-page contain bg-beige-lighter pb-4 md:pt-2 max-w-5xl'>
       <Head>
         <title>{product.title}</title>
       </Head>
@@ -95,14 +95,14 @@ const DetailProduct = (props) => {
           />
         </div>
 
-        <div className='flex flex-row cursor-pointer' ref={imgRef}>
+        <div className='flex flex-row cursor-pointer mx-auto max-w-2xl' ref={imgRef}>
           {product.images.map((img, index) => (
             <img
               key={index}
               src={img.url}
               alt={img.url}
               className='bg-white opacity-25 p-1'
-              style={{ height: '80px', width: '20%' }}
+              style={{ height: '80px', width: '20%'}}
               onClick={() => setTab(index)}
             />
           ))}
@@ -182,7 +182,7 @@ const DetailProduct = (props) => {
               </li>
             )}
 
-            {product.rating === 0 && (
+            {product.rating !== 0 && (
               <li>
                 <div className='flex items-center mb-1'>
                 <div className="w-min self-start text-beige-normal inline-block mr-4 mt-1">
@@ -203,13 +203,18 @@ const DetailProduct = (props) => {
                   </div>
                   <div className='inline-block'>
                     {product.county.length >= 21 ? (
-                      <p className='mr-2'>Hela Sverige</p>
+                      <p className=''>Hela Sverige</p>
                     ) : (
-                      product.county.map((item) => (
-                        <div key={item.value} className='mr-2 inline-block'>
+                      <>
+                      {product.county.map((item) => (
+                        <div key={item.value} className='mr-1 inline-block'>
                           {item.label}
+                          {product.county.length > 1 ? (
+                          <div className="ml-1 inline-block">|</div>
+                          ) : (<></>)}
                         </div>
-                      ))
+                      ))}
+                      </>
                     )}
                   </div>
                 </div>

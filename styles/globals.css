@@ -35,7 +35,8 @@ h6 {
 
 img {
   object-fit: cover;
-  object-position: 0 25%;
+  /* object-position: 0 25%; */
+  object-position: center;
 }
 
 .dropdown {
