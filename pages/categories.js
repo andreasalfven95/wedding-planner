@@ -59,7 +59,7 @@ const Categories = () => {
 
   if (!auth.user) return null
   return (
-    <div className='card mx-auto my-3'>
+    <div className='contain card mx-auto my-3'>
       <Head>
         <title>Categories</title>
       </Head>

@@ -13,7 +13,7 @@ const Users = () => {
 
   if (!auth.user) return null
   return (
-    <div className=''>
+    <div className='contain'>
       <Head>
         <title>Users</title>
       </Head>
