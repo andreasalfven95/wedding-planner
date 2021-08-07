@@ -13,8 +13,8 @@ import Link from 'next/link'
 import { useContext } from 'react'
 import { DataContext } from '../store/GlobalState'
 
-import {AiOutlineMail, AiOutlinePhone} from "react-icons/ai"
-import {HiHeart, HiOutlineHeart} from "react-icons/hi"
+import { AiOutlineMail, AiOutlinePhone } from 'react-icons/ai'
+import { HiHeart, HiOutlineHeart } from 'react-icons/hi'
 
 const Map = ({ productsToDisplay }) => {
   /* const [activeMarker, setActiveMarker] = useState(null) */
@@ -43,8 +43,6 @@ const Map = ({ productsToDisplay }) => {
       )
     }
   } */
-
-  
 
   const checkCart = ({ item }) => {
     let isAdded = false
@@ -118,48 +116,54 @@ const Map = ({ productsToDisplay }) => {
               position={[item.coordinates.lat, item.coordinates.lng]}
               /* eventHandlers={{
                 click: (e) => {
-                  console.log(e)
-                  console.log(item)
                   setActiveMarker(item)
                 },
               }} */
               icon={icon}
             >
               <Popup maxWidth={200}>
-                <div className="flex flex-col">
-                  <div className="border-b mb-2">
-                    <h2 className="capitalize text-base font-bold">{item.title}</h2>
+                <div className='flex flex-col'>
+                  <div className='border-b mb-2'>
+                    <h2 className='capitalize text-base font-bold'>
+                      {item.title}
+                    </h2>
                   </div>
-                  <div className="">
-                    <img className="block max-h-32 md:max-w-sm mx-auto md:m-0" layout='fill' src={item.images[0].url} alt={item.images[0].url}></img>
+                  <div className=''>
+                    <img
+                      className='block max-h-32 md:max-w-sm mx-auto md:m-0'
+                      layout='fill'
+                      src={item.images[0].url}
+                      alt={item.images[0].url}
+                    ></img>
                   </div>
-                  <div className="mt-2 mb-1 border-b border-t py-1">{item.description}</div>
+                  <div className='mt-2 mb-1 border-b border-t py-1'>
+                    {item.description}
+                  </div>
 
                   {item.email && (
-                      <div className='flex items-center mb-1'>
-                      <div className="w-min self-start text-beige-normal inline-block mr-4 mt-1">
+                    <div className='flex items-center mb-1'>
+                      <div className='w-min self-start text-beige-normal inline-block mr-4 mt-1'>
                         <AiOutlineMail></AiOutlineMail>
                       </div>
-                        <a
-                          className='hover:underline'
-                          href={`mailto:${item.email}`}
-                        >
-                          {item.email}
-                        </a>
-                      </div>
+                      <a
+                        className='hover:underline'
+                        href={`mailto:${item.email}`}
+                      >
+                        {item.email}
+                      </a>
+                    </div>
                   )}
 
                   {item.phone && (
-                      <div className='flex items-center mb-1'>
-                      <div className="w-min self-start text-beige-normal inline-block mr-4 mt-1">
+                    <div className='flex items-center mb-1'>
+                      <div className='w-min self-start text-beige-normal inline-block mr-4 mt-1'>
                         <AiOutlinePhone></AiOutlinePhone>
                       </div>
-                        <a className='hover:underline' href={`tel:${item.phone}`}>
-                          {item.phone}
-                        </a>
-                      </div>
+                      <a className='hover:underline' href={`tel:${item.phone}`}>
+                        {item.phone}
+                      </a>
+                    </div>
                   )}
-
 
                   <div className='flex justify-end border-t pt-1'>
                     <Link href={`/product/${item._id}`} passHref>
@@ -167,10 +171,9 @@ const Map = ({ productsToDisplay }) => {
                         Läs mer...
                       </Button>
                     </Link>
-                    
-                    {checkCart({item})}
+
+                    {checkCart({ item })}
                   </div>
-                  
                 </div>
               </Popup>
             </Marker>

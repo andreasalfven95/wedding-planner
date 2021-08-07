@@ -31,10 +31,7 @@ export default function SignIn() {
     const res = await postData('auth/login', userData)
 
     if (res.err) {
-      return dispatch(
-        { type: 'NOTIFY', payload: { error: res.err } },
-        console.log('fault')
-      )
+      return dispatch({ type: 'NOTIFY', payload: { error: res.err } })
     }
     dispatch({ type: 'NOTIFY', payload: { success: res.msg } })
 
@@ -114,15 +111,13 @@ export default function SignIn() {
             </a> */}
           </div>
 
-          <div className="flex items-center">
-            <p className='font-bold mr-2'>
-              Har ni inget konto?
-            </p>
-              <Link href='/register' passHref>
-                <Button primary='true' round='true'>
-                  <a className='block font-bold'>Registrera er här!</a>
-                </Button>
-              </Link>
+          <div className='flex items-center'>
+            <p className='font-bold mr-2'>Har ni inget konto?</p>
+            <Link href='/register' passHref>
+              <Button primary='true' round='true'>
+                <a className='block font-bold'>Registrera er här!</a>
+              </Button>
+            </Link>
           </div>
         </form>
       </div>

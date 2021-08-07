@@ -97,16 +97,14 @@ const Profile = () => {
     getData(
       `product?category=${'all'}&county=${'all'}&title=${'all'}&userid=${props}`
     ).then((res) => {
-      /* id = res.products[0]._id
-      console.log(id) */
+      /* id = res.products[0]._id */
+
       setUserProducts(res.products)
     })
   }
 
   useEffect(() => {
     if (userProducts.length > 0) {
-      console.log('Finns produkt: ', userProducts)
-
       setOnEdit(true)
       getData(`product/${userProducts[0]._id}`).then((res) => {
         setProduct(res.product)
@@ -119,7 +117,6 @@ const Profile = () => {
         setCoordinates(res.product.coordinates)
       })
     } else {
-      console.log('finns INTE', userProducts)
       setOnEdit(false)
       setProduct(initialStateProduct)
       setAbout('')
@@ -136,7 +133,6 @@ const Profile = () => {
     if (!product.userid) {
       if (auth.user) {
         if (auth.user.id) {
-          console.log('test')
           setProduct({ ...product, userid: auth.user.id })
         }
       }
@@ -495,38 +491,6 @@ const Profile = () => {
               Produkt:
             </h3>
             <form onSubmit={handleSubmit}>
-              {/* <div className=''>
-                <label
-                  className='block text-grey-darker text-sm font-bold my-2'
-                  htmlFor='show'
-                >
-                  Show product?
-                </label>
-                <input
-                  className='h-5 w-5'
-                  type='checkbox'
-                  checked={show}
-                  onChange={() => setShow(!show)}
-                  name='show'
-                />
-              </div> */}
-              <div className=''>
-                {/* <label
-                  className='block text-grey-darker text-sm font-bold my-2'
-                  htmlFor='userid'
-                >
-                  User ID:
-                </label> */}
-                <input
-                  type='text'
-                  disabled
-                  placeholder='User ID'
-                  name='userid'
-                  value={userid}
-                  onChange={handleChangeInput}
-                  className='shadow appearance-none border border-red rounded w-full py-2 px-3 text-grey-darker'
-                />
-              </div>
               <div className=''>
                 <label
                   className='block text-grey-darker text-sm font-bold my-2'
@@ -757,9 +721,6 @@ const Profile = () => {
                   options={County}
                 />
               </div>
-              {/* {console.log(county.length)}
-          {console.log(county)} */}
-
               <div className=''>
                 <div className='my-4'>
                   <label

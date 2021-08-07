@@ -25,13 +25,8 @@ export class AddressForm extends Component {
     geocodeByAddress(address)
       .then((results) => getLatLng(results[0]))
       .then((latLng) => {
-        console.log('Success', latLng)
-        console.log('Success', typeof latLng)
-        console.log('Success', address)
-        console.log('Success', typeof address)
         this.setState({ address })
         this.props.setAddress = address
-        console.log('Address is', this.props.setAddress)
         /* this.props.coordinates = latLng */
       })
       .catch((error) => console.error('Error', error))

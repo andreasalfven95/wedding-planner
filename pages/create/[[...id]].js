@@ -70,7 +70,6 @@ const ProductsManager = () => {
 
   useEffect(() => {
     if (id) {
-      console.log(id)
       setOnEdit(true)
       getData(`product/${id}`).then((res) => {
         setProduct(res.product)
@@ -115,7 +114,6 @@ const ProductsManager = () => {
   }
 
   useEffect(() => {
-    console.log(about)
     dispatch({ type: 'NOTIFY', payload: {} })
   }, [about])
 
@@ -533,8 +531,6 @@ const ProductsManager = () => {
                 options={County}
               />
             </div>
-            {/* {console.log(county.length)}
-          {console.log(county)} */}
 
             <div className=''>
               <div className='my-4'>

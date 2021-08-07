@@ -4,16 +4,12 @@ import { getData } from '../utils/fetchData'
 import { useRouter } from 'next/router'
 import County from '../data/County'
 import Select from 'react-select'
-/* import Image from './image/Image'
-import NextImg from 'next/image'
-import img from '/img/logo.png' */
 
 const Filter = ({ state }) => {
   const [search, setSearch] = useState('')
   const [sort, setSort] = useState('')
   const [category, setCategory] = useState('')
   const [county, setCounty] = useState([])
-  /* const [county, setCounty] = useState([]) */
 
   const { categories } = state
 
@@ -53,13 +49,10 @@ const Filter = ({ state }) => {
 
   /* const handleCounty = (e) => {
     setCounty(e)
-    console.log(e.target)
-    console.log(county)
   } */
 
   /* const handleSort = (e) => {
     setSort(e.target.value)
-    console.log(e.target.value)
     filterSearch({ router, sort: e.target.value })
   } */
 

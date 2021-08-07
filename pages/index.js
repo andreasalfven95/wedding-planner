@@ -43,17 +43,6 @@ export default function Home(props) {
   }, [products])
 
   /* useEffect(() => {
-    console.log('Coordinates', coordinates)
-  }, [coordinates]) */
-
-  /* useEffect(() => {
-    productsToDisplay.forEach((item) => {
-      markerBounds.push([item.coordinates.lat, item.coordinates.lng])
-    })
-    setCoordinates(markerBounds)
-  }, [productsToDisplay]) */
-
-  /* useEffect(() => {
     if (Object.keys(router.query).length === 0) setPage(1)
   }, [router.query]) */
 
