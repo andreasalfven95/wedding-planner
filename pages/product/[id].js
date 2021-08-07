@@ -81,7 +81,7 @@ const DetailProduct = (props) => {
   return (
     <div className='detail-page contain bg-beige-lighter pb-4 md:pt-2 max-w-5xl'>
       <Head>
-        <title>{product.title}</title>
+        <title>wed2be | {product.title}</title>
       </Head>
       <header className=' border-b border-t border-black py-2'>
         <h2 className='text-3xl capitalize'>{product.title}</h2>
@@ -95,14 +95,17 @@ const DetailProduct = (props) => {
           />
         </div>
 
-        <div className='flex flex-row cursor-pointer mx-auto max-w-2xl' ref={imgRef}>
+        <div
+          className='flex flex-row cursor-pointer mx-auto max-w-2xl'
+          ref={imgRef}
+        >
           {product.images.map((img, index) => (
             <img
               key={index}
               src={img.url}
               alt={img.url}
               className='bg-white opacity-25 p-1'
-              style={{ height: '80px', width: '20%'}}
+              style={{ height: '80px', width: '20%' }}
               onClick={() => setTab(index)}
             />
           ))}
@@ -124,9 +127,9 @@ const DetailProduct = (props) => {
             {product.email && (
               <li>
                 <div className='flex items-center mb-1'>
-                <div className="w-min self-start text-beige-normal inline-block mr-4 mt-1">
-                  <AiOutlineMail></AiOutlineMail>
-                </div>
+                  <div className='w-min self-start text-beige-normal inline-block mr-4 mt-1'>
+                    <AiOutlineMail></AiOutlineMail>
+                  </div>
                   <a
                     className='hover:underline'
                     href={`mailto:${product.email}`}
@@ -140,9 +143,9 @@ const DetailProduct = (props) => {
             {product.phone && (
               <li>
                 <div className='flex items-center mb-1'>
-                <div className="w-min self-start text-beige-normal inline-block mr-4 mt-1">
-                  <AiOutlinePhone></AiOutlinePhone>
-                </div>
+                  <div className='w-min self-start text-beige-normal inline-block mr-4 mt-1'>
+                    <AiOutlinePhone></AiOutlinePhone>
+                  </div>
                   <a className='hover:underline' href={`tel:${product.phone}`}>
                     {product.phone}
                   </a>
@@ -153,9 +156,9 @@ const DetailProduct = (props) => {
             {product.address && (
               <li>
                 <div className='flex items-center mb-1'>
-                <div className="w-min self-start text-beige-normal inline-block mr-4 mt-1">
-                  <FaMapMarkedAlt/>
-                </div>
+                  <div className='w-min self-start text-beige-normal inline-block mr-4 mt-1'>
+                    <FaMapMarkedAlt />
+                  </div>
                   <div className='inline-block'>
                     <a
                       className='hover:underline'
@@ -172,9 +175,9 @@ const DetailProduct = (props) => {
             {product.guests && (
               <li>
                 <div className='flex items-center mb-1'>
-                <div className="w-min self-start text-beige-normal inline-block mr-4 mt-1">
-                  <BsPersonFill></BsPersonFill>
-                </div>
+                  <div className='w-min self-start text-beige-normal inline-block mr-4 mt-1'>
+                    <BsPersonFill></BsPersonFill>
+                  </div>
                   <div className='inline-block'>
                     <p>Max {product.guests} gäster</p>
                   </div>
@@ -185,9 +188,9 @@ const DetailProduct = (props) => {
             {product.rating !== 0 && (
               <li>
                 <div className='flex items-center mb-1'>
-                <div className="w-min self-start text-beige-normal inline-block mr-4 mt-1">
-                  <AiFillStar/>
-                </div>
+                  <div className='w-min self-start text-beige-normal inline-block mr-4 mt-1'>
+                    <AiFillStar />
+                  </div>
                   <div className='inline-block'>
                     <p>{product.rating}</p>
                   </div>
@@ -198,7 +201,7 @@ const DetailProduct = (props) => {
             {product.county && (
               <li>
                 <div className='flex items-center mb-1'>
-                  <div className="w-min self-start text-beige-normal inline-block mr-4 mt-1">
+                  <div className='w-min self-start text-beige-normal inline-block mr-4 mt-1'>
                     <ImLocation />
                   </div>
                   <div className='inline-block'>
@@ -206,14 +209,16 @@ const DetailProduct = (props) => {
                       <p className=''>Hela Sverige</p>
                     ) : (
                       <>
-                      {product.county.map((item) => (
-                        <div key={item.value} className='mr-1 inline-block'>
-                          {item.label}
-                          {product.county.length > 1 ? (
-                          <div className="ml-1 inline-block">|</div>
-                          ) : (<></>)}
-                        </div>
-                      ))}
+                        {product.county.map((item) => (
+                          <div key={item.value} className='mr-1 inline-block'>
+                            {item.label}
+                            {product.county.length > 1 ? (
+                              <div className='ml-1 inline-block'>|</div>
+                            ) : (
+                              <></>
+                            )}
+                          </div>
+                        ))}
                       </>
                     )}
                   </div>
@@ -225,9 +230,9 @@ const DetailProduct = (props) => {
             {product.website && (
               <li>
                 <div className='flex items-center mb-1'>
-                <div className="w-min self-start text-beige-normal inline-block mr-4 mt-1">
-                  <FaGlobeAmericas/>
-                </div>
+                  <div className='w-min self-start text-beige-normal inline-block mr-4 mt-1'>
+                    <FaGlobeAmericas />
+                  </div>
                   <div className='inline-block'>
                     <a
                       target='blank'
@@ -244,9 +249,9 @@ const DetailProduct = (props) => {
             {product.instagram && (
               <li>
                 <div className='flex items-center mb-1'>
-                <div className="w-min self-start text-beige-normal inline-block mr-4 mt-1">
-                  <AiOutlineInstagram/>
-                </div>
+                  <div className='w-min self-start text-beige-normal inline-block mr-4 mt-1'>
+                    <AiOutlineInstagram />
+                  </div>
                   <div className='inline-block'>
                     <a
                       target='blank'
@@ -263,9 +268,9 @@ const DetailProduct = (props) => {
             {product.facebook && (
               <li>
                 <div className='flex items-center mb-1'>
-                <div className="w-min self-start text-beige-normal inline-block mr-4 mt-1">
-                  <AiFillFacebook/>
-                </div>
+                  <div className='w-min self-start text-beige-normal inline-block mr-4 mt-1'>
+                    <AiFillFacebook />
+                  </div>
                   <div className='inline-block'>
                     <a
                       target='blank'

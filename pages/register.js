@@ -50,7 +50,7 @@ export default function Register() {
   return (
     <div className='contain bg-beige-lighter'>
       <Head>
-        <title>Register</title>
+        <title>wed2be | Registrera</title>
       </Head>
       <div className='pt-36'>
         <form
@@ -131,10 +131,8 @@ export default function Register() {
             </button>
           </div>
 
-          <div className="flex items-center">
-            <p className='font-bold mr-2'>
-              Har ni redan ett konto?
-            </p>
+          <div className='flex items-center'>
+            <p className='font-bold mr-2'>Har ni redan ett konto?</p>
             <Link href='/signin' passHref>
               <Button primary='true' round='true'>
                 <a className='block font-bold'>Logga in här!</a>

@@ -396,7 +396,7 @@ const Profile = () => {
   return (
     <div className='profile_page'>
       <Head>
-        <title>Profile</title>
+        <title>wed2be | Profil</title>
       </Head>
 
       <section className='py-3 contain bg-beige-lighter'>

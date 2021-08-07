@@ -15,7 +15,7 @@ const Users = () => {
   return (
     <div className='contain'>
       <Head>
-        <title>Users</title>
+        <title>wed2be | Användare</title>
       </Head>
 
       <table className='table table-auto w-full'>

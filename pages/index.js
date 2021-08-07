@@ -56,7 +56,7 @@ export default function Home(props) {
   return (
     <>
       <Head>
-        <title>WedPlan | Home</title>
+        <title>wed2be | Hem</title>
         <meta
           name='description'
           content='A website for all of those who are planning their big day. Here you can find venues, locations, services etc.'

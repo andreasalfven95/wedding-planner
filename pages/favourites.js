@@ -11,7 +11,7 @@ export default function Cart() {
     return (
       <>
         <Head>
-          <title>Wed2Be | Favoriter</title>
+          <title>wed2be | Favoriter</title>
         </Head>
         <h2 className='text-5xl font-light text-center my-60'>
           Inga sparade favoriter.
@@ -22,7 +22,7 @@ export default function Cart() {
   return (
     <div className='contain bg-beige-lighter'>
       <Head>
-        <title>Wed2Be | Favoriter</title>
+        <title>wed2be | Favoriter</title>
       </Head>
 
       <div className=''>
