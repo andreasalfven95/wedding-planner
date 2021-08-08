@@ -1,4 +1,4 @@
-import connectDB from '../../../utils/connectDB'
+import connectDB from '../../../utils/connectDb'
 import Users from '../../../models/userModel'
 import jwt from 'jsonwebtoken'
 import { createAccessToken } from '../../../utils/generateToken'
