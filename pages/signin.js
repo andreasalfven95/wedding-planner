@@ -58,7 +58,7 @@ export default function SignIn() {
   return (
     <div className='contain bg-beige-lighter'>
       <Head>
-        <title>wwed2be | Logga in</title>
+        <title>wed2be | Logga in</title>
       </Head>
       <div className='pt-44'>
         <form
