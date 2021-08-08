@@ -79,7 +79,7 @@ const DetailProduct = (props) => {
   parse('<h1>single</h1>')
 
   return (
-    <div className='detail-page contain bg-beige-lighter pb-4 md:pt-2 max-w-5xl'>
+    <div className='detail-page mx-auto bg-beige-lighter pb-4 md:pt-2 max-w-5xl'>
       <Head>
         <title>wed2be | {product.title}</title>
       </Head>
