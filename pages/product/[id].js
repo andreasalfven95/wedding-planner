@@ -87,7 +87,7 @@ const DetailProduct = (props) => {
         <h2 className='text-3xl capitalize'>{product.title}</h2>
       </header>
       <div className=''>
-        <div className='h-72 flex items-center justify-center my-2'>
+        <div className='h-80 flex items-center justify-center my-2'>
           <img
             src={product.images[tab].url}
             alt={product.images[tab].url}
