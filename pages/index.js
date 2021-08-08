@@ -118,6 +118,10 @@ export async function getServerSideProps({ query }) {
     `product?category=${category}&county=${county}&sort=${sort}&title=${search}`
   )
 
+  console.log(process.env.CLOUD_UPDATE_PRESET)
+  console.log(process.env.MONGODB_URL)
+  console.log(process.env.BASE_URL)
+
   // server side rendering
   return {
     props: {
