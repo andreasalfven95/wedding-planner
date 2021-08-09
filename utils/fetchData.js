@@ -1,4 +1,4 @@
-const baseUrl = 'https://wed2be-sweden-j37fdxy9s-andreasalfven95.vercel.app'
+const baseUrl = 'https://wed2be-sweden.vercel.app'
 
 export const getData = async (url, token) => {
   const res = await fetch(`${baseUrl}/api/${url}`, {
