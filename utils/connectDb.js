@@ -6,7 +6,7 @@ const connectDB = () => {
     return
   }
 
-  mongoose
+  /* mongoose
     .connect(process.env.MONGODB_URL, {
       useCreateIndex: true,
       useFindAndModify: false,
@@ -18,9 +18,9 @@ const connectDB = () => {
     })
     .catch((err) => {
       console.log('Connection failed!' + err.message)
-    })
+    }) */
 
-  /* mongoose.connect(
+  mongoose.connect(
     process.env.MONGODB_URL,
     {
       useCreateIndex: true,
@@ -32,7 +32,7 @@ const connectDB = () => {
       if (err) throw err
       console.log('Connected to mongodb.')
     }
-  ) */
+  )
 }
 
 export default connectDB

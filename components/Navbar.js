@@ -119,7 +119,7 @@ const Navbar = ({ toggle }) => {
           <Link href='/' passHref className='flex items-center w-full h-full'>
             <img
               src='/img/logo.svg'
-              className='h-full max-h-20 py-2 object-contain cursor-pointer'
+              className='h-full md:max-h-20 py-2 object-contain cursor-pointer'
             />
           </Link>
           <div className='hidden md:flex flex-row min-w-max justify-start items-center'>

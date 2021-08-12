@@ -1,4 +1,4 @@
-import connectDB from '../../../utils/connectDb'
+import connectDB from '../../../utils/connectDB'
 import Users from '../../../models/userModel'
 import auth from '../../../middleware/auth'
 import bcrypt from 'bcrypt'

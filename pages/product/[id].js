@@ -79,214 +79,221 @@ const DetailProduct = (props) => {
   parse('<h1>single</h1>')
 
   return (
-    <div className='detail-page mx-auto bg-beige-lighter pb-4 md:pt-2 max-w-5xl'>
-      <Head>
-        <title>wed2be | {product.title}</title>
-      </Head>
-      <header className=' border-b border-t border-black py-2'>
-        <h2 className='text-3xl capitalize'>{product.title}</h2>
-      </header>
-      <div className=''>
-        <div className='h-80 flex items-center justify-center my-2'>
-          <img
-            src={product.images[tab].url}
-            alt={product.images[tab].url}
-            className='block mt-2 max-h-full'
-          />
-        </div>
-
-        <div
-          className='flex flex-row cursor-pointer mx-auto max-w-2xl'
-          ref={imgRef}
-        >
-          {product.images.map((img, index) => (
+    <div className='detail-page pb-4 md:pt-2 contain'>
+      <div className='bg-white p-3 card-container max-w-5xl mx-auto rounded-xl border border-beige-light shadow-md'>
+        <Head>
+          <title>wed2be | {product.title}</title>
+        </Head>
+        <header className=' border-b border-t border-black py-2'>
+          <h2 className='text-3xl md:text-5xl font-thin text-center capitalize'>
+            {product.title}
+          </h2>
+        </header>
+        <div className=''>
+          <div className='h-80 flex items-center justify-center my-2'>
             <img
-              key={index}
-              src={img.url}
-              alt={img.url}
-              className='bg-white opacity-25 p-1'
-              style={{ height: '80px', width: '20%' }}
-              onClick={() => setTab(index)}
+              src={product.images[tab].url}
+              alt={product.images[tab].url}
+              className='block mt-2 max-h-full'
             />
-          ))}
-        </div>
-      </div>
-      {/* BIG SCREEN: Picture to left, information to right */}
-      <div className='col-md-6'>
-        <div className='information pt-2 border-b border-black mb-4'>
-          <h3 className='text-lg font-medium pb-2'>{product.description}</h3>
-          <p className='leading-6 italic pb-3 font-extralight'>
-            {product.content}
-          </p>
-          <div className='about leading-6'>{parse(product.about)}</div>
-        </div>
-      </div>
-      <div className='company-info justify-end break-all text-base'>
-        <ul className=''>
-          <div className='information mb-4 pb-2 border-b'>
-            {product.email && (
-              <li>
-                <div className='flex items-center mb-1'>
-                  <div className='w-min self-start text-beige-normal inline-block mr-4 mt-1'>
-                    <AiOutlineMail></AiOutlineMail>
-                  </div>
-                  <a
-                    className='hover:underline'
-                    href={`mailto:${product.email}`}
-                  >
-                    {product.email}
-                  </a>
-                </div>
-              </li>
-            )}
-
-            {product.phone && (
-              <li>
-                <div className='flex items-center mb-1'>
-                  <div className='w-min self-start text-beige-normal inline-block mr-4 mt-1'>
-                    <AiOutlinePhone></AiOutlinePhone>
-                  </div>
-                  <a className='hover:underline' href={`tel:${product.phone}`}>
-                    {product.phone}
-                  </a>
-                </div>
-              </li>
-            )}
-
-            {product.address && (
-              <li>
-                <div className='flex items-center mb-1'>
-                  <div className='w-min self-start text-beige-normal inline-block mr-4 mt-1'>
-                    <FaMapMarkedAlt />
-                  </div>
-                  <div className='inline-block'>
-                    <a
-                      className='hover:underline'
-                      target='blank'
-                      href={`http://maps.google.com/?q=${product.address}`}
-                    >
-                      {product.address}
-                    </a>
-                  </div>
-                </div>
-              </li>
-            )}
-
-            {product.guests && (
-              <li>
-                <div className='flex items-center mb-1'>
-                  <div className='w-min self-start text-beige-normal inline-block mr-4 mt-1'>
-                    <BsPersonFill></BsPersonFill>
-                  </div>
-                  <div className='inline-block'>
-                    <p>Max {product.guests} gäster</p>
-                  </div>
-                </div>
-              </li>
-            )}
-
-            {product.rating !== 0 && (
-              <li>
-                <div className='flex items-center mb-1'>
-                  <div className='w-min self-start text-beige-normal inline-block mr-4 mt-1'>
-                    <AiFillStar />
-                  </div>
-                  <div className='inline-block'>
-                    <p>{product.rating}</p>
-                  </div>
-                </div>
-              </li>
-            )}
-
-            {product.county && (
-              <li>
-                <div className='flex items-center mb-1'>
-                  <div className='w-min self-start text-beige-normal inline-block mr-4 mt-1'>
-                    <ImLocation />
-                  </div>
-                  <div className='inline-block'>
-                    {product.county.length >= 21 ? (
-                      <p className=''>Hela Sverige</p>
-                    ) : (
-                      <>
-                        {product.county.map((item) => (
-                          <div key={item.value} className='mr-1 inline-block'>
-                            {item.label}
-                            {product.county.length > 1 ? (
-                              <div className='ml-1 inline-block'>|</div>
-                            ) : (
-                              <></>
-                            )}
-                          </div>
-                        ))}
-                      </>
-                    )}
-                  </div>
-                </div>
-              </li>
-            )}
           </div>
-          <div className='socials'>
-            {product.website && (
-              <li>
-                <div className='flex items-center mb-1'>
-                  <div className='w-min self-start text-beige-normal inline-block mr-4 mt-1'>
-                    <FaGlobeAmericas />
-                  </div>
-                  <div className='inline-block'>
-                    <a
-                      target='blank'
-                      href={product.website}
-                      className='hover:underline'
-                    >
-                      {product.website}
-                    </a>
-                  </div>
-                </div>
-              </li>
-            )}
 
-            {product.instagram && (
-              <li>
-                <div className='flex items-center mb-1'>
-                  <div className='w-min self-start text-beige-normal inline-block mr-4 mt-1'>
-                    <AiOutlineInstagram />
-                  </div>
-                  <div className='inline-block'>
-                    <a
-                      target='blank'
-                      href={product.instagram}
-                      className='hover:underline'
-                    >
-                      {product.instagram}
-                    </a>
-                  </div>
-                </div>
-              </li>
-            )}
-
-            {product.facebook && (
-              <li>
-                <div className='flex items-center mb-1'>
-                  <div className='w-min self-start text-beige-normal inline-block mr-4 mt-1'>
-                    <AiFillFacebook />
-                  </div>
-                  <div className='inline-block'>
-                    <a
-                      target='blank'
-                      href={product.facebook}
-                      className='hover:underline'
-                    >
-                      {product.facebook}
-                    </a>
-                  </div>
-                </div>
-              </li>
-            )}
+          <div
+            className='flex flex-row cursor-pointer mx-auto max-w-2xl'
+            ref={imgRef}
+          >
+            {product.images.map((img, index) => (
+              <img
+                key={index}
+                src={img.url}
+                alt={img.url}
+                className='bg-white opacity-25 p-1'
+                style={{ height: '80px', width: '20%' }}
+                onClick={() => setTab(index)}
+              />
+            ))}
           </div>
-        </ul>
+        </div>
+        {/* BIG SCREEN: Picture to left, information to right */}
+        <div className='col-md-6'>
+          <div className='information pt-2 border-b border-black mb-4'>
+            <h3 className='text-lg font-medium pb-2'>{product.description}</h3>
+            <p className='leading-6 italic pb-3 font-extralight'>
+              {product.content}
+            </p>
+            <div className='about leading-6'>{parse(product.about)}</div>
+          </div>
+        </div>
+        <div className='company-info justify-end break-all text-base'>
+          <ul className=''>
+            <div className='information mb-4 pb-2 border-b'>
+              {product.email && (
+                <li>
+                  <div className='flex items-center mb-1'>
+                    <div className='w-min self-start text-beige-normal inline-block mr-4 mt-1'>
+                      <AiOutlineMail></AiOutlineMail>
+                    </div>
+                    <a
+                      className='hover:underline'
+                      href={`mailto:${product.email}`}
+                    >
+                      {product.email}
+                    </a>
+                  </div>
+                </li>
+              )}
+
+              {product.phone && (
+                <li>
+                  <div className='flex items-center mb-1'>
+                    <div className='w-min self-start text-beige-normal inline-block mr-4 mt-1'>
+                      <AiOutlinePhone></AiOutlinePhone>
+                    </div>
+                    <a
+                      className='hover:underline'
+                      href={`tel:${product.phone}`}
+                    >
+                      {product.phone}
+                    </a>
+                  </div>
+                </li>
+              )}
+
+              {product.address && (
+                <li>
+                  <div className='flex items-center mb-1'>
+                    <div className='w-min self-start text-beige-normal inline-block mr-4 mt-1'>
+                      <FaMapMarkedAlt />
+                    </div>
+                    <div className='inline-block'>
+                      <a
+                        className='hover:underline'
+                        target='blank'
+                        href={`http://maps.google.com/?q=${product.address}`}
+                      >
+                        {product.address}
+                      </a>
+                    </div>
+                  </div>
+                </li>
+              )}
+
+              {product.guests && (
+                <li>
+                  <div className='flex items-center mb-1'>
+                    <div className='w-min self-start text-beige-normal inline-block mr-4 mt-1'>
+                      <BsPersonFill></BsPersonFill>
+                    </div>
+                    <div className='inline-block'>
+                      <p>Max {product.guests} gäster</p>
+                    </div>
+                  </div>
+                </li>
+              )}
+
+              {product.rating !== 0 && (
+                <li>
+                  <div className='flex items-center mb-1'>
+                    <div className='w-min self-start text-beige-normal inline-block mr-4 mt-1'>
+                      <AiFillStar />
+                    </div>
+                    <div className='inline-block'>
+                      <p>{product.rating}</p>
+                    </div>
+                  </div>
+                </li>
+              )}
+
+              {product.county && (
+                <li>
+                  <div className='flex items-center mb-1'>
+                    <div className='w-min self-start text-beige-normal inline-block mr-4 mt-1'>
+                      <ImLocation />
+                    </div>
+                    <div className='inline-block'>
+                      {product.county.length >= 21 ? (
+                        <p className=''>Hela Sverige</p>
+                      ) : (
+                        <>
+                          {product.county.map((item) => (
+                            <div key={item.value} className='mr-1 inline-block'>
+                              {item.label}
+                              {product.county.length > 1 ? (
+                                <div className='ml-1 inline-block'>|</div>
+                              ) : (
+                                <></>
+                              )}
+                            </div>
+                          ))}
+                        </>
+                      )}
+                    </div>
+                  </div>
+                </li>
+              )}
+            </div>
+            <div className='socials'>
+              {product.website && (
+                <li>
+                  <div className='flex items-center mb-1'>
+                    <div className='w-min self-start text-beige-normal inline-block mr-4 mt-1'>
+                      <FaGlobeAmericas />
+                    </div>
+                    <div className='inline-block'>
+                      <a
+                        target='blank'
+                        href={product.website}
+                        className='hover:underline'
+                      >
+                        {product.website}
+                      </a>
+                    </div>
+                  </div>
+                </li>
+              )}
+
+              {product.instagram && (
+                <li>
+                  <div className='flex items-center mb-1'>
+                    <div className='w-min self-start text-beige-normal inline-block mr-4 mt-1'>
+                      <AiOutlineInstagram />
+                    </div>
+                    <div className='inline-block'>
+                      <a
+                        target='blank'
+                        href={product.instagram}
+                        className='hover:underline'
+                      >
+                        {product.instagram}
+                      </a>
+                    </div>
+                  </div>
+                </li>
+              )}
+
+              {product.facebook && (
+                <li>
+                  <div className='flex items-center mb-1'>
+                    <div className='w-min self-start text-beige-normal inline-block mr-4 mt-1'>
+                      <AiFillFacebook />
+                    </div>
+                    <div className='inline-block'>
+                      <a
+                        target='blank'
+                        href={product.facebook}
+                        className='hover:underline'
+                      >
+                        {product.facebook}
+                      </a>
+                    </div>
+                  </div>
+                </li>
+              )}
+            </div>
+          </ul>
+        </div>
+        <div className='flex justify-end'>{checkCart()}</div>
       </div>
-      <div className='flex justify-end'>{checkCart()}</div>
     </div>
   )
 }
