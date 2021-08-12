@@ -1,6 +1,6 @@
-import connectDB from '../../../utils/connectDB'
 import Users from '../../../models/userModel'
 import auth from '../../../middleware/auth'
+import connectDB from './../../../utils/connectDb'
 
 connectDB()
 
