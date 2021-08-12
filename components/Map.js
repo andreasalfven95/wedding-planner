@@ -95,6 +95,7 @@ const Map = ({ productsToDisplay }) => {
         /* whenCreated={map => OpenStreetMapProvider(map)} */
         /* bounds={coordinates} */
         /* boundsOptions={{ padding: [500, 500] }} */
+        dragging='false'
         className='markercluster-map'
         center={center}
         zoom={zoom}
