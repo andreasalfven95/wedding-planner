@@ -1,5 +1,5 @@
 module.exports = {
-  /* async headers() {
+  async headers() {
     return [
       {
         // matching all API routes
@@ -19,7 +19,7 @@ module.exports = {
         ],
       },
     ]
-  }, */
+  },
   //From where can images be fetched
   images: {
     domains: ['res.cloudinary.com'],
