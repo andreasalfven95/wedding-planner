@@ -116,10 +116,10 @@ const Navbar = ({ toggle }) => {
         </Link> */}
       <div className='w-full h-full flex flex-row items-center justify-between'>
         <div className='flex items-center justify-start mr-2'>
-          <Link href='/' passHref className='flex items-center w-full h-full'>
+          <Link href='/' passHref className='py-2'>
             <img
               src='/img/logo.svg'
-              className='h-full md:max-h-20 py-2 object-contain cursor-pointer'
+              className='max-h-20 object-contain w-full h-full py-2'
             />
           </Link>
           <div className='hidden md:flex flex-row min-w-max justify-start items-center'>
