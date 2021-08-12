@@ -4,6 +4,7 @@ import auth from '../../../middleware/auth'
 import bcrypt from 'bcrypt'
 
 connectDB()
+
 export default async (req, res) => {
   switch (req.method) {
     case 'PATCH':
