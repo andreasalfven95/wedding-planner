@@ -3,7 +3,7 @@ import bcrypt from 'bcrypt'
 import Users from '../../../models/userModel'
 import connectDB from './../../../utils/connectDb'
 
-connectDB
+connectDB()
 
 export default async (req, res) => {
   switch (req.method) {
