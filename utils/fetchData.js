@@ -17,6 +17,7 @@ export const postData = async (url, post, token) => {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
+      'Accept': 'application/json',
       Authorization: token,
     },
     body: JSON.stringify(post),
@@ -59,6 +60,11 @@ export const patchData = async (url, post, token) => {
     },
     body: JSON.stringify(post),
   })
+  if (res.err)
+    return dispatch({
+      type: 'NOTIFY',
+      payload: { error: res.err },
+  })
 
   const data = await res.json()
   return data
@@ -71,6 +77,11 @@ export const deleteData = async (url, token) => {
       'Content-Type': 'application/json',
       Authorization: token,
     },
+  })
+  if (res.err)
+    return dispatch({
+      type: 'NOTIFY',
+      payload: { error: res.err },
   })
 
   const data = await res.json()

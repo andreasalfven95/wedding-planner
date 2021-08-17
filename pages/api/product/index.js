@@ -165,6 +165,6 @@ const createProduct = async (req, res) => {
 
     res.json({ msg: 'Success, created a new product!' })
   } catch (err) {
-    return res.status(500).json({ err: err.message })
+    return console.log("Här bör vara problemet...")/* res.status(500).json({ err: err.message }) */
   }
 }
