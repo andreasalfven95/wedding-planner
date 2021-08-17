@@ -560,7 +560,7 @@ const Profile = () => {
                   className='block text-grey-darker text-sm font-bold my-2'
                   htmlFor='description'
                 >
-                  Slogan*
+                  Slogan* (max 100 tecken)
                 </label>
                 <textarea
                   required
@@ -569,6 +569,7 @@ const Profile = () => {
                   name='description'
                   id='description'
                   value={description}
+                  maxLength="100"
                   cols='30'
                   rows='1'
                   onChange={handleChangeInput}
@@ -578,7 +579,7 @@ const Profile = () => {
                   className='block text-grey-darker text-sm font-bold my-2'
                   htmlFor='content'
                 >
-                  Sammanfattning*
+                  Sammanfattning* (max 300 tecken)
                 </label>
                 <textarea
                   required
@@ -587,6 +588,7 @@ const Profile = () => {
                   name='content'
                   id='content'
                   value={content}
+                  maxLength="300"
                   cols='30'
                   rows='3'
                   onChange={handleChangeInput}

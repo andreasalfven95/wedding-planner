@@ -35,6 +35,11 @@ export const putData = async (url, post, token) => {
     },
     body: JSON.stringify(post),
   })
+  if (res.err)
+    return dispatch({
+      type: 'NOTIFY',
+      payload: { error: res.err },
+  })
 
   const data = await res.json()
   return data
