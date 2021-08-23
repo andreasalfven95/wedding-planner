@@ -164,7 +164,15 @@ const createProduct = async (req, res) => {
     await newProduct.save()
 
     res.json({ msg: 'Success, created a new product!' })
+    if (res.err) {
+      console.log('Här bör vara problemet...1')
+    }
   } catch (err) {
-    return console.log("Här bör vara problemet...")/* res.status(500).json({ err: err.message }) */
+    return console.log(
+      'Här bör vara problemet...2'
+    ) /* res.status(500).json({ err: err.message }) */
+  }
+  if (res.err) {
+    console.log('Här bör vara problemet...3')
   }
 }
