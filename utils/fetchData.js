@@ -1,4 +1,5 @@
-const baseUrl = process.env.NEXT_PUBLIC_BASE_URL
+/* const baseUrl = process.env.NEXT_PUBLIC_BASE_URL */
+const baseUrl = process.env.BASE_URL
 
 export const getData = async (url, token) => {
   const res = await fetch(`${baseUrl}/api/${url}`, {
@@ -17,7 +18,7 @@ export const postData = async (url, post, token) => {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      'Accept': 'application/json',
+      Accept: 'application/json',
       Authorization: token,
     },
     body: JSON.stringify(post),
@@ -26,7 +27,7 @@ export const postData = async (url, post, token) => {
     return dispatch({
       type: 'NOTIFY',
       payload: { error: res.err },
-  })
+    })
 
   const data = await res.json()
   return data
@@ -45,7 +46,7 @@ export const putData = async (url, post, token) => {
     return dispatch({
       type: 'NOTIFY',
       payload: { error: res.err },
-  })
+    })
 
   const data = await res.json()
   return data
@@ -64,7 +65,7 @@ export const patchData = async (url, post, token) => {
     return dispatch({
       type: 'NOTIFY',
       payload: { error: res.err },
-  })
+    })
 
   const data = await res.json()
   return data
@@ -82,7 +83,7 @@ export const deleteData = async (url, token) => {
     return dispatch({
       type: 'NOTIFY',
       payload: { error: res.err },
-  })
+    })
 
   const data = await res.json()
   return data

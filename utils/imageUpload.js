@@ -11,7 +11,11 @@ export const imageUpload = async (images) => {
       body: formData,
     })
 
+    if (res.err) return console.log('FUNGERAR ICKE...')
+
     const data = await res.json()
+    if (data.err) return console.log('FUNGERAR ICKE...')
+
     imgArr.push({ public_id: data.public_id, url: data.secure_url })
   }
 

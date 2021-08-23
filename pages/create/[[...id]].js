@@ -250,11 +250,10 @@ const ProductsManager = () => {
         },
         auth.token
       )
-      if (res.err)
-        return dispatch({
+      if (res.err) return console.log('bajs') /* dispatch({
           type: 'NOTIFY',
           payload: { error: res.err },
-        })
+        }) */
     }
     return dispatch({
       type: 'NOTIFY',
