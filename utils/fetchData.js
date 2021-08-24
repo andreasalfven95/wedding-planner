@@ -16,7 +16,7 @@ export const getData = async (url, token) => {
 
 export const postData = async (url, post, token) => {
   /* const res = await fetch(`${baseUrl}/api/${url}/index.js`, { */
-  const res = await fetch(`/api/${url}/index.js`, {
+  const res = await fetch(`/api/${url}`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
