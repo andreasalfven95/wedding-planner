@@ -557,8 +557,8 @@ const ProductsManager = () => {
                   >
                     <div className='w-full h-full p-1 relative'>
                       <img
-                        src={img.url ? img.url : URL.createObjectURL(img)}
-                        alt=''
+                        src={img.url ? img.url : (URL.srcObject = img)}
+                        alt={img.url ? img.url : (URL.srcObject = img)}
                         className='img-thumbnail w-full h-full'
                       />
                       <span
