@@ -238,7 +238,7 @@ const ProductsManager = () => {
         })
     } else {
       res = await postData(
-        'product',
+        'product/index.js',
         {
           ...product,
           about: updatedAbout,
