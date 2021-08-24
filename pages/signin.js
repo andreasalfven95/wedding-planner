@@ -52,7 +52,7 @@ export default function SignIn() {
   }
 
   useEffect(() => {
-    if (Object.keys(auth).length !== 0) router.push('/')
+    if (Object.keys(auth).length !== 0) router.push('/profile')
   }, [auth])
 
   return (
