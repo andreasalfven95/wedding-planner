@@ -550,26 +550,29 @@ const ProductsManager = () => {
                 />
               </div>
               <div className='images w-full flex'>
-                {images.map((img, index) => (
-                  <div
-                    key={index}
-                    className='img-file h-28 w-1/5 hover:opacity-75'
-                  >
-                    <div className='w-full h-full p-1 relative'>
-                      <img
-                        src={img.url ? img.url : (URL.srcObject = img)}
-                        alt={img.url ? img.url : (URL.srcObject = img)}
-                        className='img-thumbnail w-full h-full'
-                      />
-                      <span
-                        onClick={() => deleteImage(index)}
-                        className='cursor-pointer hover:scale-95 flex flex-row justify-center items-center text-2xl border border-gray-300 font-extrabold bg-white hover:bg-gray-300 h-8 w-8 rounded-full text-red-600 absolute top-0 right-0'
-                      >
-                        x
-                      </span>
+                {images &&
+                  images.length !== 0 &&
+                  images.map((img, index) => (
+                    <div
+                      key={index}
+                      className='img-file h-28 w-1/5 hover:opacity-75'
+                    >
+                      <div className='w-full h-full p-1 relative'>
+                        <img
+                          /* src={img.url ? img.url : (URL.srcObject = img)} */
+                          src={img.url ? img.url : URL.createObjectURL(img)}
+                          alt='image'
+                          className='img-thumbnail w-full h-full'
+                        />
+                        <span
+                          onClick={() => deleteImage(index)}
+                          className='cursor-pointer hover:scale-95 flex flex-row justify-center items-center text-2xl border border-gray-300 font-extrabold bg-white hover:bg-gray-300 h-8 w-8 rounded-full text-red-600 absolute top-0 right-0'
+                        >
+                          x
+                        </span>
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  ))}
               </div>
             </div>
             <div className='socials mb-4'>
