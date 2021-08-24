@@ -6,11 +6,11 @@ connectDB()
 
 export default async (req, res) => {
   switch (req.method) {
-    case 'GET':
-      await getProducts(req, res)
-      break
     case 'POST':
       await createProduct(req, res)
+      break
+    case 'GET':
+      await getProducts(req, res)
       break
   }
 }
@@ -164,15 +164,7 @@ const createProduct = async (req, res) => {
     await newProduct.save()
 
     res.json({ msg: 'Success, created a new product!' })
-    if (res.err) {
-      console.log('Här bör vara problemet...1')
-    }
   } catch (err) {
-    return console.log(
-      'Här bör vara problemet...2'
-    ) /* res.status(500).json({ err: err.message }) */
-  }
-  if (res.err) {
-    console.log('Här bör vara problemet...3')
+    return res.status(500).json({ err: err.message })
   }
 }

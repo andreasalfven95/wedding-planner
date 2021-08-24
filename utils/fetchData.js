@@ -14,13 +14,11 @@ export const getData = async (url, token) => {
   return data
 }
 
-export const postData = async (url, post, token) => {
-  /* const res = await fetch(`${baseUrl}/api/${url}/index.js`, { */
+/* export const postData = async (url, post, token) => {
   const res = await fetch(`/api/${url}`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      /* Accept: 'application/json', */
       Authorization: token,
     },
     body: JSON.stringify(post),
@@ -30,6 +28,20 @@ export const postData = async (url, post, token) => {
       type: 'NOTIFY',
       payload: { error: res.err },
     })
+
+  const data = await res.json()
+  return data
+} */
+
+export const postData = async (url, post, token) => {
+  const res = await fetch(`./api/${url}`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: token,
+    },
+    body: JSON.stringify(post),
+  })
 
   const data = await res.json()
   return data
