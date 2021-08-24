@@ -10,6 +10,13 @@ export const getData = async (url, token) => {
     },
   })
 
+  if (res.err) {
+    return dispatch({
+      type: 'NOTIFY',
+      payload: { error: res.err },
+    })
+  }
+
   const data = await res.json()
   return data
 }
@@ -43,6 +50,13 @@ export const postData = async (url, post, token) => {
     body: JSON.stringify(post),
   })
 
+  if (res.err) {
+    return dispatch({
+      type: 'NOTIFY',
+      payload: { error: res.err },
+    })
+  }
+
   const data = await res.json()
   return data
 }
@@ -56,11 +70,13 @@ export const putData = async (url, post, token) => {
     },
     body: JSON.stringify(post),
   })
-  if (res.err)
+
+  if (res.err) {
     return dispatch({
       type: 'NOTIFY',
       payload: { error: res.err },
     })
+  }
 
   const data = await res.json()
   return data
@@ -75,11 +91,13 @@ export const patchData = async (url, post, token) => {
     },
     body: JSON.stringify(post),
   })
-  if (res.err)
+
+  if (res.err) {
     return dispatch({
       type: 'NOTIFY',
       payload: { error: res.err },
     })
+  }
 
   const data = await res.json()
   return data
@@ -93,11 +111,13 @@ export const deleteData = async (url, token) => {
       Authorization: token,
     },
   })
-  if (res.err)
+
+  if (res.err) {
     return dispatch({
       type: 'NOTIFY',
       payload: { error: res.err },
     })
+  }
 
   const data = await res.json()
   return data

@@ -12,16 +12,19 @@ export const imageUpload = async (images) => {
     formData.append('cloud_name', process.env.CLOUD_NAME)
     /* formData.append('cloud_name', process.env.NEXT_PUBLIC_CLOUD_NAME) */
 
-    const res = await fetch(process.env.CLOUD_API, {
-      /* const res = await fetch(process.env.NEXT_PUBLIC_CLOUD_API, { */
+    /* const res = await fetch(process.env.CLOUD_API, { */
+    const res = await fetch(process.env.NEXT_PUBLIC_CLOUD_API, {
       method: 'POST',
       body: formData,
     })
 
-    if (res.err) return console.log('FUNGERAR ICKE...')
+    if (res.err)
+      return dispatch({
+        type: 'NOTIFY',
+        payload: { error: res.err },
+      })
 
     const data = await res.json()
-    if (data.err) return console.log('FUNGERAR ICKE...')
 
     imgArr.push({ public_id: data.public_id, url: data.secure_url })
   }
