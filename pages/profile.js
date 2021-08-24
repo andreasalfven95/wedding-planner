@@ -748,8 +748,8 @@ const Profile = () => {
                     >
                       <div className='w-full h-full p-1 relative'>
                         <img
-                          src={img.url ? img.url : URL.createObjectURL(img)}
-                          alt=''
+                          src={img.url ? img.url : (URL.srcObject = img)}
+                          alt='img'
                           className='img-thumbnail w-full h-full'
                         />
                         <span
