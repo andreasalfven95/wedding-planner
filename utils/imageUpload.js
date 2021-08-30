@@ -12,7 +12,9 @@ export const imageUpload = async (images) => {
     formData.append('cloud_name', process.env.NEXT_PUBLIC_CLOUD_NAME)
 
     /* const res = await fetch(process.env.CLOUD_API, { */
-    const res = await fetch(process.env.NEXT_PUBLIC_CLOUD_API, {
+
+    let res
+    res = await fetch(process.env.NEXT_PUBLIC_CLOUD_API, {
       method: 'POST',
       body: formData,
     })
@@ -24,7 +26,6 @@ export const imageUpload = async (images) => {
       })
 
     const data = await res.json()
-
     imgArr.push({ public_id: data.public_id, url: data.secure_url })
   }
 
