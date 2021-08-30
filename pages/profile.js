@@ -407,7 +407,7 @@ const Profile = () => {
           <div className='w-40 h-40 overflow-hidden relative my-4 mx-auto border border-solid border-gray-300 rounded-full'>
             <img
               className='w-full h-full block object-cover'
-              src={avatar ? (URL.srcObject = avatar) : auth.user.avatar}
+              src={avatar ? URL.createObjectURL(avatar) : auth.user.avatar}
               alt='avatar'
             />
             <span className='absolute bottom-0 left-0 w-full h-2/5 bg-gray-500 bg-opacity-70 text-center font-normal cursor-pointer'>
