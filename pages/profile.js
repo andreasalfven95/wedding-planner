@@ -174,6 +174,7 @@ const Profile = () => {
           console.log('should be fine')
         })
         .catch((err) => {
+          files = []
           return dispatch({
             type: 'NOTIFY',
             payload: {
@@ -748,7 +749,8 @@ const Profile = () => {
                     htmlFor='upload'
                     className='block text-grey-darker text-sm font-bold'
                   >
-                    Ladda upp bilder (max 5 st, max 1Mb/bild)*
+                    Ladda upp bilder (max 5 st, max 1Mb/bild, bara lokala
+                    filer)*
                   </label>
                   <input
                     type='file'
