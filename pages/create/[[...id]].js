@@ -220,7 +220,7 @@ const ProductsManager = () => {
             type: 'NOTIFY',
             payload: {
               error:
-                'Kan inte läsa fil, ladda bara upp lokala filer, dvs inte från t.ex. Google Drive.',
+                'Kan inte läsa bild, ladda bara upp lokala filer, dvs inte från t.ex. Google Drive.',
             },
           })
         })
