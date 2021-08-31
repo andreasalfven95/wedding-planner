@@ -165,7 +165,7 @@ const Profile = () => {
     let err = ''
     const files = [...e.target.files]
 
-    files.forEach((file) => {
+    /* files.forEach((file) => {
       file
         .slice(0, 1) // only the first byte
         .arrayBuffer() // try to read
@@ -183,7 +183,7 @@ const Profile = () => {
             },
           })
         })
-    })
+    }) */
 
     if (files.length === 0)
       return dispatch({
@@ -195,6 +195,27 @@ const Profile = () => {
         return (err = 'The largest file size is 1 MB.')
       if (file.type !== 'image/jpeg' && file.type !== 'image/png')
         return (err = 'Image format is incorrect.')
+
+      /* if(files.length > 0){
+        file
+        .slice(0, 1) // only the first byte
+        .arrayBuffer() // try to read
+        .then(() => {
+          // success, we should be able to send that File
+          console.log('should be fine')
+        })
+        .catch((err) => {
+          files = []
+          console.log(err);
+          return dispatch({
+            type: 'NOTIFY',
+            payload: {
+              error:
+                'Kan inte läsa fil, ladda bara upp lokala filer, dvs inte från t.ex. Google Drive.',
+            },
+          })
+        })
+      } */
 
       num += 1
       if (num <= 5) newImages.push(file)
@@ -274,6 +295,26 @@ const Profile = () => {
         payload: { error: 'User ID and id on products does not match.' },
       })
     }
+
+    images.forEach((file) => {
+      file
+        .slice(0, 1) // only the first byte
+        .arrayBuffer() // try to read
+        .then(() => {
+          // success, we should be able to send that File
+          console.log('should be fine')
+        })
+        .catch((err) => {
+          files = []
+          return dispatch({
+            type: 'NOTIFY',
+            payload: {
+              error:
+                'Kan inte läsa fil, ladda bara upp lokala filer, dvs inte från t.ex. Google Drive.',
+            },
+          })
+        })
+    })
 
     dispatch({
       type: 'NOTIFY',

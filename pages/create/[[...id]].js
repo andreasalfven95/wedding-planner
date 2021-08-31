@@ -206,6 +206,26 @@ const ProductsManager = () => {
         payload: { error: 'Authentication is not valid.' },
       })
 
+    images.forEach((file) => {
+      file
+        .slice(0, 1) // only the first byte
+        .arrayBuffer() // try to read
+        .then(() => {
+          // success, we should be able to send that File
+          console.log('should be fine')
+        })
+        .catch((err) => {
+          files = []
+          return dispatch({
+            type: 'NOTIFY',
+            payload: {
+              error:
+                'Kan inte läsa fil, ladda bara upp lokala filer, dvs inte från t.ex. Google Drive.',
+            },
+          })
+        })
+    })
+
     dispatch({
       type: 'NOTIFY',
       payload: { loading: true },
