@@ -420,7 +420,7 @@ const Profile = () => {
         payload: { error: 'Image must be either JPEG or PNG.' },
       })
 
-    file.forEach((file) => {
+    
       file
         .slice(0, 1) // only the first byte
         .arrayBuffer() // try to read
@@ -438,7 +438,7 @@ const Profile = () => {
             },
           })
         })
-    })
+    }
 
     setData({ ...data, avatar: file })
   }
