@@ -305,7 +305,7 @@ const Profile = () => {
           console.log('should be fine')
         })
         .catch((err) => {
-          files = []
+          /* setImages([]) */
           return dispatch({
             type: 'NOTIFY',
             payload: {
