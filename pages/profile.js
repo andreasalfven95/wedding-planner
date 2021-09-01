@@ -256,9 +256,6 @@ const Profile = () => {
     }
 
     images.forEach((file) => {
-      console.log(images)
-      console.log(file)
-
       if (!file.url) {
         file
           .slice(0, 1) // only the first byte
