@@ -256,24 +256,28 @@ const Profile = () => {
     }
 
     images.forEach((file) => {
-      file
-        .slice(0, 1) // only the first byte
-        .arrayBuffer() // try to read
-        .then(() => {
-          // success, we should be able to send that File
-          console.log('Image file URL is OK')
-        })
-        .catch((err) => {
-          setImages([])
-          //testar detta
-          return dispatch({
-            type: 'NOTIFY',
-            payload: {
-              error:
-                'Kan inte läsa bild, ladda bara upp lokala filer, dvs inte från t.ex. Google Drive.',
-            },
+      console.log(images)
+      console.log(file)
+      if (typeof file === 'string') {
+        file
+          .slice(0, 1) // only the first byte
+          .arrayBuffer() // try to read
+          .then(() => {
+            // success, we should be able to send that File
+            console.log('Image file URL is OK')
           })
-        })
+          .catch((err) => {
+            /* setImages([]) */
+            //testar detta
+            return dispatch({
+              type: 'NOTIFY',
+              payload: {
+                error:
+                  'Kan inte läsa bild, ladda bara upp lokala filer, dvs inte från t.ex. Google Drive.',
+              },
+            })
+          })
+      }
     })
 
     dispatch({
@@ -348,23 +352,25 @@ const Profile = () => {
       updatePassword()
     }
 
-    avatar
-      .slice(0, 1) // only the first byte
-      .arrayBuffer() // try to read
-      .then(() => {
-        // success, we should be able to send that File
-        console.log('should be fine')
-      })
-      .catch((err) => {
-        /* setData((avatar = '')) */
-        return dispatch({
-          type: 'NOTIFY',
-          payload: {
-            error:
-              'Kan inte läsa bild, ladda bara upp lokala filer, dvs inte från t.ex. Google Drive.',
-          },
+    if (avatar) {
+      avatar
+        .slice(0, 1) // only the first byte
+        .arrayBuffer() // try to read
+        .then(() => {
+          // success, we should be able to send that File
+          console.log('should be fine')
         })
-      })
+        .catch((err) => {
+          /* setData((avatar = '')) */
+          return dispatch({
+            type: 'NOTIFY',
+            payload: {
+              error:
+                'Kan inte läsa bild, ladda bara upp lokala filer, dvs inte från t.ex. Google Drive.',
+            },
+          })
+        })
+    }
 
     if (name !== auth.user.name || avatar) updateInfor()
   }
