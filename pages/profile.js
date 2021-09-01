@@ -165,26 +165,6 @@ const Profile = () => {
     let err = ''
     const files = [...e.target.files]
 
-    /* files.forEach((file) => {
-      file
-        .slice(0, 1) // only the first byte
-        .arrayBuffer() // try to read
-        .then(() => {
-          // success, we should be able to send that File
-          console.log('should be fine')
-        })
-        .catch((err) => {
-          files = []
-          return dispatch({
-            type: 'NOTIFY',
-            payload: {
-              error:
-                'Kan inte läsa fil, ladda bara upp lokala filer, dvs inte från t.ex. Google Drive.',
-            },
-          })
-        })
-    }) */
-
     if (files.length === 0)
       return dispatch({
         type: 'NOTIFY',
@@ -195,27 +175,6 @@ const Profile = () => {
         return (err = 'The largest file size is 1 MB.')
       if (file.type !== 'image/jpeg' && file.type !== 'image/png')
         return (err = 'Image format is incorrect.')
-
-      /* if(files.length > 0){
-        file
-        .slice(0, 1) // only the first byte
-        .arrayBuffer() // try to read
-        .then(() => {
-          // success, we should be able to send that File
-          console.log('should be fine')
-        })
-        .catch((err) => {
-          files = []
-          console.log(err);
-          return dispatch({
-            type: 'NOTIFY',
-            payload: {
-              error:
-                'Kan inte läsa fil, ladda bara upp lokala filer, dvs inte från t.ex. Google Drive.',
-            },
-          })
-        })
-      } */
 
       num += 1
       if (num <= 5) newImages.push(file)
@@ -302,7 +261,7 @@ const Profile = () => {
         .arrayBuffer() // try to read
         .then(() => {
           // success, we should be able to send that File
-          console.log('should be fine')
+          console.log('Image file URL is OK')
         })
         .catch((err) => {
           /* setImages([]) */
@@ -421,25 +380,6 @@ const Profile = () => {
   const changeAvatar = (e) => {
     const file = e.target.files[0]
 
-    /* file.forEach((item) => {
-      item
-        .slice(0, 1) // only the first byte
-        .arrayBuffer() // try to read
-        .then(() => {
-          // success, we should be able to send that File
-          console.log('should be fine')
-        })
-        .catch((err) => {
-          return dispatch({
-            type: 'NOTIFY',
-            payload: {
-              error:
-                'Kan inte läsa bild, ladda bara upp lokala filer, dvs inte från t.ex. Google Drive.',
-            },
-          })
-        })
-    }) */
-
     if (!file)
       return dispatch({
         type: 'NOTIFY',
@@ -501,7 +441,7 @@ const Profile = () => {
       <section className='py-3 contain bg-beige-lighter'>
         <div className=''>
           <h3 className='text-center uppercase font-medium underline'>
-            {auth.user.role === 'user' ? 'User Profile:' : 'Admin Profile:'}
+            {auth.user.role === 'user' ? 'Användare:' : 'Admin Profile:'}
           </h3>
           <div className='w-40 h-40 overflow-hidden relative my-4 mx-auto border border-solid border-gray-300 rounded-full'>
             <img
