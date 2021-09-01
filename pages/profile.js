@@ -421,7 +421,7 @@ const Profile = () => {
   const changeAvatar = (e) => {
     const file = e.target.files[0]
 
-    file.forEach((item) => {
+    /* file.forEach((item) => {
       item
         .slice(0, 1) // only the first byte
         .arrayBuffer() // try to read
@@ -430,7 +430,6 @@ const Profile = () => {
           console.log('should be fine')
         })
         .catch((err) => {
-          /* file = [] */
           return dispatch({
             type: 'NOTIFY',
             payload: {
@@ -439,7 +438,7 @@ const Profile = () => {
             },
           })
         })
-    })
+    }) */
 
     if (!file)
       return dispatch({
@@ -458,24 +457,6 @@ const Profile = () => {
         type: 'NOTIFY',
         payload: { error: 'Image must be either JPEG or PNG.' },
       })
-
-    /* file
-      .slice(0, 1) // only the first byte
-      .arrayBuffer() // try to read
-      .then(() => {
-        // success, we should be able to send that File
-        console.log('should be fine')
-      })
-      .catch((err) => {
-        file = []
-        return dispatch({
-          type: 'NOTIFY',
-          payload: {
-            error:
-              'Kan inte läsa bild, ladda bara upp lokala filer, dvs inte från t.ex. Google Drive.',
-          },
-        })
-      }) */
 
     setData({ ...data, avatar: file })
   }
@@ -520,7 +501,7 @@ const Profile = () => {
       <section className='py-3 contain bg-beige-lighter'>
         <div className=''>
           <h3 className='text-center uppercase font-medium underline'>
-            {auth.user.role === 'user' ? 'User Profile' : 'Admin Profile'}
+            {auth.user.role === 'user' ? 'User Profile:' : 'Admin Profile:'}
           </h3>
           <div className='w-40 h-40 overflow-hidden relative my-4 mx-auto border border-solid border-gray-300 rounded-full'>
             <img
