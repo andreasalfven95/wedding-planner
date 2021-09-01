@@ -430,7 +430,7 @@ const Profile = () => {
           console.log('should be fine')
         })
         .catch((err) => {
-          file = []
+          /* file = [] */
           return dispatch({
             type: 'NOTIFY',
             payload: {
