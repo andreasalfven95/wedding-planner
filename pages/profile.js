@@ -396,7 +396,7 @@ const Profile = () => {
         console.log('should be fine')
       })
       .catch((err) => {
-        file = []
+        /* setData((avatar = '')) */
         return dispatch({
           type: 'NOTIFY',
           payload: {
@@ -420,6 +420,27 @@ const Profile = () => {
 
   const changeAvatar = (e) => {
     const file = e.target.files[0]
+
+    file.forEach((item) => {
+      item
+        .slice(0, 1) // only the first byte
+        .arrayBuffer() // try to read
+        .then(() => {
+          // success, we should be able to send that File
+          console.log('should be fine')
+        })
+        .catch((err) => {
+          file = []
+          return dispatch({
+            type: 'NOTIFY',
+            payload: {
+              error:
+                'Kan inte läsa bild, ladda bara upp lokala filer, dvs inte från t.ex. Google Drive.',
+            },
+          })
+        })
+    })
+
     if (!file)
       return dispatch({
         type: 'NOTIFY',
@@ -438,7 +459,7 @@ const Profile = () => {
         payload: { error: 'Image must be either JPEG or PNG.' },
       })
 
-    file
+    /* file
       .slice(0, 1) // only the first byte
       .arrayBuffer() // try to read
       .then(() => {
@@ -454,7 +475,7 @@ const Profile = () => {
               'Kan inte läsa bild, ladda bara upp lokala filer, dvs inte från t.ex. Google Drive.',
           },
         })
-      })
+      }) */
 
     setData({ ...data, avatar: file })
   }
