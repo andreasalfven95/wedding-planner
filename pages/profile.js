@@ -258,7 +258,8 @@ const Profile = () => {
     images.forEach((file) => {
       console.log(images)
       console.log(file)
-      if (typeof file === 'string') {
+
+      if (!file.url) {
         file
           .slice(0, 1) // only the first byte
           .arrayBuffer() // try to read
