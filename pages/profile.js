@@ -264,7 +264,8 @@ const Profile = () => {
           console.log('Image file URL is OK')
         })
         .catch((err) => {
-          /* setImages([]) */
+          setImages([])
+          //testar detta
           return dispatch({
             type: 'NOTIFY',
             payload: {
