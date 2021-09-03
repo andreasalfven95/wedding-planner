@@ -26,7 +26,7 @@ export default class MyDocument extends Document {
           <meta
             name='description'
             /* content='A website for all of those who are planning their big day. Here you can find venues, locations, services etc.' */
-            content='En hemsida som hjälper er att hitta vad ni behöver för er stora dag. Här hittar ni Festlokaler, Fotografer, Florister, Bröllopsplanerare och Brudsalonger.'
+            content='En hemsida som hjälper er att hitta vad ni behöver för er stora dag. Här hittar ni Festlokaler, Fotografer, Florister, Bröllopsplanerare och Brudsalonger till erat bröllop.'
           ></meta>
           {/*  <meta
             name='viewport'
