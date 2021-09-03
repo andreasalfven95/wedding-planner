@@ -25,13 +25,15 @@ export default class MyDocument extends Document {
         <Head>
           <meta
             name='description'
-            content='A website for all of those who are planning their big day. Here you can find venues, locations, services etc.'
+            /* content='A website for all of those who are planning their big day. Here you can find venues, locations, services etc.' */
+            content='En hemsida som hjälper er att hitta vad ni behöver för er stora dag. Här hittar ni Festlokaler, Fotografer, Florister, Bröllopsplanerare och Brudsalonger.'
           ></meta>
           {/*  <meta
             name='viewport'
             content='width=device-width, initial-scale=1.0'
           ></meta> */}
           <meta charSet='UTF-8'></meta>
+          <link rel='shortcut icon' href='/favicon.ico' />
           <link rel='preconnect' href='https://fonts.gstatic.com'></link>
           <link
             href='https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400;500;600&family=Raleway:wght@200;400;600&display=swap'
