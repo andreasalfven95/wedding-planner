@@ -207,23 +207,25 @@ const ProductsManager = () => {
       })
 
     images.forEach((file) => {
-      file
-        .slice(0, 1) // only the first byte
-        .arrayBuffer() // try to read
-        .then(() => {
-          // success, we should be able to send that File
-          console.log('should be fine')
-        })
-        .catch((err) => {
-          /* setImages([]) */
-          return dispatch({
-            type: 'NOTIFY',
-            payload: {
-              error:
-                'Kan inte läsa bild, ladda bara upp lokala filer, dvs inte från t.ex. Google Drive.',
-            },
+      if (!file.url) {
+        file
+          .slice(0, 1) // only the first byte
+          .arrayBuffer() // try to read
+          .then(() => {
+            // success, we should be able to send that File
+            console.log('should be fine')
           })
-        })
+          .catch((err) => {
+            /* setImages([]) */
+            return dispatch({
+              type: 'NOTIFY',
+              payload: {
+                error:
+                  'Kan inte läsa bild, ladda bara upp lokala filer, dvs inte från t.ex. Google Drive.',
+              },
+            })
+          })
+      }
     })
 
     dispatch({
