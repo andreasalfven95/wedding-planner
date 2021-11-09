@@ -154,7 +154,7 @@ const Filter = ({ state }) => {
             'linear-gradient(rgba(244,242,239,0.7), rgba(255,255,255,0.3), rgba(244,242,239,0.5))',
         }}
       >
-        <div className='mx-auto md:max-w-md'>
+        <div className='mx-auto max-w-md'>
           <div className='input-group-prepend col-md-2 px-0 mt-2'>
             <Select
               placeholder='Alla kategorier'
