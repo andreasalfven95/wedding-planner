@@ -16,7 +16,7 @@ function Sidebar({ isOpen, toggle }) {
     >
       {menuData.map((item, index) => (
         <Link href={item.link} passHref key={index}>
-          <a className='p-3 border-b rounded-t-none rounded-xl text-beige-darker border-beige-light text-center items-center h-full cursor-pointer transition duration-200 ease-in-out hover:text-black hover:bg-beige-light'>
+          <a className='p-3 border-b text-beige-darker border-beige-light text-center items-center h-full cursor-pointer transition duration-200 ease-in-out hover:text-black hover:bg-beige-light'>
             {item.title}
           </a>
         </Link>

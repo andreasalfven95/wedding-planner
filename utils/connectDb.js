@@ -22,13 +22,13 @@ const connectDB = () => {
 
   mongoose.connect(
     process.env.MONGODB_URL,
-    {
+    /* {
       useCreateIndex: true,
       useFindAndModify: false,
       useNewUrlParser: true,
       useUnifiedTopology: true,
-    },
-    (err) => {
+    }, */
+    async (err) => {
       if (err) throw err
       console.log('Connected to mongodb.')
     }

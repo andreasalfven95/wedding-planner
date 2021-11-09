@@ -25,7 +25,7 @@ const Layout = ({ children }) => {
       <Sidebar isOpen={isOpen} toggle={toggle} />
       <Notify />
       <Modal />
-      <main>{children}</main>
+      <main className='cursor-default'>{children}</main>
       {/* <Footer /> */}
     </>
   )

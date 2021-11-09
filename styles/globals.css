@@ -50,8 +50,8 @@ img {
 
 @layer utilities {
   .contain {
-    padding-left: max(calc((100vw - 1300px) / 2), 1rem);
-    padding-right: max(calc((100vw - 1300px) / 2), 1rem);
+    padding-left: max(calc((100vw - 1100px) / 2), 1rem);
+    padding-right: max(calc((100vw - 1100px) / 2), 1rem);
     margin: auto;
   }
 }

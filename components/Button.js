@@ -12,7 +12,7 @@ export const Button = styled.div`
   cursor: pointer;
   text-decoration: none;
   transition: 0.3s !important;
-  border-radius: ${({ round }) => (round ? '25px' : '5px')};
+  border-radius: ${({ round }) => (round ? '2px' : '5px')};
   height: 40px;
   display: flex;
   align-items: center;

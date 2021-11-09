@@ -115,17 +115,17 @@ const Navbar = ({ toggle }) => {
           />
         </Link> */}
       <div className='w-full h-full flex flex-row items-center justify-between'>
-        <div className='flex items-center justify-start mr-2 w-full py-2'>
+        <div className='flex items-center justify-between mr-4 w-full py-2'>
           <Link href='/' passHref className=''>
             <img
               src='/img/logo.svg'
               className='max-h-20 object-contain h-full py-2 cursor-pointer'
             />
           </Link>
-          <div className='hidden md:flex flex-row min-w-max justify-start items-center'>
+          <div className='hidden md:flex flex-row min-w-max items-center space-x-8'>
             {menuData.map((item, index) => (
               <Link href={item.link} passHref key={index}>
-                <a className='text-gray-500 flex items-center ml-6 lg:ml-8 xl:ml-12 no-underline h-full cursor-pointer transition duration-200 ease-in-out hover:text-black'>
+                <a className='text-gray-500 flex items-center lg:ml-8 xl:ml-12 no-underline h-full cursor-pointer transition duration-200 ease-in-out hover:text-black'>
                   {item.title}
                 </a>
               </Link>

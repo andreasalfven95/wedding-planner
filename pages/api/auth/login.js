@@ -12,6 +12,7 @@ connectDB()
 export default async (req, res) => {
   switch (req.method) {
     case 'POST':
+      console.log('hej')
       await login(req, res)
       break
   }
