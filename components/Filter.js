@@ -139,7 +139,7 @@ const Filter = ({ state }) => {
 
   return (
     <div
-      className='border-none rounded-b-xl rounded-t-xl z-50'
+      className='border-none z-50'
       style={{
         backgroundImage: `url(${'/img/' + img})`,
         backgroundRepeat: 'no-repeat',
