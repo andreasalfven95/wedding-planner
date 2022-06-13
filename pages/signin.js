@@ -58,7 +58,13 @@ export default function SignIn() {
   return (
     <div className='contain bg-beige-lighter'>
       <Head>
-        <title>wed2be | Logga in</title>
+        <title>
+          wed2be | Logga in på er företagsprofil & skräddarsy den idag
+        </title>
+        <meta
+          name='description'
+          content='Här kan ni som företag logga in och skräddarsy er gratis annons idag. Låt wed2be koppla er samman med brudpar som just nu planerar sin stora dag.'
+        />
       </Head>
       <div className='pt-44'>
         <form

@@ -452,7 +452,7 @@ const Profile = () => {
             <img
               className='w-full h-full block object-cover'
               src={avatar ? URL.createObjectURL(avatar) : auth.user.avatar}
-              alt='avatar'
+              alt='Profilbild'
             />
             <span className='absolute bottom-0 left-0 w-full h-2/5 bg-gray-500 bg-opacity-70 text-center font-normal cursor-pointer'>
               <FaCamera className='cursor-pointer mx-auto' />
@@ -595,7 +595,7 @@ const Profile = () => {
                   name='title'
                   value={title}
                   onChange={handleChangeInput}
-                  className='shadow capitalize appearance-none border border-red rounded w-full py-2 px-3 text-grey-darker'
+                  className='shadow appearance-none border border-red rounded w-full py-2 px-3 text-grey-darker'
                 />
               </div>
 
@@ -717,7 +717,7 @@ const Profile = () => {
                             'location-search-input shadow appearance-none border border-red rounded w-full py-2 px-3 text-grey-darker',
                         })}
                       />
-                      <div className='autocomplete-dropdown-contain shadow border rounded text-grey-darker'>
+                      <div className='autocomplete-dropdown-container shadow border rounded text-grey-darker'>
                         {loading && <div>Loading...</div>}
                         {suggestions.map((suggestion) => {
                           const className = suggestion.active

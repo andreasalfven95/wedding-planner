@@ -11,7 +11,10 @@ export default function Cart() {
     return (
       <>
         <Head>
-          <title>wed2be | Favoriter</title>
+          <title>
+            wed2be | Se era sparade favoriter bland festlokaler, florister,
+            brudsalonger, fotografer & bröllopsplanerare
+          </title>
         </Head>
         <h2 className='text-5xl font-light text-center my-60'>
           Inga sparade favoriter.
@@ -22,7 +25,10 @@ export default function Cart() {
   return (
     <div className='contain bg-beige-lighter'>
       <Head>
-        <title>wed2be | Favoriter</title>
+        <title>
+          wed2be | Se era sparade favoriter bland festlokaler, florister,
+          brudsalonger, fotografer & bröllopsplanerare
+        </title>
       </Head>
 
       <div className=''>

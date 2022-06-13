@@ -56,11 +56,13 @@ export default function Home(props) {
   return (
     <>
       <Head>
-        <title>wed2be | Hem</title>
-        {/* <meta
+        <title>
+          wed2be | Här finner ni allt som kan behövas till bröllopet
+        </title>
+        <meta
           name='description'
-          content='A website for all of those who are planning their big day. Here you can find venues, locations, services etc.'
-        ></meta> */}
+          content='Här finns allt vad ni kan tänkas behöva inför er stora dag. Allt från festlokaler, florister och brudsalonger till fotografer & bröllopsplanerare'
+        ></meta>
       </Head>
 
       <Filter state={state} />

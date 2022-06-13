@@ -39,7 +39,7 @@ export default function Register() {
     }
 
     router.push('/signin')
-    
+
     return dispatch({ type: 'NOTIFY', payload: { success: res.msg } })
   }
 
@@ -50,7 +50,11 @@ export default function Register() {
   return (
     <div className='contain bg-beige-lighter'>
       <Head>
-        <title>wed2be | Registrera</title>
+        <title>wed2be | Registrera ert företag och hitta nya kunder nu</title>
+        <meta
+          name='description'
+          content='Här kan ni som företag registrera er och skapa en gratis annons idag. Låt wed2be koppla er samman med brudpar som just nu planerar sin stora dag.'
+        />
       </Head>
       <div className='pt-36'>
         <form

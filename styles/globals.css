@@ -2,7 +2,6 @@ html,
 body {
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-  background-color: #fffdf9;
 }
 
 a {
@@ -50,8 +49,8 @@ img {
 
 @layer utilities {
   .contain {
-    padding-left: max(calc((100vw - 1100px) / 2), 1rem);
-    padding-right: max(calc((100vw - 1100px) / 2), 1rem);
+    padding-left: max(calc((100vw - 1280px) / 2), 1rem);
+    padding-right: max(calc((100vw - 1280px) / 2), 1rem);
     margin: auto;
   }
 }

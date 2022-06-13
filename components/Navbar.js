@@ -34,7 +34,7 @@ const Navbar = ({ toggle }) => {
                 <div className='h-8 w-8'>
                   <img
                     src={auth.user.avatar}
-                    alt='auth.user.avatar'
+                    alt='Användarens profilbild'
                     className='rounded-full w-full h-full align-middle object-cover'
                   />
                 </div>
@@ -115,14 +115,14 @@ const Navbar = ({ toggle }) => {
           />
         </Link> */}
       <div className='w-full h-full flex flex-row items-center justify-between'>
-        <div className='flex items-center justify-between mr-4 w-full py-2'>
+        <div className='flex items-center justify-between mr-4 lg:mr-8 w-full py-2'>
           <Link href='/' passHref className=''>
             <img
               src='/img/logo.svg'
               className='max-h-20 object-contain h-full py-2 cursor-pointer'
             />
           </Link>
-          <div className='hidden md:flex flex-row min-w-max items-center space-x-8'>
+          <div className='hidden md:flex flex-row min-w-max items-center space-x-6 lg:space-x-8'>
             {menuData.map((item, index) => (
               <Link href={item.link} passHref key={index}>
                 <a className='text-gray-500 flex items-center lg:ml-8 xl:ml-12 no-underline h-full cursor-pointer transition duration-200 ease-in-out hover:text-black'>

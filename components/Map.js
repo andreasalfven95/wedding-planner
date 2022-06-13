@@ -125,16 +125,14 @@ const Map = ({ productsToDisplay }) => {
               <Popup maxWidth={200}>
                 <div className='flex flex-col'>
                   <div className='border-b mb-2'>
-                    <h2 className='capitalize text-base font-bold'>
-                      {item.title}
-                    </h2>
+                    <h2 className='text-base font-bold'>{item.title}</h2>
                   </div>
                   <div className=''>
                     <img
-                      className='block max-h-32 md:max-w-sm mx-auto md:m-0'
+                      className='block max-h-32 md:max-w-sm mx-auto'
                       layout='fill'
                       src={item.images[0].url}
-                      alt={item.images[0].url}
+                      alt={item.title}
                     ></img>
                   </div>
                   <div className='mt-2 mb-1 border-b border-t py-1'>
@@ -143,11 +141,11 @@ const Map = ({ productsToDisplay }) => {
 
                   {item.email && (
                     <div className='flex items-center mb-1'>
-                      <div className='w-min self-start text-beige-normal inline-block mr-4 mt-1'>
+                      <div className='w-min self-start text-beige-normal inline-block mr-2 mt-1'>
                         <AiOutlineMail></AiOutlineMail>
                       </div>
                       <a
-                        className='hover:underline'
+                        className='hover:underline truncate'
                         href={`mailto:${item.email}`}
                       >
                         {item.email}
@@ -157,7 +155,7 @@ const Map = ({ productsToDisplay }) => {
 
                   {item.phone && (
                     <div className='flex items-center mb-1'>
-                      <div className='w-min self-start text-beige-normal inline-block mr-4 mt-1'>
+                      <div className='w-min self-start text-beige-normal inline-block mr-2 mt-1'>
                         <AiOutlinePhone></AiOutlinePhone>
                       </div>
                       <a className='hover:underline' href={`tel:${item.phone}`}>

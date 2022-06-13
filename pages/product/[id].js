@@ -34,7 +34,7 @@ const DetailProduct = (props) => {
     for (let i = 0; i < images.length; i++) {
       images[i].className = images[i].className.replace(
         'active',
-        'bg-white opacity-25 p-1'
+        'bg-white opacity-25 cursor-pointer p-1'
       )
     }
 
@@ -82,32 +82,35 @@ const DetailProduct = (props) => {
     <div className='detail-page pb-4 md:pt-2 contain'>
       <div className='bg-white p-3 card-container max-w-5xl mx-auto rounded-xl border border-beige-light shadow-md'>
         <Head>
-          <title>wed2be | {product.title}</title>
+          <title>
+            {/* {product.title.charAt(0).toUpperCase() +
+              product.title.slice(1).toLowerCase() +
+              ' '} */}
+            {product.title} | wed2be
+          </title>
+          <meta name='description' content={product.description} />
         </Head>
         <header className=' border-b border-t border-black py-2'>
-          <h2 className='text-3xl md:text-5xl font-thin text-center capitalize'>
+          <h1 className='text-3xl md:text-5xl font-thin text-center'>
             {product.title}
-          </h2>
+          </h1>
         </header>
         <div className=''>
           <div className='h-80 flex items-center justify-center my-2'>
             <img
               src={product.images[tab].url}
-              alt={product.images[tab].url}
+              alt={product.title}
               className='block mt-2 max-h-full'
             />
           </div>
 
-          <div
-            className='flex flex-row cursor-pointer mx-auto max-w-2xl'
-            ref={imgRef}
-          >
+          <div className='flex flex-row justify-center max-w-2xl' ref={imgRef}>
             {product.images.map((img, index) => (
               <img
                 key={index}
                 src={img.url}
-                alt={img.url}
-                className='bg-white opacity-25 p-1'
+                alt={product.title + ' ' + (index + 1)}
+                className='bg-white opacity-25 cursor-pointer p-1'
                 style={{ height: '80px', width: '20%' }}
                 onClick={() => setTab(index)}
               />
@@ -117,7 +120,7 @@ const DetailProduct = (props) => {
         {/* BIG SCREEN: Picture to left, information to right */}
         <div className='col-md-6'>
           <div className='information pt-2 border-b border-black mb-4'>
-            <h3 className='text-lg font-medium pb-2'>{product.description}</h3>
+            <h2 className='text-lg font-medium pb-2'>{product.description}</h2>
             <p className='leading-6 italic pb-3 font-extralight'>
               {product.content}
             </p>
